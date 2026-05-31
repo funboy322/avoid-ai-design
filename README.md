@@ -77,17 +77,19 @@ Quick passes fix P0 and P1. A full audit covers all three.
 
 ## Install
 
-Clone straight into your Claude Code skills directory:
+Clone into your agent's skills directory. `~/.agents/skills/` is the cross-client convention, so Claude Code, Cursor, Codex, and other compatible tools all pick it up:
+
+```bash
+git clone https://github.com/funboy322/avoid-ai-design.git ~/.agents/skills/avoid-ai-design
+```
+
+Claude Code also reads `~/.claude/skills/`:
 
 ```bash
 git clone https://github.com/funboy322/avoid-ai-design.git ~/.claude/skills/avoid-ai-design
 ```
 
-Or install it per-project instead of globally:
-
-```bash
-git clone https://github.com/funboy322/avoid-ai-design.git .claude/skills/avoid-ai-design
-```
+For a single project instead of globally, clone into `.agents/skills/` (or `.claude/skills/`) under the repo root.
 
 Then start (or restart) Claude Code and confirm it loaded:
 
