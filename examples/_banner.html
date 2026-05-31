@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --paper:#f4efe4; --accent:#c2410c; --mut:#a99d87; }
+  html,body{ width:1600px; height:900px; overflow:hidden; }
+  body{
+    background: radial-gradient(1300px 560px at 50% -8%, #241c12, #141009 72%);
+    font-family:"Avenir Next","Helvetica Neue",sans-serif; color:var(--paper);
+    -webkit-font-smoothing:antialiased; display:flex; flex-direction:column;
+  }
+  .top{ display:flex; justify-content:space-between; align-items:center; padding:42px 70px 0; }
+  .wm{ font-family:"Hoefler Text",Georgia,serif; font-size:27px; font-weight:700; letter-spacing:-.01em; }
+  .wm b{ color:var(--accent); }
+  .tag{ font-family:"SF Mono",Menlo,monospace; font-size:13.5px; letter-spacing:.16em; color:var(--mut); text-transform:uppercase; }
+
+  .stage{ flex:1; display:flex; align-items:center; justify-content:center; }
+  .col{ display:flex; flex-direction:column; }
+  .chip{ align-self:flex-start; margin:0 0 15px 3px; font-family:"SF Mono",Menlo,monospace;
+         font-size:12.5px; font-weight:700; letter-spacing:.18em; padding:7px 13px; border-radius:7px; }
+  .chip.b{ background:rgba(255,255,255,.07); color:#d8cab2; border:1px solid rgba(255,255,255,.18); }
+  .chip.a{ background:var(--accent); color:#fff; }
+  .panel{ position:relative; width:720px; height:540px; border-radius:16px; overflow:hidden;
+          box-shadow:0 55px 95px -42px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.06); }
+  .panel iframe{ width:1200px; height:900px; border:0; transform:scale(.6); transform-origin:top left; }
+  .arrow{ position:relative; top:20px; width:62px; height:62px; border-radius:50%; background:var(--accent);
+          color:#fff; display:grid; place-items:center; font-size:27px; margin:0 -31px; z-index:5;
+          box-shadow:0 18px 34px -10px rgba(194,65,12,.75); }
+  .cap{ text-align:center; font-size:16px; color:var(--mut); padding:0 0 34px; }
+  .cap b{ color:var(--paper); font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="wm">avoid<b>-ai-</b>design</div>
+    <div class="tag">the same landing page, de-slopped</div>
+  </div>
+  <div class="stage">
+    <div class="col">
+      <div class="chip b">BEFORE</div>
+      <div class="panel"><iframe src="before.html" scrolling="no"></iframe></div>
+    </div>
+    <div class="arrow">&rarr;</div>
+    <div class="col">
+      <div class="chip a">AFTER</div>
+      <div class="panel"><iframe src="after.html" scrolling="no"></iframe></div>
+    </div>
+  </div>
+  <div class="cap"><b>Identical content.</b>&nbsp; One audit, one committed design direction.</div>
+</body>
+</html>

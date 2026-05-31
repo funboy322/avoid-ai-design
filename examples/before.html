@@ -1,0 +1,83 @@
+<!doctype html>
+<!-- BEFORE: a deliberately generic, AI-slop landing page. Illustrative bad-on-purpose (see avoid-ai-design self-reference rule). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AvoidAI — before</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --indigo:#6d5efc; --indigo2:#8b5cf6; --ink:#0f172a; --muted:#64748b; }
+  body {
+    font-family: Inter, -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(900px 420px at 50% -120px, rgba(124,92,252,.28), transparent 70%),
+      linear-gradient(180deg, #ece9ff 0%, #f3f1fe 36%, #ffffff 72%);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 26px 40px 64px; }
+
+  /* floating nav */
+  nav {
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border-radius:18px; padding:14px 18px;
+    box-shadow: 0 18px 40px -18px rgba(80,70,160,.35); margin-bottom: 72px;
+  }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; }
+  .logo { width:30px; height:30px; border-radius:9px; background:linear-gradient(135deg,var(--indigo),var(--indigo2));
+          display:grid; place-items:center; color:#fff; font-size:15px; }
+  .links { display:flex; gap:30px; color:#475569; font-weight:500; font-size:15.5px; }
+  .nav-cta { background:linear-gradient(135deg,var(--indigo),var(--indigo2)); color:#fff; font-weight:700;
+             padding:11px 20px; border-radius:11px; font-size:15px; }
+
+  /* hero */
+  .hero { text-align:center; }
+  .pill { display:inline-flex; gap:7px; align-items:center; background:rgba(124,92,252,.12); color:#6d5efc;
+          font-weight:700; font-size:14px; padding:8px 16px; border-radius:999px; margin-bottom:26px; }
+  h1 { font-size:72px; line-height:1.04; font-weight:800; letter-spacing:-.02em; margin-bottom:24px;
+       background:linear-gradient(120deg,#6d5efc,#8b5cf6 60%,#a855f7); -webkit-background-clip:text;
+       background-clip:text; color:transparent; }
+  .sub { font-size:20px; line-height:1.6; color:var(--muted); max-width:560px; margin:0 auto 36px; }
+  .ctas { display:flex; gap:16px; justify-content:center; }
+  .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--indigo2)); color:#fff; font-weight:700;
+                 padding:15px 28px; border-radius:13px; font-size:16.5px; box-shadow:0 16px 30px -10px rgba(109,94,252,.6); }
+  .btn-ghost { background:#fff; color:var(--ink); font-weight:700; padding:15px 28px; border-radius:13px;
+               font-size:16.5px; box-shadow:0 10px 24px -14px rgba(15,23,42,.3); }
+
+  /* features */
+  .features { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:84px; }
+  .card { background:#fff; border-radius:20px; padding:28px; box-shadow:0 26px 50px -28px rgba(80,70,160,.45); }
+  .ic { width:54px; height:54px; border-radius:15px; background:rgba(124,92,252,.12); display:grid; place-items:center;
+        font-size:25px; margin-bottom:18px; }
+  .card h3 { font-size:21px; font-weight:800; margin-bottom:9px; }
+  .card p { color:var(--muted); font-size:15.5px; line-height:1.6; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <div class="brand"><span class="logo">◆</span> AvoidAI</div>
+      <div class="links"><span>Features</span><span>Pricing</span><span>Docs</span><span>Blog</span></div>
+      <div class="nav-cta">Get Started</div>
+    </nav>
+
+    <section class="hero">
+      <div class="pill">✨ AI-Powered Design</div>
+      <h1>Elevate Your<br>Workflow</h1>
+      <p class="sub">Seamlessly transform the way you build beautiful, powerful interfaces with our all-in-one platform.</p>
+      <div class="ctas">
+        <span class="btn-primary">Get Started →</span>
+        <span class="btn-ghost">Learn More</span>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="card"><div class="ic">🚀</div><h3>Lightning Fast</h3><p>Supercharge your workflow with blazing-fast performance.</p></div>
+      <div class="card"><div class="ic">⚡</div><h3>Powerful</h3><p>Everything you need to scale, all in one seamless place.</p></div>
+      <div class="card"><div class="ic">🎨</div><h3>Beautiful</h3><p>Stunning designs that delight users out of the box.</p></div>
+    </section>
+  </div>
+</body>
+</html>

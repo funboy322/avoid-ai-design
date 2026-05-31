@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- AFTER: the SAME page (same brand, nav, headline, subhead, three features) rewritten by avoid-ai-design.
+     Copy is held identical to before.html on purpose; only the design changes. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AvoidAI — after</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --paper:#f4efe4; --paper2:#efe9da; --ink:#1b1712; --muted:#6c6353;
+    --accent:#c2410c; --line:#ddd4c2; --card:#fbf8f1;
+    --serif:"Hoefler Text","Iowan Old Style",Palatino,Georgia,serif;
+    --sans:"Avenir Next","Avenir","Helvetica Neue",Helvetica,sans-serif;
+    --mono:"SF Mono","Menlo",monospace;
+  }
+  body{ background:var(--paper); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:30px 48px 60px; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* nav */
+  nav{ display:flex; align-items:center; justify-content:space-between; padding-bottom:22px;
+       border-bottom:1px solid var(--line); }
+  .brand{ font-family:var(--serif); font-weight:700; font-size:23px; letter-spacing:-.01em; }
+  .brand b{ color:var(--accent); font-weight:700; }
+  .links{ display:flex; gap:34px; font-size:15px; color:#534b3e; font-weight:500; }
+  .links span:hover{ color:var(--ink); }
+  .nav-cta{ background:var(--ink); color:var(--paper); font-weight:600; font-size:14.5px;
+            padding:11px 20px; border-radius:8px; }
+
+  /* hero */
+  .hero{ display:grid; grid-template-columns:1.08fr .92fr; gap:52px; align-items:center;
+         padding:74px 0 18px; }
+  .eyebrow{ font-family:var(--mono); font-size:12.5px; letter-spacing:.22em; text-transform:uppercase;
+            color:var(--accent); margin-bottom:26px; }
+  h1{ font-family:var(--serif); font-weight:700; font-size:78px; line-height:.98; letter-spacing:-.02em;
+      margin-bottom:26px; }
+  h1 em{ font-style:italic; color:var(--accent); } /* not used as a one-word garnish; whole headline committed to serif */
+  .sub{ font-size:19px; line-height:1.62; color:var(--muted); max-width:460px; margin-bottom:36px; }
+  .ctas{ display:flex; align-items:center; gap:26px; }
+  .btn{ background:var(--ink); color:var(--paper); font-weight:600; font-size:16px; padding:15px 30px;
+        border-radius:9px; transition:transform .15s ease; }
+  .btn:hover{ transform:translateY(-2px); }
+  .link{ font-weight:600; font-size:16px; border-bottom:2px solid var(--accent); padding-bottom:3px; }
+
+  /* hero visual: a type-specimen / product card */
+  .visual{ position:relative; }
+  .accent-block{ position:absolute; inset:18px -14px -16px 30px; background:var(--accent); border-radius:14px; opacity:.92; }
+  .specimen{ position:relative; background:var(--card); border:1px solid var(--line); border-radius:14px;
+             box-shadow:0 30px 60px -34px rgba(40,30,15,.55); padding:24px 24px 26px; }
+  .specimen .bar{ display:flex; gap:6px; margin-bottom:20px; }
+  .specimen .bar i{ width:10px; height:10px; border-radius:50%; background:#d8cfbe; display:block; }
+  .specimen .bar i:first-child{ background:var(--accent); }
+  .big{ font-family:var(--serif); font-size:104px; line-height:.85; letter-spacing:-.03em; }
+  .big small{ color:var(--accent); }
+  .specrow{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:10px; }
+  .specrow .meta{ font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.04em; line-height:1.7; }
+  .swatches{ display:flex; gap:7px; }
+  .swatches s{ width:26px; height:26px; border-radius:6px; display:block; }
+  .rule{ height:1px; background:var(--line); margin:22px 0 16px; }
+  .lines{ display:flex; flex-direction:column; gap:9px; }
+  .lines u{ height:9px; border-radius:4px; background:#e7dfce; display:block; }
+  .lines u:nth-child(1){ width:88%; } .lines u:nth-child(2){ width:70%; }
+
+  /* features */
+  .features{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:74px;
+             border-top:1px solid var(--line); }
+  .feat{ padding:30px 30px 6px; border-right:1px solid var(--line); }
+  .feat:last-child{ border-right:0; padding-right:0; }
+  .feat:first-child{ padding-left:0; }
+  .num{ font-family:var(--serif); font-size:30px; color:var(--accent); line-height:1; }
+  .feat h3{ font-family:var(--serif); font-weight:700; font-size:24px; margin:16px 0 10px; letter-spacing:-.01em; }
+  .feat p{ font-size:15.5px; line-height:1.62; color:var(--muted); max-width:260px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <div class="brand">Avoid<b>AI</b></div>
+      <div class="links"><span>Features</span><span>Pricing</span><span>Docs</span><span>Blog</span></div>
+      <a class="nav-cta">Get started</a>
+    </nav>
+
+    <section class="hero">
+      <div class="copy">
+        <div class="eyebrow">All-in-one platform</div>
+        <h1>Elevate your<br>workflow</h1>
+        <p class="sub">Seamlessly transform the way you build beautiful, powerful interfaces with our all-in-one platform.</p>
+        <div class="ctas">
+          <a class="btn">Get started</a>
+          <a class="link">Learn more</a>
+        </div>
+      </div>
+      <div class="visual">
+        <div class="accent-block"></div>
+        <div class="specimen">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="big">Aa<small>.</small></div>
+          <div class="specrow">
+            <div class="meta">HOEFLER · AVENIR<br>EDITORIAL GRID</div>
+            <div class="swatches">
+              <s style="background:#1b1712"></s><s style="background:#c2410c"></s><s style="background:#f4efe4;border:1px solid #ddd4c2"></s>
+            </div>
+          </div>
+          <div class="rule"></div>
+          <div class="lines"><u></u><u></u></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feat"><div class="num">01</div><h3>Lightning Fast</h3><p>Supercharge your workflow with blazing-fast performance.</p></div>
+      <div class="feat"><div class="num">02</div><h3>Powerful</h3><p>Everything you need to scale, all in one seamless place.</p></div>
+      <div class="feat"><div class="num">03</div><h3>Beautiful</h3><p>Stunning designs that delight users out of the box.</p></div>
+    </section>
+  </div>
+</body>
+</html>
