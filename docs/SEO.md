@@ -77,7 +77,7 @@ A Claude Code skill that audits AI-generated UI and rewrites it to remove generi
 <meta name="twitter:card" content="summary_large_image" />
 ```
 
-**Social preview image (1200×630)**: not generated yet. Suggested concept: a literal split-screen, generic AI landing page (purple gradient, centered hero, three identical cards) on the left, the same page rewritten with a bold editorial direction on the right, with the repo name set in a distinctive display face. GitHub also lets you upload this under **Settings → Social preview**.
+**Social preview image** (`docs/og-image.png`, 1200×630): included in the repo. Upload it under **Settings → General → Social preview** so links to the repo unfurl with the card.
 
 ---
 
@@ -123,5 +123,5 @@ Each listing is a backlink and a discovery surface. Rough order of effort vs. pa
 - [x] Question-style FAQ headings for AEO (matches how people and AI search)
 - [x] Keyword footer line
 - [x] Repo URL and author filled in (funboy322)
-- [ ] Add a real before/after screenshot near the top (images rank and convert)
-- [ ] Add the social preview image once generated
+- [x] Before/after screenshot embedded near the top of the README (`docs/before-after.png`)
+- [x] Social preview image included (`docs/og-image.png`); upload via repo Settings

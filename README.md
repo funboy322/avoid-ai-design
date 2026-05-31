@@ -9,6 +9,12 @@
 [![Works with Claude Code](https://img.shields.io/badge/Claude%20Code-ready-d97757.svg)](https://claude.com/claude-code)
 [![Also works with](https://img.shields.io/badge/Cursor%20%C2%B7%20Codex%20%C2%B7%20Copilot-compatible-8b5cf6.svg)](#compatibility)
 
+<p align="center">
+  <img src="docs/before-after.png" alt="Before and after. Left: a generic AI-generated landing page with a purple gradient, an 'Elevate Your Workflow' headline, a pill badge, and three emoji feature cards. Right: the same page rewritten in a dark editorial style with a real type pairing and a terminal showing the audit, zero P0 tells remaining." width="100%">
+</p>
+
+<p align="center"><sub><i>Left: what every model ships. Right: the same page after <code>avoid-ai-design</code>.</i></sub></p>
+
 Ask Claude, Codex, or any model to "build a landing page" and you get the same page every time: a purple-to-blue gradient on white, Inter for every word, a centered hero with three rounded feature cards, and a glassy navbar. `avoid-ai-design` is the cleanup pass. It reads the frontend an AI just produced, flags the patterns that give it away, and rewrites the interface around one committed design direction.
 
 It is the design counterpart to [`avoid-ai-writing`](https://github.com/Significant-Gravitas/avoid-ai-writing): same idea, applied to UI instead of prose.

@@ -162,10 +162,10 @@ I kept fixing the same five things in every AI-built page, so I wrote them down.
 
 ## Launch-day checklist
 
-- [ ] README has a before/after image near the top (the single biggest conversion lever)
-- [ ] Repo description and topics set (see `docs/SEO.md`)
+- [x] README has a before/after image near the top (the single biggest conversion lever)
+- [x] Repo description and topics set (see `docs/SEO.md`)
 - [x] Repo URL filled into every post and the README clone command
-- [ ] Social preview image uploaded (Settings → Social preview)
+- [ ] Upload `docs/og-image.png` as the GitHub Social preview (Settings → General)
 - [ ] Post the Show HN first; do not ask for upvotes (against the rules), just reply to every comment fast
 - [ ] Post the X thread; reply to existing "AI slop" threads with the catalog link
 - [ ] Post to r/ClaudeAI; answer questions in the comments
@@ -173,11 +173,11 @@ I kept fixing the same five things in every AI-built page, so I wrote them down.
 - [ ] Submit to agentskills.io
 - [ ] Pin the thread, add the repo to your X bio for the week
 
-## Assets still needed
+## Assets
 
-- **Before/after image.** A generic AI page (purple gradient, centered hero, three cards) beside the same page rewritten with a real direction. This is the asset that earns shares.
-- **Demo GIF** (for Product Hunt later): the skill auditing a page and rewriting it.
-- **Social preview (1200×630).** See `docs/SEO.md` for the concept.
+- **Before/after image.** Done: `docs/before-after.png`, embedded at the top of the README. The asset that earns shares.
+- **Social preview (1200×630).** Done: `docs/og-image.png`. Still needs uploading under repo Settings → General → Social preview so repo links unfurl with it.
+- **Demo GIF** (for Product Hunt later): still needed. The skill auditing a page and rewriting it.
 
 ## What earns stars (and what doesn't)
 
