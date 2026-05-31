@@ -111,6 +111,23 @@ Repo and the full catalog: https://github.com/funboy322/avoid-ai-design
 Curious which tells you'd add. The catalog takes PRs.
 ```
 
+### Reddit: r/ClaudeAI Showcase Megathread comment
+
+New accounts cannot make standalone Showcase posts (the sub has a minimum-karma rule; the mod bot removes them and points to the megathread). The project still qualifies for the **Build with Claude Project Showcase Megathread**, where a comment is welcome and image links are allowed. Paste this as a comment there:
+
+```
+**avoid-ai-design** is a Claude Code skill that audits AI-generated frontend and rewrites it so it stops looking AI-generated.
+
+You can spot an AI-built page in a second: purple-to-blue gradient, Inter, a centered hero with three feature cards, untouched shadcn. The skill reads the code, flags each tell by severity, then rewrites the UI around one committed design direction without breaking your props, state, or accessibility. Two modes: detect (audit only) and rewrite. It ships a catalog of the tells with a fix for each in HTML/CSS and React/Tailwind/shadcn.
+
+Same content, real before/after (both pages live in the repo):
+https://raw.githubusercontent.com/funboy322/avoid-ai-design/main/docs/before-after.png
+
+Repo, MIT: https://github.com/funboy322/avoid-ai-design
+
+It's the design counterpart to avoid-ai-writing. I built it because I kept fixing the same five things by hand. Curious which tells you'd add.
+```
+
 ### Hacker News: Show HN
 
 **Title:** Show HN: A Claude skill that de-slops AI-generated UI
