@@ -2,7 +2,9 @@
 
 The reference catalog for the `avoid-ai-design` skill. Each tell carries a **detection signal**, a one-line reason it **reads as AI**, and a **fix** for both plain HTML/CSS and React/Tailwind/shadcn.
 
-Percentages cited below come from a Playwright analysis of ~1,400 recent Show HN sites ([Krebs, "design slop"](#sources)). Treat them as evidence of how common a pattern is, not a hard threshold.
+Percentages cited below come from a Playwright analysis of ~1,400 recent Show HN sites ([Krebs, "design slop"](#sources)): 16 deterministic CSS/DOM heuristics, a ~5-10% false-positive rate per the author, on a sample that skews toward solo, AI-built projects. Read them as relative commonness in a slop-prone corner of the web, not ground truth.
+
+**Detectability.** Most tells are code-certain (a literal class, font, or import). A few, marked **👁 needs render**, need the rendered pixels to judge honestly: palette dominance, spacing rhythm, visual hierarchy, motion. Without a render, flag those as inferred and lower-confidence.
 
 ## Why AI design converges
 
@@ -26,7 +28,7 @@ body { font-family: var(--font-body); }
 **Fix (React/Tailwind):** Map two fonts to `fontFamily` in `tailwind.config` (`font-display`, `font-sans`), load them with `next/font` or a `<link>`, and apply `font-display` to headings. Do not leave Geist/Inter as the only face.
 
 ### T2: The "tasteful free font" cluster · P1
-**Detection:** Space Grotesk, Geist, Syne, Sora, Instrument Serif, or Fraunces used as the *only* gesture toward design. ~15.8% of analyzed sites used one of a five-font set.
+**Detection:** Space Grotesk, Geist, Syne, Sora, Instrument Serif, or Fraunces used as the *only* gesture toward design. ~15.8% of analyzed sites used one of this small set.
 **Why AI:** This is the second-order default. Models reach for the same small set of "indie-startup" Google Fonts to look non-generic, so the non-generic choice became generic. Anthropic calls out **Space Grotesk** by name as overused across its generations.
 **Fix:** Keep the font only if it fits the chosen direction, and pair it. Otherwise pick from a wider pool: grotesques (Neue Haas, Aktiv, Söhne, Hanken), serifs (Fraunces, GT Sectra, Tiempos, Newsreader), or a mono (Berkeley, Commit) used with intent. The rule: never ship the font the last three projects shipped.
 
@@ -68,7 +70,7 @@ body { font-family: var(--font-body); }
 **Why AI:** The unmodified "modern dark mode" cluster. Low body contrast also fails accessibility.
 **Fix:** Pick a dark palette with intent: a warm near-black, a real text color at AA+ contrast, and an accent that means something. Avoid grey-on-grey body text.
 
-### C4: Timid, evenly distributed palette · P0/P1
+### C4: Timid, evenly distributed palette · P0/P1 · 👁 needs render
 **Detection:** Several colors at similar weight, no clear dominant, no sharp accent.
 **Why AI:** AI spreads color evenly and avoids commitment. Intentional brands do the opposite: one dominant color carries the page, an accent punctuates it.
 **Fix:** Use the 60/30/10 discipline. One dominant, one secondary, one accent used sparingly for emphasis. Commit.
@@ -78,12 +80,17 @@ body { font-family: var(--font-body); }
 **Why AI:** Decoration with no function. A glow that says nothing.
 **Fix:** Use shadow for elevation, not color theater. If you want atmosphere, build it into the background, not as a glow under every card.
 
+### C6: Gradient headline text · P0
+**Detection:** `bg-clip-text text-transparent bg-gradient-to-r ...` on a heading, often the indigo→violet again.
+**Why AI:** A 2024-era default flourish that doubles down on C1 and usually weakens legibility and contrast.
+**Fix:** Make headings solid ink or the brand color. For emphasis use weight, size, or one accent word, not a gradient fill.
+
 ---
 
 ## Layout & composition
 
 ### L1: The centered hero template · P0
-**Detection:** Pill badge, centered H1, centered subhead, one or two centered CTAs. ~23.5% centered titles; the badge-above-headline is its own tell.
+**Detection:** Pill badge, centered H1, centered subhead, one or two centered CTAs (~23.5% of sites center the title). Centering alone is not a tell; the badge + centered hero + three-card combo is.
 **Why AI:** The default "landing page" skeleton. The composition makes no spatial decision.
 **Fix (HTML/CSS):** Break symmetry. Try a left-aligned hero with an asymmetric visual, an oversized type-driven hero, a split layout, or an editorial grid where content sits off-center. Let one element be dramatically larger.
 **Fix (React/Tailwind):** Replace the `flex flex-col items-center text-center` hero with a `grid` that places headline, supporting text, and media on an intentional grid. Drop the pill badge unless it carries real news.
@@ -107,6 +114,21 @@ body { font-family: var(--font-body); }
 **Detection:** A three-step sequence with big numerals. ~9.4% of sites.
 **Why AI:** Formulaic filler structure.
 **Fix:** Keep it only if the process genuinely has ordered steps. Otherwise show the product doing the thing.
+
+### L6: The default page shell · P1
+**Detection:** Every section wrapped in `container mx-auto px-4` or `max-w-7xl mx-auto`, nothing else.
+**Why AI:** The reflex Tailwind shell: one width, centered, forever. No spatial decision.
+**Fix:** Vary container width by section role. Let some content go full-bleed, some stay narrow and editorial. Width is a tool, not a constant.
+
+### L7: Pricing as three tiers with a "Most Popular" ring · P1
+**Detection:** Three cards, the middle one scaled or ringed, a "Most Popular" badge.
+**Why AI:** The canonical SaaS pricing template, shipped without regard to the actual plans.
+**Fix:** Let structure follow the real offer: two plans, a table, or one plan with add-ons. If a highlight is right, earn it with design, not a default ring.
+
+### L8: The default four-column footer · P1
+**Detection:** Four equal link columns, a newsletter input, a row of social icons.
+**Why AI:** The universal generated footer, the same whether or not the links exist.
+**Fix:** Build the footer from what the site actually has. Two columns and a line is often enough. Drop the newsletter box unless it is real.
 
 ---
 
@@ -148,11 +170,21 @@ body { font-family: var(--font-body); }
 **Fix (HTML/CSS):** Add `:hover`, `:focus-visible`, `:active`, and `:disabled` styles, and a `transition`. Design error and empty states.
 **Fix (React/Tailwind):** Implement `hover:`, `focus-visible:`, `disabled:`, and loading/error variants. Wire real validation states into forms.
 
+### K8: Untouched `--radius` · P1
+**Detection:** shadcn's default `--radius: 0.5rem` left as-is across every component.
+**Why AI:** The radius is a fingerprint; the default one says the theme was never touched. (Related to K1.)
+**Fix:** Set a radius that fits the direction: sharp (0) for brutalist or editorial, soft for playful. Vary it by element role.
+
+### K9: The default dark SaaS card · P1
+**Detection:** `bg-zinc-950` / `bg-gray-900` surfaces with `border-white/10` hairlines and a faint shadow.
+**Why AI:** The unmodified "modern dark" card that every generated dark UI ships.
+**Fix:** Choose a real dark palette (a warm or cool near-black with intent) and separate surfaces by more than a 10%-white border.
+
 ---
 
 ## Spacing
 
-### S1: Uniform padding, no rhythm · P2
+### S1: Uniform padding, no rhythm · P2 · 👁 needs render
 **Detection:** The same `gap` and `p-*` on most things; whitespace distributed evenly.
 **Why AI:** Even spacing makes a flat hierarchy. Nothing is emphasized because everything breathes the same.
 **Fix:** Use a spacing scale to create rhythm. Give sections distinct vertical space by importance. Use whitespace as composition: crowd some things, isolate others.
@@ -162,17 +194,17 @@ body { font-family: var(--font-body); }
 
 ## Motion
 
-### M1: The same fade-up-on-scroll on everything · P2
+### M1: The same fade-up-on-scroll on everything · P2 · 👁 needs render
 **Detection:** Every section reveals with an identical fade-and-rise.
 **Why AI:** Reflexive, not choreographed. The default AOS reveal.
 **Fix:** Pick one or two high-impact moments. One well-staggered page-load entrance delivers more than a uniform reveal on every block. Vary easing and intent.
 
-### M2: Scattered micro-interactions, no orchestration · P2
+### M2: Scattered micro-interactions, no orchestration · P2 · 👁 needs render
 **Detection:** Many small random hovers and bounces, no coherent motion language.
 **Why AI:** Motion sprinkled on rather than designed.
 **Fix:** Define a motion language: shared easing, shared duration scale, a clear entrance. One orchestrated load beats scattered fidgets.
 
-### M3: The copied "Linear glow" · P2
+### M3: The copied "Linear glow" · P2 · 👁 needs render
 **Detection:** A dark hero with a blurred animated gradient glow behind a product shot.
 **Why AI:** "The Linear effect," lifted wholesale onto an unrelated product.
 **Fix:** Borrow the principle (atmosphere, depth), not the exact effect. Build atmosphere that fits your own direction.
@@ -188,6 +220,11 @@ See **K6**. The default set used as-is, one per feature card.
 **Detection:** Emoji standing in for icons in features or navigation. ~3.8% had emoji in nav.
 **Why AI:** A lazy substitute for real iconography.
 **Fix:** Use a real icon set chosen for the direction, or custom marks. Reserve emoji for genuinely casual, human contexts, never as the system's iconography.
+
+### I3: The overused Lucide glyph set · P1
+**Detection:** `Sparkles` (beside "AI"), `ArrowRight`, `Zap`, `Rocket`, `CheckCircle2`, `Star`, straight from `lucide-react`. The `Sparkles` + "AI" pairing is the 2024-26 signature.
+**Why AI:** The same handful of icons in the same roles, unedited. `Sparkles` for "AI" is the most worn of all.
+**Fix:** Pick icons for meaning, not availability. Retire `Sparkles` for AI. Match weight and style to the direction, or draw a few simple custom marks.
 
 ---
 
@@ -221,6 +258,11 @@ See **K6**. The default set used as-is, one per feature card.
 **Detection:** Flat illustrations of people with tiny heads, long bendy limbs, no faces, flat bright fills.
 **Why AI:** A pre-AI corporate trend (Buck's "Alegria," 2017) now widely declared dead, but still reproduced by image tools as "friendly corporate." Lineage, not a fresh AI tell.
 **Fix:** Choose an illustration style with a real voice, or skip illustration for photography or product UI.
+
+### IM4: Placeholder identities and media · P1
+**Detection:** DiceBear / boring-avatars / `pravatar.cc` avatars; `aspect-video bg-muted rounded-xl` standing in for a real demo or screenshot.
+**Why AI:** Generated stand-ins where real content belongs. Code-detectable, and a strong "nothing real here yet" signal.
+**Fix:** Use real avatars and a real product screenshot or recording. If you must use a placeholder, make it obviously intentional, not a stock avatar service.
 
 ---
 

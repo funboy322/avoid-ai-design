@@ -89,9 +89,9 @@ The `description` field is what makes Claude trigger the skill *and* what skill 
 ---
 name: avoid-ai-design
 description: Audit and rewrite frontend UI to remove generic AI design patterns ("AI slop"). Use this skill when asked to "de-slop a UI", "make a design look less AI-generated", "audit a component or page for AI design tells", or "fix Claude/Codex-generated frontend that looks generic". Covers HTML/CSS and React/Tailwind/shadcn. Supports a detection-only mode that flags patterns without rewriting.
-version: 0.1.0
+version: 0.2.0
 license: MIT
-compatibility: Any AI coding assistant that supports the agentskills.io SKILL.md format (Claude Code, Cursor, VS Code Copilot, Codex CLI, etc.). No external tools or APIs required.
+compatibility: Any AI coding assistant that supports the agentskills.io SKILL.md format (Claude Code, Cursor, VS Code Copilot, Codex CLI, etc.). No external tools or APIs required; uses a screenshot tool if one is available.
 metadata:
   author: ungspirit
   tags: design ui frontend ai-slop tailwind shadcn react

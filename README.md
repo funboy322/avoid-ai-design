@@ -17,7 +17,7 @@
 
 Ask Claude, Codex, or any model to "build a landing page" and you get the same page every time: a purple-to-blue gradient on white, Inter for every word, a centered hero with three rounded feature cards, and a glassy navbar. `avoid-ai-design` is the cleanup pass. It reads the frontend an AI just produced, flags the patterns that give it away, and rewrites the interface around one committed design direction.
 
-It is the design counterpart to [`avoid-ai-writing`](https://github.com/Significant-Gravitas/avoid-ai-writing): same idea, applied to UI instead of prose.
+It is the design counterpart to [`avoid-ai-writing`](https://github.com/conorbronsdon/avoid-ai-writing): same idea, applied to UI instead of prose.
 
 ---
 
@@ -40,12 +40,12 @@ The full catalog lives in [`references/ai-tells-catalog.md`](references/ai-tells
 | Category | Example tells |
 |---|---|
 | **Typography** | Inter / Roboto / system default, no display face, the overused "safe" pick (Space Grotesk) treated as a non-choice |
-| **Color** | purple→blue gradient on white, untouched shadcn `zinc`/`slate`, timid evenly-spread palettes, default Tailwind `blue-600` buttons |
-| **Layout** | centered hero, the hero + three-feature-cards + CTA template, uniform section rhythm, zero asymmetry |
+| **Color** | purple→blue gradient on white, gradient `bg-clip-text` headline text, untouched shadcn `zinc`/`slate`, timid evenly-spread palettes, default Tailwind `blue-600` buttons |
+| **Layout** | centered hero, the hero + three-feature-cards + CTA template, the default page shell, three-tier pricing rings, the four-column footer, zero asymmetry |
 | **Components** | `rounded-2xl shadow-lg` on everything, glassmorphism by reflex, icon-in-a-rounded-square, default Card/Button with no styling |
 | **Spacing** | uniform `gap-4` / `p-6` with no spatial hierarchy |
 | **Motion** | none at all, or the same `fade-in-up` on every element |
-| **Icons** | unedited `lucide` set, emoji used as feature bullets |
+| **Icons** | the worn `lucide` set (`Sparkles`+AI, `ArrowRight`, `Zap`), emoji used as feature bullets |
 | **Copy** | "Elevate / Seamless / Powerful", generic CTAs, filler microcopy |
 | **Imagery** | gradient placeholders, DiceBear avatars, generic stock-photo energy |
 
@@ -61,7 +61,7 @@ Trigger `detect` with phrases like "just audit", "flag only", "don't change the 
 ## How it works
 
 1. **Scope.** Identify what you are auditing (a component, a page, a whole app), the stack, and the mode.
-2. **Audit.** Walk the catalog against your code and report each tell with its location, category, severity, and *why it reads as AI*.
+2. **Audit.** Read your code, and render the UI when a screenshot tool is available, then report each tell with its location, category, severity, and *why it reads as AI*. Visual tells (palette weight, spacing rhythm, motion) need the render; without one they are flagged as lower-confidence.
 3. **Direction.** Commit to one concrete aesthetic direction for the artifact (for example brutalist editorial, warm editorial pastel, or refined luxury), named with three to five defining moves. You confirm it before any code changes.
 4. **Calibrate.** A small component or anything inside an existing design system gets a surgical pass that preserves structure. A standalone page or marketing artifact gets a bold rebuild around the chosen direction.
 5. **Rewrite.** Edit the real files. Functionality, props, data flow, accessibility, and the meaning of your copy stay intact. New dependencies are called out, never added silently.
