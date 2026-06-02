@@ -1,0 +1,211 @@
+<!doctype html>
+<!-- DEMO / after: the SAME site as slop.html (same product, sections, copy, links),
+     rewritten by avoid-ai-design. One direction: Swiss/editorial-technical,
+     ink + a single vermilion accent, Helvetica grotesque, strict grid, real dashboard mock.
+     Substantive copy held identical to slop.html to isolate the DESIGN transformation. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadence — product analytics</title>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --paper:#f5f4f1; --ink:#15120d; --mut:#6c675e; --accent:#e5402b; --line:#e2ded5; --card:#fffffe;
+    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif; --mono:"SF Mono","Menlo",monospace;
+  }
+  body{ font-family:var(--sans); color:var(--ink); background:var(--paper); -webkit-font-smoothing:antialiased;
+        letter-spacing:-.005em; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 36px; }
+  a{ color:inherit; text-decoration:none; }
+  .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
+  .rule{ height:1px; background:var(--line); }
+
+  /* nav */
+  nav{ border-bottom:1px solid var(--line); background:var(--paper); position:sticky; top:0; z-index:10; }
+  .nav-in{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand{ display:flex; align-items:center; gap:11px; font-weight:700; font-size:20px; letter-spacing:-.02em; }
+  .brand .mk{ width:13px; height:13px; background:var(--accent); border-radius:2px; transform:rotate(45deg); }
+  .nav-links{ display:flex; gap:32px; font-size:14.5px; color:#4c4840; font-weight:500; }
+  .nav-r{ display:flex; align-items:center; gap:22px; }
+  .nav-r .login{ font-size:14.5px; font-weight:600; }
+  .btn{ background:var(--ink); color:var(--paper); font-weight:600; font-size:14px; padding:11px 19px; border-radius:7px;
+        transition:transform .14s ease; display:inline-block; }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn.lg{ padding:15px 26px; font-size:15.5px; }
+  .ghost{ border:1px solid var(--ink); color:var(--ink); font-weight:600; font-size:15.5px; padding:14px 25px; border-radius:7px; display:inline-block; }
+
+  /* hero */
+  .hero{ padding:78px 0 30px; display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  .hero h1{ font-size:64px; line-height:1.0; font-weight:800; letter-spacing:-.035em; margin:22px 0 24px; }
+  .hero h1 .a{ color:var(--accent); }
+  .hero .sub{ font-size:18.5px; line-height:1.6; color:var(--mut); max-width:440px; margin-bottom:34px; }
+  .hero .cta{ display:flex; gap:16px; align-items:center; }
+  .meta-row{ display:flex; gap:30px; margin-top:42px; }
+  .meta-row .m{ }
+  .meta-row .mv{ font-size:24px; font-weight:700; letter-spacing:-.02em; }
+  .meta-row .ml{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--mut); text-transform:uppercase; margin-top:3px; }
+
+  /* dashboard mock */
+  .dash{ background:var(--card); border:1px solid var(--line); border-radius:10px; box-shadow:0 34px 60px -38px rgba(30,22,10,.5);
+         overflow:hidden; }
+  .dash .bar{ display:flex; align-items:center; gap:7px; padding:13px 15px; border-bottom:1px solid var(--line); }
+  .dash .bar i{ width:9px; height:9px; border-radius:50%; background:#dcd8cf; }
+  .dash .bar i:first-child{ background:var(--accent); }
+  .dash .bar .t{ font-family:var(--mono); font-size:11px; color:var(--mut); margin-left:6px; }
+  .dash .body{ padding:18px; }
+  .dash .kpis{ display:flex; gap:26px; margin-bottom:16px; }
+  .dash .kpi .v{ font-size:23px; font-weight:700; letter-spacing:-.02em; }
+  .dash .kpi .v b{ color:var(--accent); font-weight:700; font-size:13px; margin-left:5px; }
+  .dash .kpi .k{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--mut); text-transform:uppercase; margin-top:2px; }
+  .dash svg{ display:block; width:100%; height:118px; }
+
+  /* logos */
+  .logos{ padding:34px 0; }
+  .logos .lab{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); margin-bottom:18px; }
+  .logo-row{ display:flex; justify-content:space-between; align-items:center; }
+  .logo-row span{ font-weight:700; font-size:19px; color:#3a362e; letter-spacing:-.02em; }
+
+  /* sections */
+  .sec{ padding:88px 0; }
+  .sec-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:8px; }
+  .sec-head h2{ font-size:38px; font-weight:800; letter-spacing:-.03em; max-width:560px; line-height:1.05; }
+  .sec-head .n{ font-family:var(--mono); font-size:12px; color:var(--mut); letter-spacing:.1em; }
+
+  /* features */
+  .feats{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); }
+  .feat{ padding:30px 28px 8px; border-right:1px solid var(--line); }
+  .feat:last-child{ border-right:0; padding-right:0; }
+  .feat:first-child{ padding-left:0; }
+  .feat .num{ font-family:var(--mono); font-size:13px; color:var(--accent); }
+  .feat h3{ font-size:21px; font-weight:700; letter-spacing:-.02em; margin:18px 0 10px; }
+  .feat p{ font-size:15px; line-height:1.6; color:var(--mut); max-width:280px; }
+
+  /* stats (dark band for rhythm) */
+  .statband{ background:var(--ink); color:var(--paper); }
+  .statband .in{ display:grid; grid-template-columns:repeat(4,1fr); }
+  .statband .s{ padding:54px 0; border-left:1px solid rgba(255,255,255,.12); padding-left:26px; }
+  .statband .s:first-child{ border-left:0; padding-left:0; }
+  .statband .v{ font-size:46px; font-weight:800; letter-spacing:-.03em; }
+  .statband .v b{ color:var(--accent); font-weight:800; }
+  .statband .l{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:rgba(245,244,241,.6); margin-top:8px; }
+
+  /* pricing */
+  .price{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); }
+  .tier{ padding:32px 28px; border-right:1px solid var(--line); position:relative; }
+  .tier:last-child{ border-right:0; }
+  .tier.pop{ background:var(--card); }
+  .tier .rec{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; color:var(--accent); text-transform:uppercase; height:14px; }
+  .tier h3{ font-size:16px; font-weight:700; margin:10px 0 14px; }
+  .tier .amt{ font-size:44px; font-weight:800; letter-spacing:-.03em; }
+  .tier .amt small{ font-size:15px; color:var(--mut); font-weight:500; letter-spacing:0; }
+  .tier ul{ list-style:none; margin:22px 0 26px; }
+  .tier li{ font-size:14px; color:#4c4840; padding:7px 0 7px 20px; position:relative; border-bottom:1px solid var(--line); }
+  .tier li:before{ content:"+"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+  .tier .pick{ display:block; text-align:center; padding:12px; border-radius:7px; font-weight:600; font-size:14px; }
+  .tier .pick.out{ border:1px solid var(--ink); }
+  .tier .pick.solid{ background:var(--ink); color:var(--paper); }
+
+  /* cta */
+  .cta2{ padding:96px 0; text-align:center; }
+  .cta2 h2{ font-size:52px; font-weight:800; letter-spacing:-.035em; line-height:1.02; margin-bottom:18px; }
+  .cta2 p{ font-size:18px; color:var(--mut); margin-bottom:32px; }
+
+  /* footer */
+  footer{ border-top:1px solid var(--ink); padding:56px 0 36px; }
+  .foot{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1.4fr; gap:30px; }
+  .foot h4{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--mut); margin-bottom:16px; }
+  .foot a{ display:block; color:#4c4840; font-size:14px; margin-bottom:11px; }
+  .foot .news p{ color:var(--mut); font-size:14px; line-height:1.6; margin-bottom:14px; }
+  .foot .news .nf{ display:flex; border:1px solid var(--ink); border-radius:7px; overflow:hidden; }
+  .foot .news input{ flex:1; border:0; padding:11px 13px; font-size:13.5px; background:transparent; outline:none; font-family:var(--sans); }
+  .foot .news button{ border:0; background:var(--ink); color:var(--paper); font-weight:600; font-size:13px; padding:0 16px; cursor:pointer; }
+  .copy{ display:flex; justify-content:space-between; align-items:center; margin-top:42px; padding-top:22px; border-top:1px solid var(--line); color:var(--mut); font-size:13px; }
+  .copy .soc{ display:flex; gap:18px; font-family:var(--mono); font-size:12px; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+  <nav><div class="wrap nav-in">
+    <div class="brand"><span class="mk"></span> Cadence</div>
+    <div class="nav-links"><span>Product</span><span>Solutions</span><span>Pricing</span><span>Docs</span><span>Blog</span></div>
+    <div class="nav-r"><span class="login">Log in</span><a class="btn">Get started</a></div>
+  </div></nav>
+
+  <header class="wrap hero">
+    <div>
+      <div class="eyebrow">Product analytics</div>
+      <h1>Product analytics that <span class="a">just works</span></h1>
+      <p class="sub">Cadence turns raw events into clear answers, so your team can ship with confidence instead of guesswork. Seamlessly powerful, beautifully simple.</p>
+      <div class="cta"><a class="btn lg">Start for free</a><a class="ghost">Book a demo</a></div>
+      <div class="meta-row">
+        <div class="m"><div class="mv">No SQL</div><div class="ml">required</div></div>
+        <div class="m"><div class="mv">5 min</div><div class="ml">to first chart</div></div>
+        <div class="m"><div class="mv">SOC 2</div><div class="ml">compliant</div></div>
+      </div>
+    </div>
+    <div class="dash">
+      <div class="bar"><i></i><i></i><i></i><span class="t">cadence — weekly active</span></div>
+      <div class="body">
+        <div class="kpis">
+          <div class="kpi"><div class="v">48,210<b>+12%</b></div><div class="k">Weekly active</div></div>
+          <div class="kpi"><div class="v">3.4%<b>+0.6</b></div><div class="k">Conversion</div></div>
+        </div>
+        <svg viewBox="0 0 480 118" preserveAspectRatio="none">
+          <polyline fill="none" stroke="#e2ded5" stroke-width="1" points="0,30 480,30"/>
+          <polyline fill="none" stroke="#e2ded5" stroke-width="1" points="0,60 480,60"/>
+          <polyline fill="none" stroke="#e2ded5" stroke-width="1" points="0,90 480,90"/>
+          <polygon fill="rgba(229,64,43,.08)" points="0,96 40,86 90,90 140,70 190,76 240,52 300,58 360,36 420,40 480,22 480,118 0,118"/>
+          <polyline fill="none" stroke="#e5402b" stroke-width="2.2" points="0,96 40,86 90,90 140,70 190,76 240,52 300,58 360,36 420,40 480,22"/>
+          <circle cx="480" cy="22" r="3.4" fill="#e5402b"/>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap logos">
+    <div class="lab">Trusted by fast-moving teams at</div>
+    <div class="logo-row"><span>Northwind</span><span>Lumen</span><span>Vertex</span><span>Quanta</span><span>Beacon</span><span>Atlas</span></div>
+  </section>
+
+  <section class="wrap sec">
+    <div class="sec-head"><h2>Everything you need to understand your users</h2><span class="n">/ features</span></div>
+    <div class="feats">
+      <div class="feat"><div class="num">01</div><h3>Live dashboards</h3><p>Watch events stream in and build views without writing a single line of SQL.</p></div>
+      <div class="feat"><div class="num">02</div><h3>Funnels &amp; retention</h3><p>See exactly where users drop off and what brings them back, in seconds.</p></div>
+      <div class="feat"><div class="num">03</div><h3>Team workspaces</h3><p>Share boards, annotate changes, and keep everyone aligned around the data.</p></div>
+    </div>
+  </section>
+
+  <section class="statband"><div class="wrap in">
+    <div class="s"><div class="v">12,000<b>+</b></div><div class="l">Teams onboard</div></div>
+    <div class="s"><div class="v">8B</div><div class="l">Events / month</div></div>
+    <div class="s"><div class="v">4.9</div><div class="l">Average rating</div></div>
+    <div class="s"><div class="v">99.99<b>%</b></div><div class="l">Uptime SLA</div></div>
+  </div></section>
+
+  <section class="wrap sec">
+    <div class="sec-head"><h2>Simple, transparent pricing</h2><span class="n">/ pricing</span></div>
+    <div class="price">
+      <div class="tier"><div class="rec"></div><h3>Starter</h3><div class="amt">$0</div><ul><li>Up to 5k events</li><li>2 dashboards</li><li>7-day history</li><li>Community support</li></ul><a class="pick out">Get started</a></div>
+      <div class="tier pop"><div class="rec">Recommended</div><h3>Pro</h3><div class="amt">$29<small> / mo</small></div><ul><li>Up to 1M events</li><li>Unlimited dashboards</li><li>1-year history</li><li>Funnels &amp; retention</li><li>Priority support</li></ul><a class="pick solid">Start free trial</a></div>
+      <div class="tier"><div class="rec"></div><h3>Scale</h3><div class="amt">$99<small> / mo</small></div><ul><li>Unlimited events</li><li>SSO &amp; roles</li><li>Unlimited history</li><li>Dedicated CSM</li></ul><a class="pick out">Contact sales</a></div>
+    </div>
+  </section>
+
+  <section class="wrap cta2">
+    <h2>Ready to get started?</h2>
+    <p>Join thousands of teams shipping smarter with Cadence.</p>
+    <a class="btn lg">Start for free</a>
+  </section>
+
+  <footer><div class="wrap">
+    <div class="foot">
+      <div><div class="brand" style="margin-bottom:14px"><span class="mk"></span> Cadence</div><p style="color:var(--mut);font-size:14px;line-height:1.6;max-width:240px">Product analytics for fast-moving teams.</p></div>
+      <div><h4>Product</h4><a>Features</a><a>Integrations</a><a>Pricing</a><a>Changelog</a></div>
+      <div><h4>Company</h4><a>About</a><a>Careers</a><a>Customers</a><a>Contact</a></div>
+      <div class="news"><h4>Stay in the loop</h4><p>Product notes and the occasional deep dive. No noise.</p><div class="nf"><input placeholder="you@company.com"><button>Subscribe</button></div></div>
+    </div>
+    <div class="copy"><span>© 2026 Cadence, Inc.</span><span class="soc"><a>X</a><a>LinkedIn</a><a>GitHub</a></span></div>
+  </div></footer>
+</body>
+</html>

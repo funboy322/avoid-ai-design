@@ -10,10 +10,10 @@
 [![Also works with](https://img.shields.io/badge/Cursor%20%C2%B7%20Codex%20%C2%B7%20Copilot-compatible-8b5cf6.svg)](#compatibility)
 
 <p align="center">
-  <img src="docs/before-after.png" alt="Before and after. Left: a generic AI-generated landing page with a purple gradient, an 'Elevate Your Workflow' headline, a pill badge, and three emoji feature cards. Right: the exact same content rewritten with a serif and sans editorial type pairing, a warm paper palette with a single accent color, an asymmetric hero, and numbered features." width="100%">
+  <img src="docs/before-after.png" alt="The same SaaS landing page, before and after. Left, labeled AI-generated: a purple-to-blue gradient hero with gradient headline text, a sparkle pill badge, a glassy chart mock, and three emoji feature cards. Right, after avoid-ai-design: the exact same product, sections, and copy, rewritten in a Swiss editorial style with ink and one vermilion accent, Helvetica, a strict grid, a real dashboard view, and numbered features." width="100%">
 </p>
 
-<p align="center"><sub><i>Left: what every model ships. Right: the same content after <code>avoid-ai-design</code>. Both pages are real and live in <a href="examples/">examples/</a>.</i></sub></p>
+<p align="center"><sub><i>One real site, run through the skill. Same product, same sections, same copy, only the design changed. The pages and the full audit live in <a href="examples/demo/">examples/demo/</a>.</i></sub></p>
 
 Ask Claude, Codex, or any model to "build a landing page" and you get the same page every time: a purple-to-blue gradient on white, Inter for every word, a centered hero with three rounded feature cards, and a glassy navbar. `avoid-ai-design` is the cleanup pass. It reads the frontend an AI just produced, flags the patterns that give it away, and rewrites the interface around one committed design direction.
 
@@ -74,6 +74,16 @@ Trigger `detect` with phrases like "just audit", "flag only", "don't change the 
 - **P2** is cosmetic: flat uniform spacing, missing or copy-paste motion.
 
 Quick passes fix P0 and P1. A full audit covers all three.
+
+## See it work on a real page
+
+[`examples/demo/`](examples/demo/) is an actual end-to-end run of the skill on one generic AI-built SaaS page, not two hand-made mockups:
+
+- [`slop.html`](examples/demo/slop.html): the page an AI tool produces unprompted (the "before").
+- [`refined.html`](examples/demo/refined.html): the same product, sections, and copy after the skill (the "after"). Only the design changed.
+- [`AUDIT.md`](examples/demo/AUDIT.md): the real audit: 21 tells found by severity, the one direction committed to, and every change made.
+
+Full-page screenshots: [before](docs/demo-before.png) and [after](docs/demo-after.png).
 
 ## Install
 

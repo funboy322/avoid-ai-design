@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --paper:#f4efe4; --accent:#e5402b; --mut:#a99d87; }
+  html,body{ width:1200px; height:630px; overflow:hidden; }
+  body{ background:radial-gradient(1000px 470px at 22% -12%, #241c12, #121009 70%); color:var(--paper);
+        font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased;
+        padding:54px 58px; position:relative; letter-spacing:-.01em; }
+  .top{ display:flex; justify-content:space-between; align-items:center; }
+  .wm{ font-size:24px; font-weight:700; }
+  .wm b{ color:var(--accent); }
+  .meta{ font-family:"SF Mono",Menlo,monospace; font-size:12.5px; letter-spacing:.1em; color:var(--mut); }
+  .eyebrow{ font-family:"SF Mono",Menlo,monospace; font-size:14px; letter-spacing:.2em; color:var(--accent);
+            text-transform:uppercase; margin-top:60px; }
+  h1{ font-weight:800; font-size:60px; line-height:1.01; letter-spacing:-.035em; margin-top:18px; }
+  h1 .a{ color:var(--accent); }
+  .sub{ font-size:18px; line-height:1.55; color:#ccc0aa; max-width:560px; margin-top:22px; }
+  .chips{ position:absolute; left:58px; bottom:54px; display:flex; gap:10px; }
+  .chips span{ font-family:"SF Mono",Menlo,monospace; font-size:12.5px; color:#d8cab2; padding:8px 13px;
+               border:1px solid rgba(255,255,255,.16); border-radius:7px; }
+  .mini{ position:absolute; right:58px; bottom:50px; display:flex; align-items:center; }
+  .mp{ position:relative; width:212px; height:150px; border-radius:10px; overflow:hidden;
+       box-shadow:0 30px 50px -24px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06); }
+  .mp iframe{ width:1280px; height:905px; border:0; transform:scale(.1656); transform-origin:top left; }
+  .ml{ position:absolute; top:8px; left:8px; font-family:"SF Mono",Menlo,monospace; font-size:9px; font-weight:700;
+       letter-spacing:.1em; padding:4px 7px; border-radius:5px; }
+  .ml.b{ background:rgba(10,8,5,.62); color:#d8cab2; } .ml.a{ background:var(--accent); color:#fff; }
+  .marrow{ width:38px; height:38px; border-radius:50%; background:var(--accent); color:#fff; display:grid;
+           place-items:center; font-size:17px; margin:0 -19px; z-index:4; box-shadow:0 10px 20px -6px rgba(229,64,43,.7); }
+</style>
+</head>
+<body>
+  <div class="top"><div class="wm">avoid<b>-ai-</b>design</div><div class="meta">SKILL.md · agentskills.io</div></div>
+  <div class="eyebrow">// de-slop your frontend</div>
+  <h1>Make AI-generated UI<br>look like a <span class="a">human</span> made it.</h1>
+  <p class="sub">A Claude Code skill that audits your frontend and rewrites it around one committed design direction.</p>
+  <div class="chips"><span>HTML / CSS</span><span>React · Tailwind · shadcn</span><span>detect + rewrite</span></div>
+  <div class="mini">
+    <div class="mp"><div class="ml b">BEFORE</div><iframe src="slop.html" scrolling="no"></iframe></div>
+    <div class="marrow">&rarr;</div>
+    <div class="mp"><div class="ml a">AFTER</div><iframe src="refined.html" scrolling="no"></iframe></div>
+  </div>
+</body>
+</html>
