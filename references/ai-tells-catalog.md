@@ -54,7 +54,7 @@ body { font-family: var(--font-body); }
 ### C1: The purple/indigo-to-blue diagonal gradient · P0
 **Detection:** `linear-gradient(135deg, ...)` from indigo/violet to blue in the hero, CTA, or as a background glow.
 **Why AI:** The canonical tell, "the Purple Problem." It traces to Tailwind UI defaulting buttons to `bg-indigo-500`; Adam Wathan publicly owned the downstream effect in 2025. The color was never tied to a brand.
-**Fix (HTML/CSS):** Choose a dominant brand color and one sharp accent. If you want a gradient, keep it tonal within a single hue, or build a duotone from the brand colors, not the stock indigo→violet.
+**Fix (HTML/CSS):** Choose a dominant brand color and one sharp accent. If you want a gradient, keep it tonal within a single hue, or build a duotone from the brand colors, not the stock indigo-to-violet.
 ```css
 :root { --ink:#101010; --paper:#f4f1ea; --accent:#e4572e; } /* a decision, not a default */
 ```
@@ -81,7 +81,7 @@ body { font-family: var(--font-body); }
 **Fix:** Use shadow for elevation, not color theater. If you want atmosphere, build it into the background, not as a glow under every card.
 
 ### C6: Gradient headline text · P0
-**Detection:** `bg-clip-text text-transparent bg-gradient-to-r ...` on a heading, often the indigo→violet again.
+**Detection:** `bg-clip-text text-transparent bg-gradient-to-r ...` on a heading, often the indigo-to-violet again.
 **Why AI:** A 2024-era default flourish that doubles down on C1 and usually weakens legibility and contrast.
 **Fix:** Make headings solid ink or the brand color. For emphasis use weight, size, or one accent word, not a gradient fill.
 
@@ -240,6 +240,11 @@ See **K6**. The default set used as-is, one per feature card.
 **Why AI:** The microcopy equivalent of beige.
 **Fix:** Replace with a concrete claim, a number, or a verb. For full prose, run the text through the `avoid-ai-writing` skill.
 
+### CP3: Arrow glyphs stapled to text · P1
+**Detection:** Unicode arrows (→ ← ↑ ↓) pasted into button labels, links, or headings: "Get started →", "Learn more →", "Read the docs →".
+**Why AI:** The typographic cousin of the em-dash. A reflexive flourish welded onto every CTA. A real button does not need an arrow character glued to its label.
+**Fix:** Drop the glyph. If a control genuinely needs a directional affordance, use a real icon component sized and aligned to the text, only where it adds meaning, never a raw arrow character in the copy.
+
 ---
 
 ## Imagery
@@ -270,7 +275,7 @@ See **K6**. The default set used as-is, one per feature card.
 
 A pattern is a tell when it is a **default reached for without reason**, not whenever it appears. Calibrate:
 
-- **One gradient, used well and tied to the brand, is not slop.** C1 is about the *unchosen* indigo→violet, not gradients in general.
+- **One gradient, used well and tied to the brand, is not slop.** C1 is about the *unchosen* indigo-to-violet, not gradients in general.
 - **Glassmorphism and bento grids** are legitimate when the content calls for them. Flag them only as reflexive defaults.
 - **Spacing (S1)** is a soft signal. Do not lead an audit with it.
 - **Corporate Memphis** is pre-AI context, not evidence a model made something.

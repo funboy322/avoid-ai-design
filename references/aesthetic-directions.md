@@ -116,11 +116,11 @@ Fonts named below are examples, not mandates. Substitute within the spirit of th
 
 ## Quick chooser
 
-- **Dev tool / honest** → Brutalist, Industrial, Monospace
-- **Content / voice** → Editorial, Maximalist
-- **Data / clarity** → Swiss, Industrial
-- **Premium** → Luxury, Art deco
-- **Consumer / joyful** → Playful, Organic
-- **Calm SaaS** → Warm minimal (only if executed precisely), Organic
+- **Dev tool / honest**: Brutalist, Industrial, Monospace
+- **Content / voice**: Editorial, Maximalist
+- **Data / clarity**: Swiss, Industrial
+- **Premium**: Luxury, Art deco
+- **Consumer / joyful**: Playful, Organic
+- **Calm SaaS**: Warm minimal (only if executed precisely), Organic
 
 When two fit, blend deliberately (e.g. Editorial type on a Swiss grid). When none obviously fits, default to the one the *audience* respects, then commit hard.

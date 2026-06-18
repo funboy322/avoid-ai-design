@@ -12,19 +12,19 @@ tells below are judged from the rendered page, not guessed from source.
 
 ## 1. Audit (`detect` mode output)
 
-21 tells found. Grouped by severity. IDs reference [`../../references/ai-tells-catalog.md`](../../references/ai-tells-catalog.md).
+22 tells found. Grouped by severity. IDs reference [`../../references/ai-tells-catalog.md`](../../references/ai-tells-catalog.md).
 
 ### P0: screams AI on sight (5)
 
 | ID | Where | Why it reads as AI |
 |----|-------|--------------------|
-| C1 | hero glow, buttons, stats panel, CTA band | The indigo→violet→pink gradient everywhere. The Purple Problem. No brand chose it. |
+| C1 | hero glow, buttons, stats panel, CTA band | The indigo-to-violet-to-pink gradient everywhere. The Purple Problem. No brand chose it. |
 | C6 | `<h1>` "just works", stat numbers | `bg-clip-text` gradient text, the 2024 default flourish. |
 | T1 | `body` | Inter / system stack for everything, no pairing, no display face. |
 | L1 | hero | Pill badge + centered H1 + centered subhead + two centered CTAs: the default skeleton. |
 | L2 | features | Three identical icon-topped cards, equal height and padding. |
 
-### P1: obvious AI smell (11)
+### P1: obvious AI smell (12)
 
 | ID | Where | Why it reads as AI |
 |----|-------|--------------------|
@@ -39,6 +39,7 @@ tells below are judged from the rendered page, not guessed from source.
 | L7 | pricing | Three tiers, middle one scaled + ringed + "Most Popular" gradient pill. |
 | L8 | footer | Default four-column footer + newsletter input + social row. |
 | IM | hero visual | A glassy gradient placeholder, not a real product view. |
+| CP3 | hero & CTA band | `→` arrow glyphs welded to CTAs ("Start for free →"). |
 
 ### P2: cosmetic (5)
 
@@ -84,7 +85,7 @@ Alternatives considered: industrial/utilitarian (too cold for a sales page), war
 Re-ran the catalog over `refined.html`:
 
 - **Zero P0 tells remain.** No gradient, no gradient text, no centered-hero template, no Inter, no identical-card row.
-- **P1/P2 cleared:** glass, default footer, pricing ring, emoji, colored glows, the pill, all gone.
+- **P1/P2 cleared:** glass, default footer, pricing ring, emoji, arrow glyphs, colored glows, the pill, all gone.
 - **Knowingly left in scope:** **CP1 and CP2 (copy)**. The headline and subhead still read a bit generic. That is a *writing* problem, not a design one, so it is out of scope for this pass. Run the copy through the [`avoid-ai-writing`](https://github.com/conorbronsdon/avoid-ai-writing) skill to finish the job. Holding the copy constant is also what makes this a fair before/after.
 
 Against the three success tests:

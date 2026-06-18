@@ -40,13 +40,13 @@ The full catalog lives in [`references/ai-tells-catalog.md`](references/ai-tells
 | Category | Example tells |
 |---|---|
 | **Typography** | Inter / Roboto / system default, no display face, the overused "safe" pick (Space Grotesk) treated as a non-choice |
-| **Color** | purple→blue gradient on white, gradient `bg-clip-text` headline text, untouched shadcn `zinc`/`slate`, timid evenly-spread palettes, default Tailwind `blue-600` buttons |
+| **Color** | purple-to-blue gradient on white, gradient `bg-clip-text` headline text, untouched shadcn `zinc`/`slate`, timid evenly-spread palettes, default Tailwind `blue-600` buttons |
 | **Layout** | centered hero, the hero + three-feature-cards + CTA template, the default page shell, three-tier pricing rings, the four-column footer, zero asymmetry |
 | **Components** | `rounded-2xl shadow-lg` on everything, glassmorphism by reflex, icon-in-a-rounded-square, default Card/Button with no styling |
 | **Spacing** | uniform `gap-4` / `p-6` with no spatial hierarchy |
 | **Motion** | none at all, or the same `fade-in-up` on every element |
 | **Icons** | the worn `lucide` set (`Sparkles`+AI, `ArrowRight`, `Zap`), emoji used as feature bullets |
-| **Copy** | "Elevate / Seamless / Powerful", generic CTAs, filler microcopy |
+| **Copy** | "Elevate / Seamless / Powerful", arrow glyphs welded to buttons, generic CTAs, filler microcopy |
 | **Imagery** | gradient placeholders, DiceBear avatars, generic stock-photo energy |
 
 ## Two modes
@@ -69,7 +69,7 @@ Trigger `detect` with phrases like "just audit", "flag only", "don't change the 
 
 ### Severity tiers
 
-- **P0** screams AI on sight: the purple→blue gradient, Inter everywhere, the centered hero-plus-three-cards template, untouched shadcn zinc, reflexive glassmorphism.
+- **P0** screams AI on sight: the purple-to-blue gradient, Inter everywhere, the centered hero-plus-three-cards template, untouched shadcn zinc, reflexive glassmorphism.
 - **P1** is the obvious AI smell: `rounded-2xl shadow-lg` on every surface, icon-in-rounded-square, emoji feature bullets, default blue buttons, "Elevate your…" copy.
 - **P2** is cosmetic: flat uniform spacing, missing or copy-paste motion.
 
@@ -81,7 +81,7 @@ Quick passes fix P0 and P1. A full audit covers all three.
 
 - [`slop.html`](examples/demo/slop.html): the page an AI tool produces unprompted (the "before").
 - [`refined.html`](examples/demo/refined.html): the same product, sections, and copy after the skill (the "after"). Only the design changed.
-- [`AUDIT.md`](examples/demo/AUDIT.md): the real audit: 21 tells found by severity, the one direction committed to, and every change made.
+- [`AUDIT.md`](examples/demo/AUDIT.md): the real audit: 22 tells found by severity, the one direction committed to, and every change made.
 
 Full-page screenshots: [before](docs/demo-before.png) and [after](docs/demo-after.png).
 

@@ -56,7 +56,7 @@ A page can pass the catalog and still fail all three. The catalog catches clich√
 Tiers triage by **who notices**, not by how much the pattern annoys you. Context can move a tell up or down.
 
 - **P0, a layperson recognizes it as AI-made.** The purple-to-blue gradient, Inter for everything, an untouched shadcn base theme, gradient (`bg-clip-text`) headline text, reflexive glassmorphism. These are the memes.
-- **P1, a designer or developer recognizes it.** `rounded-2xl shadow-lg` on every surface, the default page shell (`container mx-auto px-4`, `max-w-7xl`), icon-in-a-rounded-square, the default four-column footer, dead hover/focus states, default-blue or indigo buttons, "Elevate your workflow" copy.
+- **P1, a designer or developer recognizes it.** `rounded-2xl shadow-lg` on every surface, the default page shell (`container mx-auto px-4`, `max-w-7xl`), icon-in-a-rounded-square, the default four-column footer, dead hover/focus states, arrow glyphs stapled to CTAs, default-blue or indigo buttons, "Elevate your workflow" copy.
 - **P2, craft and polish gaps.** Flat spacing with no rhythm, no motion, or the same `fade-in-up` on everything.
 
 Context matters: a centered hero is P0 on a generic SaaS page and fine in a luxury layout. Missing `:focus-visible` is also an accessibility defect, so treat it as high priority whatever its tier.

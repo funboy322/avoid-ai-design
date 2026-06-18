@@ -77,7 +77,7 @@ A Claude Code skill that audits AI-generated UI and rewrites it to remove generi
 <meta name="twitter:card" content="summary_large_image" />
 ```
 
-**Social preview image** (`docs/og-image.png`, 1200×630): included in the repo. Upload it under **Settings → General → Social preview** so links to the repo unfurl with the card.
+**Social preview image** (`docs/og-image.png`, 1200×630): included in the repo. Upload it under **Settings > General > Social preview** so links to the repo unfurl with the card.
 
 ---
 
