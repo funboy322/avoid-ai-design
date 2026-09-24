@@ -1,211 +1,228 @@
 <!doctype html>
-<!-- DEMO / after: the SAME site as slop.html (same product, sections, copy, links),
-     rewritten by avoid-ai-design. One direction: Swiss/editorial-technical,
-     ink + a single vermilion accent, Helvetica grotesque, strict grid, real dashboard mock.
-     Substantive copy held identical to slop.html to isolate the DESIGN transformation. -->
+<!-- DEMO / after: the SAME site as slop.html (same product, sections, copy, links), rewritten by
+     avoid-ai-design v0.4. Direction "Cohort", grounded in the subject: the most characteristic
+     artifact of product analytics is the retention cohort table, so it is the hero, the page is
+     structured like a table, and the table's heat ramp is the page's only color.
+     avoid-ai-design-ignore-file: L4, L9, CP2, CP6
+     (content held identical to slop.html so that only the design varies: the stat numbers, the
+     section order, and the copy are out of scope for this demo, see AUDIT.md) -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cadence — product analytics</title>
+<title>Cadence: product analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   *{ margin:0; padding:0; box-sizing:border-box; }
   :root{
-    --paper:#f5f4f1; --ink:#15120d; --mut:#6c675e; --accent:#e5402b; --line:#e2ded5; --card:#fffffe;
-    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif; --mono:"SF Mono","Menlo",monospace;
+    --ground:#f4f6f8; --surface:#ffffff; --ink:#10233b; --muted:#4a5a6e; --rule:#d5dde6;
+    --heat-1:#c9dbef; --heat-2:#9ebfe3; --heat-3:#5f8fc9; --heat-4:#2f64a8; --heat-5:#16447f; --wash:#e8f0f9;
+    --face:"Schibsted Grotesk", "Segoe UI", sans-serif;
   }
-  body{ font-family:var(--sans); color:var(--ink); background:var(--paper); -webkit-font-smoothing:antialiased;
-        letter-spacing:-.005em; }
-  .wrap{ max-width:1180px; margin:0 auto; padding:0 36px; }
+  body{ font-family:var(--face); color:var(--ink); background:var(--ground); -webkit-font-smoothing:antialiased; line-height:1.5; }
   a{ color:inherit; text-decoration:none; }
-  .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
-  .rule{ height:1px; background:var(--line); }
+  a:focus-visible, button:focus-visible, input:focus-visible{ outline:2px solid var(--heat-4); outline-offset:3px; border-radius:4px; }
+  .wrap{ max-width:1200px; margin:0 auto; padding:0 40px; }
 
   /* nav */
-  nav{ border-bottom:1px solid var(--line); background:var(--paper); position:sticky; top:0; z-index:10; }
-  .nav-in{ display:flex; align-items:center; justify-content:space-between; height:72px; }
-  .brand{ display:flex; align-items:center; gap:11px; font-weight:700; font-size:20px; letter-spacing:-.02em; }
-  .brand .mk{ width:13px; height:13px; background:var(--accent); border-radius:2px; transform:rotate(45deg); }
-  .nav-links{ display:flex; gap:32px; font-size:14.5px; color:#4c4840; font-weight:500; }
-  .nav-r{ display:flex; align-items:center; gap:22px; }
-  .nav-r .login{ font-size:14.5px; font-weight:600; }
-  .btn{ background:var(--ink); color:var(--paper); font-weight:600; font-size:14px; padding:11px 19px; border-radius:7px;
-        transition:transform .14s ease; display:inline-block; }
-  .btn:hover{ transform:translateY(-1px); }
-  .btn.lg{ padding:15px 26px; font-size:15.5px; }
-  .ghost{ border:1px solid var(--ink); color:var(--ink); font-weight:600; font-size:15.5px; padding:14px 25px; border-radius:7px; display:inline-block; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:21px; letter-spacing:-.02em; }
+  .brand svg{ display:block; }
+  .links{ display:flex; gap:30px; font-size:15px; font-weight:500; color:var(--muted); }
+  .links a:hover{ color:var(--ink); }
+  .nav-r{ display:flex; align-items:center; gap:22px; font-size:15px; font-weight:500; }
+  .btn{ display:inline-block; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:11px 18px; border-radius:6px;
+        transition:background-color .15s ease; }
+  .btn:hover{ background:var(--heat-4); }
+  .btn.quiet{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink); }
+  .btn.quiet:hover{ background:var(--wash); }
+  .btn.lg{ padding:14px 22px; font-size:16px; }
 
-  /* hero */
-  .hero{ padding:78px 0 30px; display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
-  .hero h1{ font-size:64px; line-height:1.0; font-weight:800; letter-spacing:-.035em; margin:22px 0 24px; }
-  .hero h1 .a{ color:var(--accent); }
-  .hero .sub{ font-size:18.5px; line-height:1.6; color:var(--mut); max-width:440px; margin-bottom:34px; }
-  .hero .cta{ display:flex; gap:16px; align-items:center; }
-  .meta-row{ display:flex; gap:30px; margin-top:42px; }
-  .meta-row .m{ }
-  .meta-row .mv{ font-size:24px; font-weight:700; letter-spacing:-.02em; }
-  .meta-row .ml{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--mut); text-transform:uppercase; margin-top:3px; }
+  /* hero: the cohort table is the first thing you see */
+  .hero{ display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start; padding:56px 0 64px; }
+  .hero h1{ font-size:58px; line-height:1.02; font-weight:800; letter-spacing:-.035em; margin-bottom:22px; }
+  .hero .sub{ font-size:18px; color:var(--muted); max-width:440px; margin-bottom:30px; }
+  .cta{ display:flex; gap:12px; flex-wrap:wrap; }
+  .proof{ list-style:none; display:flex; gap:26px; margin-top:34px; font-size:14.5px; color:var(--muted); }
+  .proof strong{ display:block; color:var(--ink); font-size:17px; }
 
-  /* dashboard mock */
-  .dash{ background:var(--card); border:1px solid var(--line); border-radius:10px; box-shadow:0 34px 60px -38px rgba(30,22,10,.5);
-         overflow:hidden; }
-  .dash .bar{ display:flex; align-items:center; gap:7px; padding:13px 15px; border-bottom:1px solid var(--line); }
-  .dash .bar i{ width:9px; height:9px; border-radius:50%; background:#dcd8cf; }
-  .dash .bar i:first-child{ background:var(--accent); }
-  .dash .bar .t{ font-family:var(--mono); font-size:11px; color:var(--mut); margin-left:6px; }
-  .dash .body{ padding:18px; }
-  .dash .kpis{ display:flex; gap:26px; margin-bottom:16px; }
-  .dash .kpi .v{ font-size:23px; font-weight:700; letter-spacing:-.02em; }
-  .dash .kpi .v b{ color:var(--accent); font-weight:700; font-size:13px; margin-left:5px; }
-  .dash .kpi .k{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--mut); text-transform:uppercase; margin-top:2px; }
-  .dash svg{ display:block; width:100%; height:118px; }
+  .cohort{ background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:20px 20px 16px; }
+  .cohort table{ width:100%; border-collapse:separate; border-spacing:3px; font-size:13px; font-variant-numeric:tabular-nums; }
+  .cohort caption{ text-align:left; caption-side:top; padding:0 3px 12px; }
+  .cohort caption b{ display:block; font-size:16px; }
+  .cohort caption span{ color:var(--muted); font-size:13.5px; }
+  .cohort th{ font-weight:500; color:var(--muted); text-align:left; padding:4px 6px; white-space:nowrap; }
+  .cohort thead th{ text-align:center; }
+  .cohort td{ text-align:center; padding:7px 0; border-radius:3px; font-weight:500; }
+  .h1c{ background:var(--heat-1); } .h2c{ background:var(--heat-2); } .h3c{ background:var(--heat-3); }
+  .h4c{ background:var(--heat-4); color:#fff; } .h5c{ background:var(--heat-5); color:#fff; }
+  .key{ display:flex; align-items:center; gap:4px; margin:12px 3px 0; font-size:12.5px; color:var(--muted); }
+  .key i{ width:18px; height:8px; border-radius:2px; }
 
   /* logos */
-  .logos{ padding:34px 0; }
-  .logos .lab{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); margin-bottom:18px; }
-  .logo-row{ display:flex; justify-content:space-between; align-items:center; }
-  .logo-row span{ font-weight:700; font-size:19px; color:#3a362e; letter-spacing:-.02em; }
+  .logos{ display:flex; align-items:baseline; gap:40px; padding:26px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .logos p{ font-size:14.5px; color:var(--muted); white-space:nowrap; }
+  .logos ul{ list-style:none; display:flex; justify-content:space-between; flex:1; font-weight:700; font-size:18px; color:#34465c; }
 
-  /* sections */
-  .sec{ padding:88px 0; }
-  .sec-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:8px; }
-  .sec-head h2{ font-size:38px; font-weight:800; letter-spacing:-.03em; max-width:560px; line-height:1.05; }
-  .sec-head .n{ font-family:var(--mono); font-size:12px; color:var(--mut); letter-spacing:.1em; }
+  /* features as rows of a table */
+  section.block{ padding:88px 0 0; }
+  .block h2{ font-size:38px; line-height:1.06; font-weight:800; letter-spacing:-.03em; max-width:620px; margin-bottom:30px; }
+  .rows{ border-top:2px solid var(--ink); }
+  .row{ display:grid; grid-template-columns:260px 1fr 260px; gap:32px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); }
+  .row h3{ font-size:21px; font-weight:700; letter-spacing:-.015em; }
+  .row p{ color:var(--muted); font-size:16px; max-width:470px; }
+  .row .viz{ justify-self:end; font-size:13px; color:var(--muted); text-align:right; }
+  .row .viz svg{ display:block; margin-left:auto; }
 
-  /* features */
-  .feats{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); }
-  .feat{ padding:30px 28px 8px; border-right:1px solid var(--line); }
-  .feat:last-child{ border-right:0; padding-right:0; }
-  .feat:first-child{ padding-left:0; }
-  .feat .num{ font-family:var(--mono); font-size:13px; color:var(--accent); }
-  .feat h3{ font-size:21px; font-weight:700; letter-spacing:-.02em; margin:18px 0 10px; }
-  .feat p{ font-size:15px; line-height:1.6; color:var(--mut); max-width:280px; }
+  /* stats: the totals row */
+  .totals{ display:grid; grid-template-columns:repeat(4,1fr); margin-top:88px; background:var(--ink); color:#fff; border-radius:10px; }
+  .totals div{ padding:34px 28px; }
+  .totals div + div{ box-shadow:inset 1px 0 0 rgba(255,255,255,.14); }
+  .totals b{ display:block; font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1; }
+  .totals span{ display:block; margin-top:10px; font-size:14.5px; color:#bfd0e4; }
 
-  /* stats (dark band for rhythm) */
-  .statband{ background:var(--ink); color:var(--paper); }
-  .statband .in{ display:grid; grid-template-columns:repeat(4,1fr); }
-  .statband .s{ padding:54px 0; border-left:1px solid rgba(255,255,255,.12); padding-left:26px; }
-  .statband .s:first-child{ border-left:0; padding-left:0; }
-  .statband .v{ font-size:46px; font-weight:800; letter-spacing:-.03em; }
-  .statband .v b{ color:var(--accent); font-weight:800; }
-  .statband .l{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:rgba(245,244,241,.6); margin-top:8px; }
+  /* pricing as a comparison */
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); border-top:2px solid var(--ink); }
+  .plan{ padding:26px 26px 30px; border-bottom:1px solid var(--rule); }
+  .plan + .plan{ border-left:1px solid var(--rule); }
+  .plan.rec{ background:var(--wash); }
+  .plan .tag{ font-size:13.5px; font-weight:700; color:var(--heat-4); height:20px; }
+  .plan h3{ font-size:19px; font-weight:700; margin:4px 0 10px; }
+  .plan .price{ font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1; }
+  .plan .price small{ font-size:16px; font-weight:500; color:var(--muted); letter-spacing:0; }
+  .plan ul{ list-style:none; margin:22px 0 26px; }
+  .plan li{ padding:8px 0; border-top:1px solid var(--rule); font-size:15px; }
+  .plan .btn{ display:block; text-align:center; }
 
-  /* pricing */
-  .price{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); }
-  .tier{ padding:32px 28px; border-right:1px solid var(--line); position:relative; }
-  .tier:last-child{ border-right:0; }
-  .tier.pop{ background:var(--card); }
-  .tier .rec{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; color:var(--accent); text-transform:uppercase; height:14px; }
-  .tier h3{ font-size:16px; font-weight:700; margin:10px 0 14px; }
-  .tier .amt{ font-size:44px; font-weight:800; letter-spacing:-.03em; }
-  .tier .amt small{ font-size:15px; color:var(--mut); font-weight:500; letter-spacing:0; }
-  .tier ul{ list-style:none; margin:22px 0 26px; }
-  .tier li{ font-size:14px; color:#4c4840; padding:7px 0 7px 20px; position:relative; border-bottom:1px solid var(--line); }
-  .tier li:before{ content:"+"; position:absolute; left:0; color:var(--accent); font-weight:700; }
-  .tier .pick{ display:block; text-align:center; padding:12px; border-radius:7px; font-weight:600; font-size:14px; }
-  .tier .pick.out{ border:1px solid var(--ink); }
-  .tier .pick.solid{ background:var(--ink); color:var(--paper); }
+  /* closing */
+  .close{ display:flex; align-items:center; justify-content:space-between; gap:40px; padding:96px 0; }
+  .close h2{ font-size:46px; line-height:1.04; font-weight:800; letter-spacing:-.035em; }
+  .close p{ color:var(--muted); font-size:18px; margin-top:10px; }
 
-  /* cta */
-  .cta2{ padding:96px 0; text-align:center; }
-  .cta2 h2{ font-size:52px; font-weight:800; letter-spacing:-.035em; line-height:1.02; margin-bottom:18px; }
-  .cta2 p{ font-size:18px; color:var(--mut); margin-bottom:32px; }
+  footer{ border-top:2px solid var(--ink); padding:48px 0 34px; }
+  .foot{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.5fr; gap:32px; }
+  .foot h4{ font-size:15px; font-weight:700; margin-bottom:14px; }
+  .foot a{ display:block; color:var(--muted); font-size:15px; margin-bottom:9px; }
+  .foot a:hover{ color:var(--ink); }
+  .foot p{ color:var(--muted); font-size:15px; max-width:260px; }
+  .signup{ display:flex; margin-top:14px; }
+  .signup input{ flex:1; font:inherit; font-size:15px; padding:10px 12px; border:1.5px solid var(--ink); border-right:0; border-radius:6px 0 0 6px; background:var(--surface); color:var(--ink); }
+  .signup button{ font:inherit; font-weight:700; font-size:15px; padding:0 16px; border:0; border-radius:0 6px 6px 0; background:var(--ink); color:#fff; cursor:pointer; }
+  .signup button:hover{ background:var(--heat-4); }
+  .legal{ display:flex; justify-content:space-between; margin-top:40px; font-size:14px; color:var(--muted); }
+  .legal nav{ display:flex; gap:18px; }
 
-  /* footer */
-  footer{ border-top:1px solid var(--ink); padding:56px 0 36px; }
-  .foot{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1.4fr; gap:30px; }
-  .foot h4{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--mut); margin-bottom:16px; }
-  .foot a{ display:block; color:#4c4840; font-size:14px; margin-bottom:11px; }
-  .foot .news p{ color:var(--mut); font-size:14px; line-height:1.6; margin-bottom:14px; }
-  .foot .news .nf{ display:flex; border:1px solid var(--ink); border-radius:7px; overflow:hidden; }
-  .foot .news input{ flex:1; border:0; padding:11px 13px; font-size:13.5px; background:transparent; outline:none; font-family:var(--sans); }
-  .foot .news button{ border:0; background:var(--ink); color:var(--paper); font-weight:600; font-size:13px; padding:0 16px; cursor:pointer; }
-  .copy{ display:flex; justify-content:space-between; align-items:center; margin-top:42px; padding-top:22px; border-top:1px solid var(--line); color:var(--mut); font-size:13px; }
-  .copy .soc{ display:flex; gap:18px; font-family:var(--mono); font-size:12px; letter-spacing:.04em; }
+  @media (max-width:900px){
+    .hero, .row{ grid-template-columns:1fr; } .row .viz{ justify-self:start; text-align:left; }
+    .hero h1{ font-size:42px; } .totals, .plans, .foot{ grid-template-columns:1fr 1fr; }
+    .logos, .close{ flex-direction:column; align-items:flex-start; } .links{ display:none; }
+  }
 </style>
 </head>
 <body>
-  <nav><div class="wrap nav-in">
-    <div class="brand"><span class="mk"></span> Cadence</div>
-    <div class="nav-links"><span>Product</span><span>Solutions</span><span>Pricing</span><span>Docs</span><span>Blog</span></div>
-    <div class="nav-r"><span class="login">Log in</span><a class="btn">Get started</a></div>
-  </div></nav>
-
-  <header class="wrap hero">
-    <div>
-      <div class="eyebrow">Product analytics</div>
-      <h1>Product analytics that <span class="a">just works</span></h1>
-      <p class="sub">Cadence turns raw events into clear answers, so your team can ship with confidence instead of guesswork. Seamlessly powerful, beautifully simple.</p>
-      <div class="cta"><a class="btn lg">Start for free</a><a class="ghost">Book a demo</a></div>
-      <div class="meta-row">
-        <div class="m"><div class="mv">No SQL</div><div class="ml">required</div></div>
-        <div class="m"><div class="mv">5 min</div><div class="ml">to first chart</div></div>
-        <div class="m"><div class="mv">SOC 2</div><div class="ml">compliant</div></div>
-      </div>
-    </div>
-    <div class="dash">
-      <div class="bar"><i></i><i></i><i></i><span class="t">cadence — weekly active</span></div>
-      <div class="body">
-        <div class="kpis">
-          <div class="kpi"><div class="v">48,210<b>+12%</b></div><div class="k">Weekly active</div></div>
-          <div class="kpi"><div class="v">3.4%<b>+0.6</b></div><div class="k">Conversion</div></div>
-        </div>
-        <svg viewBox="0 0 480 118" preserveAspectRatio="none">
-          <polyline fill="none" stroke="#e2ded5" stroke-width="1" points="0,30 480,30"/>
-          <polyline fill="none" stroke="#e2ded5" stroke-width="1" points="0,60 480,60"/>
-          <polyline fill="none" stroke="#e2ded5" stroke-width="1" points="0,90 480,90"/>
-          <polygon fill="rgba(229,64,43,.08)" points="0,96 40,86 90,90 140,70 190,76 240,52 300,58 360,36 420,40 480,22 480,118 0,118"/>
-          <polyline fill="none" stroke="#e5402b" stroke-width="2.2" points="0,96 40,86 90,90 140,70 190,76 240,52 300,58 360,36 420,40 480,22"/>
-          <circle cx="480" cy="22" r="3.4" fill="#e5402b"/>
-        </svg>
-      </div>
-    </div>
+  <header class="wrap nav">
+    <a class="brand" href="refined.html" aria-label="Cadence home">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+        <rect x="0" y="0" width="6" height="6" fill="#16447f"/><rect x="8" y="0" width="6" height="6" fill="#2f64a8"/><rect x="16" y="0" width="6" height="6" fill="#9ebfe3"/>
+        <rect x="0" y="8" width="6" height="6" fill="#16447f"/><rect x="8" y="8" width="6" height="6" fill="#5f8fc9"/>
+        <rect x="0" y="16" width="6" height="6" fill="#16447f"/>
+      </svg>
+      Cadence
+    </a>
+    <nav class="links" aria-label="Main"><a href="#">Product</a><a href="#">Solutions</a><a href="#pricing">Pricing</a><a href="#">Docs</a><a href="#">Blog</a></nav>
+    <div class="nav-r"><a href="#">Log in</a><a class="btn" href="#">Get started</a></div>
   </header>
 
-  <section class="wrap logos">
-    <div class="lab">Trusted by fast-moving teams at</div>
-    <div class="logo-row"><span>Northwind</span><span>Lumen</span><span>Vertex</span><span>Quanta</span><span>Beacon</span><span>Atlas</span></div>
-  </section>
+  <main>
+    <section class="wrap hero">
+      <div>
+        <h1>Product analytics that just works</h1>
+        <p class="sub">Cadence turns raw events into clear answers, so your team can ship with confidence instead of guesswork. Seamlessly powerful, beautifully simple.</p>
+        <div class="cta"><a class="btn lg" href="#">Start for free</a><a class="btn lg quiet" href="#">Book a demo</a></div>
+        <ul class="proof">
+          <li><strong>No SQL</strong>required</li>
+          <li><strong>5 min</strong>to first chart</li>
+          <li><strong>SOC 2</strong>compliant</li>
+        </ul>
+      </div>
+      <figure class="cohort">
+        <table>
+          <caption><b>Weekly retention by signup week</b><span>Share of each week's new users still active</span></caption>
+          <thead><tr><th scope="col">Signed up</th><th scope="col">Week 0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Jul 7</th><td class="h5c">100%</td><td class="h4c">71%</td><td class="h2c">58%</td><td class="h2c">52%</td><td class="h1c">49%</td><td class="h1c">47%</td><td class="h1c">46%</td><td class="h1c">45%</td></tr>
+            <tr><th scope="row">Jul 14</th><td class="h5c">100%</td><td class="h4c">73%</td><td class="h3c">60%</td><td class="h2c">54%</td><td class="h2c">51%</td><td class="h1c">49%</td><td class="h1c">48%</td><td></td></tr>
+            <tr><th scope="row">Jul 21</th><td class="h5c">100%</td><td class="h3c">69%</td><td class="h2c">57%</td><td class="h2c">51%</td><td class="h1c">48%</td><td class="h1c">46%</td><td></td><td></td></tr>
+            <tr><th scope="row">Jul 28</th><td class="h5c">100%</td><td class="h4c">74%</td><td class="h3c">62%</td><td class="h2c">56%</td><td class="h2c">53%</td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 4</th><td class="h5c">100%</td><td class="h4c">76%</td><td class="h3c">64%</td><td class="h2c">58%</td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 11</th><td class="h5c">100%</td><td class="h4c">78%</td><td class="h3c">66%</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 18</th><td class="h5c">100%</td><td class="h4c">79%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 25</th><td class="h5c">100%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <div class="key" aria-hidden="true">Fewer <i class="h1c"></i><i class="h2c"></i><i class="h3c"></i><i class="h4c"></i><i class="h5c"></i> More still active</div>
+      </figure>
+    </section>
 
-  <section class="wrap sec">
-    <div class="sec-head"><h2>Everything you need to understand your users</h2><span class="n">/ features</span></div>
-    <div class="feats">
-      <div class="feat"><div class="num">01</div><h3>Live dashboards</h3><p>Watch events stream in and build views without writing a single line of SQL.</p></div>
-      <div class="feat"><div class="num">02</div><h3>Funnels &amp; retention</h3><p>See exactly where users drop off and what brings them back, in seconds.</p></div>
-      <div class="feat"><div class="num">03</div><h3>Team workspaces</h3><p>Share boards, annotate changes, and keep everyone aligned around the data.</p></div>
-    </div>
-  </section>
+    <section class="wrap logos" aria-label="Customers">
+      <p>Trusted by fast-moving teams at</p>
+      <ul><li>Northwind</li><li>Lumen</li><li>Vertex</li><li>Quanta</li><li>Beacon</li><li>Atlas</li></ul>
+    </section>
 
-  <section class="statband"><div class="wrap in">
-    <div class="s"><div class="v">12,000<b>+</b></div><div class="l">Teams onboard</div></div>
-    <div class="s"><div class="v">8B</div><div class="l">Events / month</div></div>
-    <div class="s"><div class="v">4.9</div><div class="l">Average rating</div></div>
-    <div class="s"><div class="v">99.99<b>%</b></div><div class="l">Uptime SLA</div></div>
-  </div></section>
+    <section class="wrap block">
+      <h2>Everything you need to understand your users</h2>
+      <div class="rows">
+        <div class="row">
+          <h3>Live dashboards</h3>
+          <p>Watch events stream in and build views without writing a single line of SQL.</p>
+          <div class="viz"><svg width="200" height="36" viewBox="0 0 200 36" aria-hidden="true"><polyline fill="none" stroke="#2f64a8" stroke-width="2" points="0,30 25,26 50,28 75,18 100,21 125,12 150,15 175,7 200,4"/></svg>events in the last hour</div>
+        </div>
+        <div class="row">
+          <h3>Funnels &amp; retention</h3>
+          <p>See exactly where users drop off and what brings them back, in seconds.</p>
+          <div class="viz"><svg width="200" height="36" viewBox="0 0 200 36" aria-hidden="true"><rect x="0" y="4" width="200" height="6" fill="#16447f"/><rect x="0" y="15" width="122" height="6" fill="#5f8fc9"/><rect x="0" y="26" width="58" height="6" fill="#9ebfe3"/></svg>visit, sign up, invite</div>
+        </div>
+        <div class="row">
+          <h3>Team workspaces</h3>
+          <p>Share boards, annotate changes, and keep everyone aligned around the data.</p>
+          <div class="viz"><strong style="color:var(--ink)">Maya annotated Tuesday</strong><br>New onboarding shipped, activation up</div>
+        </div>
+      </div>
 
-  <section class="wrap sec">
-    <div class="sec-head"><h2>Simple, transparent pricing</h2><span class="n">/ pricing</span></div>
-    <div class="price">
-      <div class="tier"><div class="rec"></div><h3>Starter</h3><div class="amt">$0</div><ul><li>Up to 5k events</li><li>2 dashboards</li><li>7-day history</li><li>Community support</li></ul><a class="pick out">Get started</a></div>
-      <div class="tier pop"><div class="rec">Recommended</div><h3>Pro</h3><div class="amt">$29<small> / mo</small></div><ul><li>Up to 1M events</li><li>Unlimited dashboards</li><li>1-year history</li><li>Funnels &amp; retention</li><li>Priority support</li></ul><a class="pick solid">Start free trial</a></div>
-      <div class="tier"><div class="rec"></div><h3>Scale</h3><div class="amt">$99<small> / mo</small></div><ul><li>Unlimited events</li><li>SSO &amp; roles</li><li>Unlimited history</li><li>Dedicated CSM</li></ul><a class="pick out">Contact sales</a></div>
-    </div>
-  </section>
+      <div class="totals">
+        <div><b>12,000+</b><span>Teams onboard</span></div>
+        <div><b>8B</b><span>Events / month</span></div>
+        <div><b>4.9</b><span>Average rating</span></div>
+        <div><b>99.99%</b><span>Uptime SLA</span></div>
+      </div>
+    </section>
 
-  <section class="wrap cta2">
-    <h2>Ready to get started?</h2>
-    <p>Join thousands of teams shipping smarter with Cadence.</p>
-    <a class="btn lg">Start for free</a>
-  </section>
+    <section class="wrap block" id="pricing">
+      <h2>Simple, transparent pricing</h2>
+      <div class="plans">
+        <div class="plan"><div class="tag"></div><h3>Starter</h3><div class="price">$0</div><ul><li>Up to 5k events</li><li>2 dashboards</li><li>7-day history</li><li>Community support</li></ul><a class="btn quiet" href="#">Get started</a></div>
+        <div class="plan rec"><div class="tag">Recommended</div><h3>Pro</h3><div class="price">$29<small> / mo</small></div><ul><li>Up to 1M events</li><li>Unlimited dashboards</li><li>1-year history</li><li>Funnels &amp; retention</li><li>Priority support</li></ul><a class="btn" href="#">Start free trial</a></div>
+        <div class="plan"><div class="tag"></div><h3>Scale</h3><div class="price">$99<small> / mo</small></div><ul><li>Unlimited events</li><li>SSO &amp; roles</li><li>Unlimited history</li><li>Dedicated CSM</li></ul><a class="btn quiet" href="#">Contact sales</a></div>
+      </div>
+    </section>
+
+    <section class="wrap close">
+      <div><h2>Ready to get started?</h2><p>Join thousands of teams shipping smarter with Cadence.</p></div>
+      <a class="btn lg" href="#">Start for free</a>
+    </section>
+  </main>
 
   <footer><div class="wrap">
     <div class="foot">
-      <div><div class="brand" style="margin-bottom:14px"><span class="mk"></span> Cadence</div><p style="color:var(--mut);font-size:14px;line-height:1.6;max-width:240px">Product analytics for fast-moving teams.</p></div>
-      <div><h4>Product</h4><a>Features</a><a>Integrations</a><a>Pricing</a><a>Changelog</a></div>
-      <div><h4>Company</h4><a>About</a><a>Careers</a><a>Customers</a><a>Contact</a></div>
-      <div class="news"><h4>Stay in the loop</h4><p>Product notes and the occasional deep dive. No noise.</p><div class="nf"><input placeholder="you@company.com"><button>Subscribe</button></div></div>
+      <div><a class="brand" href="refined.html" style="color:var(--ink);font-size:19px;margin-bottom:12px">Cadence</a><p>Product analytics for fast-moving teams.</p></div>
+      <div><h4>Product</h4><a href="#">Features</a><a href="#">Integrations</a><a href="#pricing">Pricing</a><a href="#">Changelog</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Customers</a><a href="#">Contact</a><a href="faq.html">FAQ</a></div>
+      <div><h4>Stay in the loop</h4><p>Product notes and the occasional deep dive. No noise.</p>
+        <form class="signup" onsubmit="return false"><label class="sr" for="em" style="position:absolute;left:-9999px">Email</label><input id="em" type="email" placeholder="you@company.com"><button type="submit">Subscribe</button></form></div>
     </div>
-    <div class="copy"><span>© 2026 Cadence, Inc.</span><span class="soc"><a>X</a><a>LinkedIn</a><a>GitHub</a></span></div>
+    <div class="legal"><span>© 2026 Cadence, Inc.</span><nav aria-label="Social"><a href="#">X</a><a href="#">LinkedIn</a><a href="#">GitHub</a></nav></div>
   </div></footer>
 </body>
 </html>

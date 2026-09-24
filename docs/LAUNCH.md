@@ -27,7 +27,105 @@ The repo URL (https://github.com/funboy322/avoid-ai-design) is already filled in
 
 ---
 
-## The copy
+## v0.4 update (September 2026)
+
+The story for this round is a self-own: my own scanner caught my own demo. The v0.3 "after" swapped the purple gradient for warm paper, a vermilion accent, Helvetica, all-caps labels, and one colored headline word, and Anthropic's `frontend-design` skill lists every piece of that as an AI default. v0.4 adds a zero-dependency scanner, checks the second-order defaults by name, and rebuilds the demo from the product. Lead with the self-own; it is the most shareable fact in the release.
+
+GitHub release: https://github.com/funboy322/avoid-ai-design/releases/tag/v0.4.0
+
+Like the rest of this kit, every post below went through the `avoid-ai-writing` skill: no em dashes, no Tier-1 vocabulary, varied rhythm, facts checked against the repo.
+
+### LinkedIn (attach `docs/variants.png`)
+
+```
+My own design tool just caught me making AI slop.
+
+This summer I shipped a skill that turns generic AI landing pages into something that looks designed. The demo went from a purple gradient to warm paper, a vermilion accent, Helvetica, small all-caps labels, and one colored word in the headline. It looked tasteful. People liked it.
+
+Then Anthropic's own frontend-design skill listed the looks AI-generated design clusters around right now. Cream with a terracotta accent. Near-black with one acid-green highlight. Tiny all-caps labels over every heading. One colored word in the headline. Numbers like 01, 02, 03 on things that aren't steps.
+
+That was my demo, almost line for line.
+
+So v0.4 of avoid-ai-design checks for those by name. It ships a scanner with zero dependencies that reads your code and flags 50 patterns like these. I ran it on my own demo first. It flagged every "after" I had made.
+
+I rebuilt all four. This time each design starts from the product instead of from a style: one from its retention chart, one from its name, one from the office TV it will end up on, one from the question every user asks. The scanner finds no design tells in any of them.
+
+The lesson I keep relearning: "less AI" is a moving target. The fix becomes the next default the moment everyone reaches for it.
+
+Free, MIT, the design counterpart to avoid-ai-writing, and it works on output from any model. Link in the comments. ⭐
+```
+
+**First comment** (the link goes here, not in the post):
+
+```
+Repo, free and MIT: https://github.com/funboy322/avoid-ai-design
+How the old demo failed, in detail: https://github.com/funboy322/avoid-ai-design/blob/main/examples/demo/AUDIT.md
+```
+
+### X: single post (attach `docs/before-after.png`)
+
+```
+My own anti-slop tool caught me.
+
+My "fixed" demo: warm paper, a vermilion accent, all-caps labels, one colored word in the headline. Anthropic's frontend-design skill lists every piece of that as an AI default.
+
+v0.4 checks for them by name. Free, MIT:
+github.com/funboy322/avoid-ai-design
+```
+
+### X: thread (attach `docs/variants.png` to 5/)
+
+```
+1/ I built a skill that makes AI-generated UI look less AI.
+
+Then I wrote a scanner for it, ran it on my own demo, and it flagged every "after" I had made. 🧵
+```
+```
+2/ The first "after" swapped the purple gradient for warm paper, a vermilion accent, Helvetica, tiny all-caps labels, and one colored word in the headline.
+
+It looked tasteful. It was also the current AI default.
+```
+```
+3/ Anthropic's own frontend-design skill lists the looks AI design clusters around right now:
+
+· cream + terracotta
+· near-black + one acid-green accent
+· newspaper hairlines, zero radius
+· the rounded-card kit
+· all-caps eyebrows, mono labels, → on every link
+```
+```
+4/ v0.4 checks for all of them by name, plus 17 more tells: fonts declared but never loaded, stock Aceternity effects, motion that ignores reduced-motion.
+
+The scanner has zero dependencies and exits non-zero on P0/P1, so it can gate CI:
+
+node scripts/detect.mjs src/
+```
+```
+5/ Then I rebuilt the demo starting from the product, not a style.
+
+Same analytics page, four answers: its retention chart, its name (cadence = rhythm), the office TV it ends up on, the funnel its users ask about.
+
+The scanner finds no design tells in any of them.
+```
+```
+6/ npx skills add funboy322/avoid-ai-design
+
+Free, MIT, and it works on Claude, Codex, and Cursor output. How my own demo failed, in detail:
+github.com/funboy322/avoid-ai-design
+```
+
+### v0.4 checklist
+
+- [x] GitHub release v0.4.0 with notes and images
+- [x] Repo About text and topics updated (see `docs/SEO.md`)
+- [ ] Upload the new `docs/og-image.png` under Settings > General > Social preview (the API cannot set it)
+- [ ] LinkedIn: post Tue-Thu morning ET, link in the first comment, answer every comment in the first two hours
+- [ ] X: post the thread, pin it for the week, and reply to "AI slop" threads with the before/after image
+
+---
+
+## Launch copy (v0.2, June 2026)
 
 ### X / Twitter: single post
 
@@ -195,6 +293,7 @@ I kept fixing the same five things in every AI-built page, so I wrote them down.
 - **Before/after image.** Done: `docs/before-after.png`, embedded at the top of the README. The asset that earns shares.
 - **Social preview (1200×630).** Done: `docs/og-image.png`. Still needs uploading under repo Settings > General > Social preview so repo links unfurl with it.
 - **Demo GIF** (for Product Hunt later): still needed. The skill auditing a page and rewriting it.
+- **v0.4 images.** `docs/variants.png` (one page, four directions drawn from the product) and `docs/consistency.png` (one system across pages) are new. All images were re-rendered for v0.4 from the `_*.html` scaffolds in `examples/demo/`, so they show the rebuilt demo.
 
 ## What earns stars (and what doesn't)
 

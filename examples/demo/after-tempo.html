@@ -1,0 +1,201 @@
+<!doctype html>
+<!-- DEMO / after, direction "Tempo": the SAME site as slop.html, grounded in the product's name.
+     A cadence is the rhythm a team ships at, and Cadence measures that rhythm, so the week is drawn
+     as a step sequencer, sections end on a musical double barline, and the type runs wide.
+     avoid-ai-design-ignore-file: L4, L9, CP2, CP6
+     (content held identical to slop.html so that only the design varies; see AUDIT.md) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadence: product analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ground:#ffffff; --ink:#000000; --muted:#4d4d4d; --rule:#d9d9d9; --rest:#ececec; --brass:#b07b0c;
+         --face:"Archivo", "Arial", sans-serif; }
+  body{ font-family:var(--face); color:var(--ink); background:var(--ground); line-height:1.5; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  a:focus-visible, button:focus-visible, input:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+  .wide{ font-stretch:125%; }
+  /* the signature: a section ends like a piece of music, thin line, gap, thick line */
+  .fine{ position:relative; padding-right:34px; }
+  .fine::after{ content:""; position:absolute; top:0; bottom:0; right:0; width:10px; border-left:1px solid var(--ink); border-right:5px solid var(--ink); }
+
+  .nav{ display:flex; align-items:center; justify-content:space-between; height:84px; border-bottom:1px solid var(--ink); }
+  .brand{ display:flex; align-items:center; gap:12px; font-weight:800; font-size:22px; font-stretch:125%; }
+  .beat{ display:flex; gap:3px; } .beat i{ width:7px; height:7px; background:var(--rest); } .beat i:first-child{ background:var(--brass); }
+  .links{ display:flex; gap:28px; font-size:15px; }
+  .links a:hover{ text-decoration:underline; text-underline-offset:4px; }
+  .nav-r{ display:flex; align-items:center; gap:22px; font-size:15px; }
+  .btn{ display:inline-block; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:12px 20px; border-radius:2px; transition:background-color .15s ease, color .15s ease; }
+  .btn:hover{ background:var(--brass); color:var(--ink); }
+  .btn.line{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink); }
+  .btn.line:hover{ background:var(--ink); color:#fff; }
+
+  .hero{ padding:64px 0 28px; }
+  .hero h1{ font-size:82px; line-height:.98; font-weight:900; font-stretch:125%; letter-spacing:-.03em; max-width:1000px; }
+  .hero .lede{ display:grid; grid-template-columns:1fr auto; gap:48px; align-items:end; margin-top:30px; }
+  .hero .sub{ font-size:19px; color:var(--muted); max-width:560px; }
+  .cta{ display:flex; gap:12px; }
+  .proof{ list-style:none; display:flex; gap:34px; margin-top:26px; font-size:14.5px; color:var(--muted); }
+  .proof b{ color:var(--ink); font-stretch:125%; }
+
+  .seq{ margin-top:52px; padding-top:26px; padding-bottom:30px; border-top:1px solid var(--ink); }
+  .seq .cap{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px; }
+  .seq .cap b{ font-size:26px; font-weight:800; font-stretch:125%; }
+  .seq .cap span{ color:var(--muted); font-size:14.5px; }
+  .grid{ display:grid; grid-template-columns:44px repeat(16,1fr); gap:5px; align-items:center; }
+  .grid .day{ font-size:13px; color:var(--muted); }
+  .grid .s{ aspect-ratio:5 / 3; background:var(--rest); }
+  .grid .s.on{ background:var(--brass); }
+  .grid .s.peak{ background:var(--ink); }
+  .grid .s.now{ box-shadow:0 0 0 2px var(--ink); }
+  .ticks{ display:grid; grid-template-columns:44px repeat(4,1fr); margin-top:8px; font-size:12.5px; color:var(--muted); }
+  .seq .note{ margin-top:14px; font-size:14px; color:var(--muted); }
+  .seq .note i{ display:inline-block; width:10px; height:10px; vertical-align:-1px; margin:0 4px 0 12px; }
+
+  .logos{ display:flex; justify-content:space-between; align-items:baseline; padding:26px 0; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); font-size:14.5px; }
+  .logos ul{ list-style:none; display:flex; gap:44px; font-weight:800; font-size:18px; font-stretch:112%; }
+
+  .block{ padding:96px 0 0; }
+  .block h2{ font-size:48px; line-height:1; font-weight:900; font-stretch:125%; letter-spacing:-.025em; max-width:880px; margin-bottom:36px; }
+  .measures{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); }
+  .measures > div{ padding:26px 32px 30px 0; }
+  .measures > div + div{ padding-left:32px; border-left:1px solid var(--rule); }
+  .measures h3{ font-size:22px; font-weight:800; font-stretch:125%; margin-bottom:10px; }
+  .measures p{ color:var(--muted); font-size:16px; }
+
+  .counts{ display:grid; grid-template-columns:repeat(4,1fr); margin-top:96px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); }
+  .counts div{ padding:30px 0 32px; }
+  .counts div + div{ padding-left:28px; border-left:1px solid var(--rule); }
+  .counts b{ display:block; font-size:58px; line-height:1; font-weight:900; font-stretch:125%; letter-spacing:-.03em; }
+  .counts span{ display:block; margin-top:10px; font-size:15px; color:var(--muted); }
+
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--ink); }
+  .plan{ padding:28px 32px 32px 0; }
+  .plan + .plan{ padding-left:32px; border-left:1px solid var(--rule); }
+  .plan .rec{ display:flex; align-items:center; gap:8px; height:22px; font-size:14px; font-weight:700; }
+  .plan .rec i{ width:10px; height:10px; background:var(--brass); }
+  .plan h3{ font-size:20px; font-weight:800; font-stretch:125%; margin:6px 0 8px; }
+  .plan .price{ font-size:54px; line-height:1; font-weight:900; font-stretch:125%; }
+  .plan .price small{ font-size:16px; font-weight:500; font-stretch:100%; color:var(--muted); }
+  .plan ul{ list-style:none; margin:22px 0 28px; }
+  .plan li{ padding:8px 0; border-top:1px solid var(--rule); font-size:15.5px; }
+  .plan .btn{ display:block; text-align:center; }
+
+  .close{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; padding:110px 0 100px; }
+  .close h2{ font-size:64px; line-height:.98; font-weight:900; font-stretch:125%; letter-spacing:-.03em; }
+  .close p{ margin-top:14px; color:var(--muted); font-size:18px; }
+
+  footer{ border-top:1px solid var(--ink); padding:46px 0 36px; }
+  .foot{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.6fr; gap:32px; }
+  .foot h4{ font-size:15px; font-weight:800; font-stretch:125%; margin-bottom:14px; }
+  .foot a{ display:block; color:var(--muted); font-size:15px; margin-bottom:9px; }
+  .foot a:hover{ color:var(--ink); }
+  .foot p{ color:var(--muted); font-size:15px; max-width:270px; }
+  .signup{ display:flex; margin-top:14px; }
+  .signup input{ flex:1; font:inherit; font-size:15px; padding:11px 12px; border:1.5px solid var(--ink); border-right:0; border-radius:0; }
+  .signup button{ font:inherit; font-weight:700; font-size:15px; padding:0 18px; border:0; background:var(--ink); color:#fff; cursor:pointer; }
+  .signup button:hover{ background:var(--brass); color:var(--ink); }
+  .legal{ display:flex; justify-content:space-between; margin-top:42px; padding-top:18px; border-top:1px solid var(--rule); font-size:14px; color:var(--muted); }
+  .legal nav{ display:flex; gap:18px; }
+
+  @media (max-width:900px){
+    .hero h1{ font-size:48px; } .hero .lede{ grid-template-columns:1fr; }
+    .measures, .counts, .plans, .foot{ grid-template-columns:1fr; } .measures > div + div, .counts div + div, .plan + .plan{ padding-left:0; border-left:0; }
+    .links, .logos ul{ display:none; } .close{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="after-tempo.html"><span class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Cadence</a>
+    <nav class="links" aria-label="Main"><a href="#">Product</a><a href="#">Solutions</a><a href="#pricing">Pricing</a><a href="#">Docs</a><a href="#">Blog</a></nav>
+    <div class="nav-r"><a href="#">Log in</a><a class="btn" href="#">Get started</a></div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Product analytics that just works</h1>
+      <div class="lede">
+        <div>
+          <p class="sub">Cadence turns raw events into clear answers, so your team can ship with confidence instead of guesswork. Seamlessly powerful, beautifully simple.</p>
+          <ul class="proof"><li><b>No SQL</b> required</li><li><b>5 min</b> to first chart</li><li><b>SOC 2</b> compliant</li></ul>
+        </div>
+        <div class="cta"><a class="btn" href="#">Start for free</a><a class="btn line" href="#">Book a demo</a></div>
+      </div>
+
+      <figure class="seq fine" aria-label="Weekly activity drawn as a step sequencer: each row is a day, each step ninety minutes, filled steps crossed 300 active users">
+        <div class="cap"><b>48,210 weekly active</b><span>Up 12% on last week</span></div>
+        <div class="grid" id="grid"></div>
+        <div class="ticks" aria-hidden="true"><span></span><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span></div>
+        <p class="note">Each row is a day, each step ninety minutes.<i style="background:var(--brass)"></i>over 300 active<i style="background:var(--ink)"></i>over 900 active</p>
+      </figure>
+    </section>
+
+    <section class="logos" aria-label="Customers">
+      <span>Trusted by fast-moving teams at</span>
+      <ul><li>Northwind</li><li>Lumen</li><li>Vertex</li><li>Quanta</li><li>Beacon</li><li>Atlas</li></ul>
+    </section>
+
+    <section class="block">
+      <h2>Everything you need to understand your users</h2>
+      <div class="measures fine">
+        <div><h3>Live dashboards</h3><p>Watch events stream in and build views without writing a single line of SQL.</p></div>
+        <div><h3>Funnels &amp; retention</h3><p>See exactly where users drop off and what brings them back, in seconds.</p></div>
+        <div><h3>Team workspaces</h3><p>Share boards, annotate changes, and keep everyone aligned around the data.</p></div>
+      </div>
+      <div class="counts fine">
+        <div><b>12,000+</b><span>Teams onboard</span></div>
+        <div><b>8B</b><span>Events / month</span></div>
+        <div><b>4.9</b><span>Average rating</span></div>
+        <div><b>99.99%</b><span>Uptime SLA</span></div>
+      </div>
+    </section>
+
+    <section class="block" id="pricing">
+      <h2>Simple, transparent pricing</h2>
+      <div class="plans fine">
+        <div class="plan"><div class="rec"></div><h3>Starter</h3><div class="price">$0</div><ul><li>Up to 5k events</li><li>2 dashboards</li><li>7-day history</li><li>Community support</li></ul><a class="btn line" href="#">Get started</a></div>
+        <div class="plan"><div class="rec"><i aria-hidden="true"></i>Recommended</div><h3>Pro</h3><div class="price">$29<small> / mo</small></div><ul><li>Up to 1M events</li><li>Unlimited dashboards</li><li>1-year history</li><li>Funnels &amp; retention</li><li>Priority support</li></ul><a class="btn" href="#">Start free trial</a></div>
+        <div class="plan"><div class="rec"></div><h3>Scale</h3><div class="price">$99<small> / mo</small></div><ul><li>Unlimited events</li><li>SSO &amp; roles</li><li>Unlimited history</li><li>Dedicated CSM</li></ul><a class="btn line" href="#">Contact sales</a></div>
+      </div>
+    </section>
+
+    <section class="close">
+      <div><h2>Ready to get started?</h2><p>Join thousands of teams shipping smarter with Cadence.</p></div>
+      <a class="btn" href="#">Start for free</a>
+    </section>
+  </main>
+
+  <footer><div class="wrap">
+    <div class="foot">
+      <div><a class="brand" href="after-tempo.html" style="font-size:19px;margin-bottom:12px">Cadence</a><p>Product analytics for fast-moving teams.</p></div>
+      <div><h4>Product</h4><a href="#">Features</a><a href="#">Integrations</a><a href="#pricing">Pricing</a><a href="#">Changelog</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Customers</a><a href="#">Contact</a></div>
+      <div><h4>Stay in the loop</h4><p>Product notes and the occasional deep dive. No noise.</p>
+        <form class="signup" onsubmit="return false"><label for="em" style="position:absolute;left:-9999px">Email</label><input id="em" type="email" placeholder="you@company.com"><button type="submit">Subscribe</button></form></div>
+    </div>
+    <div class="legal"><span>© 2026 Cadence, Inc.</span><nav aria-label="Social"><a href="#">X</a><a href="#">LinkedIn</a><a href="#">GitHub</a></nav></div>
+  </div></footer>
+
+  <script>
+    // One row per day, sixteen steps of ninety minutes: "." quiet, "o" over 300 active, "x" over 900 active.
+    const week = { Mon: "...ooxxoooxoo...", Tue: "...ooxxxooxxo...", Wed: "..oooxxxxoxxoo..", Thu: "...ooxxxooxxo...",
+                   Fri: "...oooxoooo.....", Sat: "......oo.oo.....", Sun: ".......oooo..o.." };
+    const grid = document.getElementById("grid");
+    for (const [day, steps] of Object.entries(week)) {
+      const label = document.createElement("span"); label.className = "day"; label.textContent = day; grid.append(label);
+      [...steps.padEnd(16, ".").slice(0, 16)].forEach((c, i) => {
+        const s = document.createElement("span");
+        s.className = "s" + (c === "o" ? " on" : c === "x" ? " peak" : "") + (day === "Sun" && i === 13 ? " now" : "");
+        grid.append(s);
+      });
+    }
+  </script>
+</body>
+</html>

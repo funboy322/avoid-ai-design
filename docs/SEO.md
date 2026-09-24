@@ -10,20 +10,20 @@ For a deeper pass, the `ai-seo` skill covers AI-search/AEO optimization and `dir
 
 The repo "About" blurb and topics are the single highest-impact SEO move for an open-source skill. Set them in the repo's right-hand sidebar.
 
-**About (short, used in search results):**
+**About (current, set on the repo):**
 
-> A Claude Code skill that audits AI-generated frontend and rewrites it to remove generic "AI slop" design patterns.
+> Audits AI-generated frontend and rewrites it so it stops looking AI-made: purple-gradient slop and the "tasteful" defaults (cream + terracotta, mono chrome). Zero-dependency scanner included. The design counterpart to avoid-ai-writing.
 
-**About (longer alternate, if you prefer detail):**
+**About (short alternate):**
 
-> Audit and de-slop AI-generated UI. Detects and rewrites generic AI design patterns (purple gradients, Inter, centered heroes, default shadcn) in HTML/CSS and React/Tailwind. The design counterpart to avoid-ai-writing.
+> A Claude Code skill that audits AI-generated frontend and rewrites it to remove generic "AI slop" design patterns, including the tasteful ones.
 
-**Topics** (paste up to 20; all lowercase, hyphenated):
+**Topics** (20 max; all lowercase, hyphenated; these are set on the repo):
 
 ```
-claude-code  claude-skill  agent-skills  agentskills  ai-slop  ai-design
-frontend  frontend-design  ui-design  web-design  tailwindcss  shadcn-ui
-react  design-system  llm  codex  cursor  ai-tools  anthropic  developer-tools
+agent-skills  ai-design  ai-slop  anthropic  claude-code  claude-skill
+codex  cursor  design-md  design-system  developer-tools  frontend
+frontend-design  linter  llm  react  shadcn-ui  tailwindcss  ui-design  web-design
 ```
 
 ---
@@ -43,6 +43,9 @@ react  design-system  llm  codex  cursor  ai-tools  anthropic  developer-tools
 - frontend design audit
 - shadcn / Tailwind looks generic
 - generic AI aesthetics
+- AI design slop scanner / detector
+- every Claude-made site looks the same (cream, terracotta, serif)
+- DESIGN.md design system for AI agents
 
 **Long-tail / question intent (the FAQ section targets these):**
 - what is AI slop in design
@@ -63,7 +66,7 @@ avoid-ai-design: Remove AI Slop From Frontend Code
 **Meta description** (≤ 155 chars):
 
 ```
-A Claude Code skill that audits AI-generated UI and rewrites it to remove generic "AI slop": purple gradients, Inter, centered heroes, default shadcn.
+A Claude Code skill and zero-dependency scanner that finds AI design slop, from purple gradients to the "tasteful" defaults, and rewrites it.
 ```
 
 **Open Graph / Twitter Card:**
@@ -83,17 +86,17 @@ A Claude Code skill that audits AI-generated UI and rewrites it to remove generi
 
 ## 4. SKILL.md frontmatter (the most important SEO for the skill itself)
 
-The `description` field is what makes Claude trigger the skill *and* what skill directories index. Keep it dense with the phrases users actually type. Recommended block for `SKILL.md`:
+The `description` field is what makes Claude trigger the skill *and* what skill directories index. Keep it dense with the phrases users actually type, under the spec's 1,024 characters. The spec allows only `name`, `description`, `license`, `compatibility`, `metadata`, and `allowed-tools` at the top level, so the version lives under `metadata`. The current block in `SKILL.md`:
 
 ```yaml
 ---
 name: avoid-ai-design
-description: Audit and rewrite frontend UI to remove generic AI design patterns ("AI slop"). Use this skill when asked to "de-slop a UI", "make a design look less AI-generated", "audit a component or page for AI design tells", or "fix Claude/Codex-generated frontend that looks generic". Covers HTML/CSS and React/Tailwind/shadcn. Supports a detection-only mode that flags patterns without rewriting.
-version: 0.2.0
+description: Audit and rewrite frontend UI to remove generic AI design patterns ("AI slop"), both the first-order defaults (purple gradients, Inter, a centered hero over three cards, untouched shadcn) and the second-order "tasteful AI" ones (cream with terracotta, near-black with acid green, all-caps mono chrome, one accented headline word, decorative 01/02/03). Use when asked to "de-slop a UI", "make a design look less AI-generated", "audit a page or component for AI design tells", "fix Claude/Codex-generated frontend that looks generic", or keep a multi-page site on one design system. Covers HTML/CSS and React/Tailwind/shadcn. Has a detection-only mode and a zero-dependency scanner (scripts/detect.mjs) for the code-certain tells.
 license: MIT
-compatibility: Any AI coding assistant that supports the agentskills.io SKILL.md format (Claude Code, Cursor, VS Code Copilot, Codex CLI, etc.). No external tools or APIs required; uses a screenshot tool if one is available.
+compatibility: Works in any agent that reads agentskills.io SKILL.md files (Claude Code, Cursor, Codex CLI, VS Code Copilot and others). Optional, Node 18+ to run scripts/detect.mjs, and a screenshot tool to judge the visual tells.
 metadata:
   author: ungspirit
+  version: "0.4.0"
   tags: design ui frontend ai-slop tailwind shadcn react
   agentskills_spec: "1.0"
 ---
@@ -106,6 +109,7 @@ metadata:
 Each listing is a backlink and a discovery surface. Rough order of effort vs. payoff:
 
 - **agentskills.io**: the canonical SKILL.md registry. Submit here first.
+- **skills.sh**: installs through `npx skills add funboy322/avoid-ai-design` show up in the directory through install telemetry, so the README leads with that command.
 - **GitHub topics**: set them (section 1); GitHub's own search and topic pages are real traffic.
 - **awesome-claude-code** and **awesome-claude-skills** lists: open a PR adding your repo.
 - **Claude Code plugin marketplaces** (the obra/superpowers ecosystem): package as a plugin later for one-command install.

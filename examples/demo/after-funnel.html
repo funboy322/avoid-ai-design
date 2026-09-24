@@ -1,0 +1,179 @@
+<!doctype html>
+<!-- DEMO / after, direction "Funnel": the SAME site as slop.html, grounded in the question every
+     Cadence user asks: where do people drop off? The hero is a real funnel, and the page itself is
+     one: each band a little narrower than the last, so the silhouette narrows toward the one action.
+     A sturdy low-contrast serif for voice, a hyperlegible sans for reading, one hue in steps.
+     avoid-ai-design-ignore-file: L4, L9, CP2, CP6
+     (content held identical to slop.html so that only the design varies; see AUDIT.md) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadence: product analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ground:#ffffff; --band:#fbf1f5; --ink:#2b0d23; --muted:#5e4657; --rule:#ecdde5;
+         --step-1:#b3124a; --step-2:#cf3f71; --step-3:#e3789d; --step-4:#f0b3c8;
+         --voice:"Young Serif", Georgia, serif; --read:"Atkinson Hyperlegible", "Segoe UI", sans-serif; }
+  body{ font-family:var(--read); color:var(--ink); background:var(--ground); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  a:focus-visible, button:focus-visible, input:focus-visible{ outline:3px solid var(--step-1); outline-offset:3px; border-radius:4px; }
+  h1, h2, h3, .big{ font-family:var(--voice); font-weight:400; }
+  /* the page narrows like a funnel: every band is centered and a step smaller than the one above */
+  .band{ margin:0 auto 26px; background:var(--band); border-radius:14px; padding:44px 48px; }
+  .w1{ max-width:1240px; } .w2{ max-width:1130px; } .w3{ max-width:1030px; } .w4{ max-width:940px; } .w5{ max-width:860px; } .w6{ max-width:640px; }
+
+  .nav{ max-width:1240px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:84px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:var(--voice); font-size:26px; }
+  .brand svg{ display:block; }
+  .links{ display:flex; gap:28px; font-size:16px; color:var(--muted); }
+  .links a:hover{ color:var(--ink); }
+  .nav-r{ display:flex; align-items:center; gap:22px; font-size:16px; }
+  .btn{ display:inline-block; background:var(--step-1); color:#fff; font-weight:700; font-size:16px; padding:12px 20px; border-radius:999px; transition:background-color .15s ease; }
+  .btn:hover{ background:var(--ink); }
+  .btn.line{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink); }
+  .btn.line:hover{ background:var(--ink); color:#fff; }
+
+  .hero{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; padding:56px 56px; }
+  .hero h1{ font-size:68px; line-height:1.02; letter-spacing:-.015em; margin-bottom:22px; }
+  .hero .sub{ font-size:18.5px; color:var(--muted); max-width:470px; margin-bottom:30px; }
+  .cta{ display:flex; gap:12px; flex-wrap:wrap; }
+  .proof{ list-style:none; display:flex; gap:30px; margin-top:32px; font-size:15px; color:var(--muted); }
+  .proof b{ display:block; color:var(--ink); font-family:var(--voice); font-weight:400; font-size:21px; }
+
+  .funnel{ background:var(--ground); border-radius:10px; padding:24px 24px 18px; }
+  .funnel figcaption{ display:flex; justify-content:space-between; margin-bottom:16px; }
+  .funnel figcaption b{ font-family:var(--voice); font-weight:400; font-size:21px; }
+  .funnel figcaption span{ color:var(--muted); font-size:14.5px; }
+  .stage{ margin-bottom:12px; }
+  .stage .top{ display:flex; justify-content:space-between; font-size:15px; margin-bottom:5px; }
+  .stage .top span, .funnel figcaption span{ font-family:var(--voice); }
+  .stage .top b{ font-weight:700; }
+  .stage .bar{ height:26px; border-radius:4px; }
+  .stage .drop{ font-size:13.5px; color:var(--muted); margin-top:4px; }
+
+  .logos{ display:flex; justify-content:space-between; align-items:baseline; gap:30px; padding:26px 44px; }
+  .logos p{ color:var(--muted); font-size:15px; white-space:nowrap; }
+  .logos ul{ list-style:none; display:flex; justify-content:space-between; flex:1; font-family:var(--voice); font-size:21px; }
+
+  .band h2{ font-size:44px; line-height:1.06; letter-spacing:-.01em; max-width:640px; margin-bottom:28px; }
+  .features{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
+  .features h3{ font-size:24px; margin-bottom:8px; }
+  .features p{ color:var(--muted); font-size:16.5px; }
+
+  .counts{ display:grid; grid-template-columns:repeat(4,1fr); gap:36px; }
+  .counts .big{ font-size:44px; line-height:1; }
+  .counts span{ display:block; margin-top:8px; color:var(--muted); font-size:15px; }
+
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .plan{ background:var(--ground); border-radius:10px; padding:22px 22px 24px; }
+  .plan .rec{ height:20px; font-size:14px; font-weight:700; color:var(--step-1); }
+  .plan h3{ font-size:24px; margin:4px 0 6px; }
+  .plan .big{ font-size:46px; line-height:1; }
+  .plan .big small{ font-family:var(--read); font-size:15px; color:var(--muted); }
+  .plan ul{ list-style:none; margin:18px 0 22px; }
+  .plan li{ padding:7px 0; border-top:1px solid var(--rule); font-size:15px; }
+  .plan .btn{ display:block; text-align:center; }
+
+  .close{ text-align:left; padding:44px 48px 48px; }
+  .close h2{ font-size:46px; margin-bottom:10px; }
+  .close p{ color:var(--muted); font-size:18px; margin-bottom:26px; }
+
+  footer{ max-width:1240px; margin:70px auto 0; padding:40px 24px 34px; border-top:1px solid var(--rule); }
+  .foot{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.6fr; gap:32px; }
+  .foot h4{ font-family:var(--voice); font-weight:400; font-size:19px; margin-bottom:12px; }
+  .foot a{ display:block; color:var(--muted); font-size:15.5px; margin-bottom:9px; }
+  .foot a:hover{ color:var(--ink); }
+  .foot p{ color:var(--muted); font-size:15.5px; max-width:270px; }
+  .signup{ display:flex; margin-top:14px; }
+  .signup input{ flex:1; font:inherit; font-size:15px; padding:11px 14px; border:1.5px solid var(--ink); border-right:0; border-radius:999px 0 0 999px; }
+  .signup button{ font:inherit; font-weight:700; font-size:15px; padding:0 18px; border:0; border-radius:0 999px 999px 0; background:var(--step-1); color:#fff; cursor:pointer; }
+  .signup button:hover{ background:var(--ink); }
+  .legal{ display:flex; justify-content:space-between; margin-top:40px; font-size:14.5px; color:var(--muted); }
+  .legal nav{ display:flex; gap:18px; }
+
+  @media (max-width:900px){
+    .hero, .features, .plans{ grid-template-columns:1fr; } .hero{ padding:36px 24px; } .band{ padding:32px 24px; }
+    .hero h1{ font-size:46px; } .counts, .foot{ grid-template-columns:1fr 1fr; } .links, .logos ul{ display:none; }
+  }
+</style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="after-funnel.html">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="0" y="1" width="20" height="4" fill="#b3124a"/><rect x="3" y="8" width="14" height="4" fill="#e3789d"/><rect x="6" y="15" width="8" height="4" fill="#f0b3c8"/></svg>
+      Cadence
+    </a>
+    <nav class="links" aria-label="Main"><a href="#">Product</a><a href="#">Solutions</a><a href="#pricing">Pricing</a><a href="#">Docs</a><a href="#">Blog</a></nav>
+    <div class="nav-r"><a href="#">Log in</a><a class="btn" href="#">Get started</a></div>
+  </header>
+
+  <main>
+    <section class="band w1 hero">
+      <div>
+        <h1>Product analytics that just works</h1>
+        <p class="sub">Cadence turns raw events into clear answers, so your team can ship with confidence instead of guesswork. Seamlessly powerful, beautifully simple.</p>
+        <div class="cta"><a class="btn" href="#">Start for free</a><a class="btn line" href="#">Book a demo</a></div>
+        <ul class="proof"><li><b>No SQL</b>required</li><li><b>5 min</b>to first chart</li><li><b>SOC 2</b>compliant</li></ul>
+      </div>
+      <figure class="funnel">
+        <figcaption><b>Trial funnel</b><span>Last 30 days</span></figcaption>
+        <div class="stage"><div class="top"><b>Visited pricing</b><span>48,210</span></div><div class="bar" style="width:100%;background:var(--step-1)"></div></div>
+        <div class="stage"><div class="top"><b>Started a trial</b><span>18,430</span></div><div class="bar" style="width:38%;background:var(--step-2)"></div><div class="drop">38% continued</div></div>
+        <div class="stage"><div class="top"><b>Built a first dashboard</b><span>9,112</span></div><div class="bar" style="width:19%;background:var(--step-3)"></div><div class="drop">49% continued</div></div>
+        <div class="stage"><div class="top"><b>Invited a teammate</b><span>4,820</span></div><div class="bar" style="width:10%;background:var(--step-4)"></div><div class="drop">53% continued, the step that predicts upgrades</div></div>
+      </figure>
+    </section>
+
+    <section class="band w2 logos" aria-label="Customers">
+      <p>Trusted by fast-moving teams at</p>
+      <ul><li>Northwind</li><li>Lumen</li><li>Vertex</li><li>Quanta</li><li>Beacon</li><li>Atlas</li></ul>
+    </section>
+
+    <section class="band w3">
+      <h2>Everything you need to understand your users</h2>
+      <div class="features">
+        <div><h3>Live dashboards</h3><p>Watch events stream in and build views without writing a single line of SQL.</p></div>
+        <div><h3>Funnels &amp; retention</h3><p>See exactly where users drop off and what brings them back, in seconds.</p></div>
+        <div><h3>Team workspaces</h3><p>Share boards, annotate changes, and keep everyone aligned around the data.</p></div>
+      </div>
+    </section>
+
+    <section class="band w4 counts" aria-label="Cadence in numbers">
+      <div><div class="big">12,000+</div><span>Teams onboard</span></div>
+      <div><div class="big">8B</div><span>Events / month</span></div>
+      <div><div class="big">4.9</div><span>Average rating</span></div>
+      <div><div class="big">99.99%</div><span>Uptime SLA</span></div>
+    </section>
+
+    <section class="band w5" id="pricing">
+      <h2>Simple, transparent pricing</h2>
+      <div class="plans">
+        <div class="plan"><div class="rec"></div><h3>Starter</h3><div class="big">$0</div><ul><li>Up to 5k events</li><li>2 dashboards</li><li>7-day history</li><li>Community support</li></ul><a class="btn line" href="#">Get started</a></div>
+        <div class="plan"><div class="rec">Recommended</div><h3>Pro</h3><div class="big">$29<small> / mo</small></div><ul><li>Up to 1M events</li><li>Unlimited dashboards</li><li>1-year history</li><li>Funnels &amp; retention</li><li>Priority support</li></ul><a class="btn" href="#">Start free trial</a></div>
+        <div class="plan"><div class="rec"></div><h3>Scale</h3><div class="big">$99<small> / mo</small></div><ul><li>Unlimited events</li><li>SSO &amp; roles</li><li>Unlimited history</li><li>Dedicated CSM</li></ul><a class="btn line" href="#">Contact sales</a></div>
+      </div>
+    </section>
+
+    <section class="band w6 close">
+      <h2>Ready to get started?</h2>
+      <p>Join thousands of teams shipping smarter with Cadence.</p>
+      <a class="btn" href="#">Start for free</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div><a class="brand" href="after-funnel.html" style="font-size:22px;margin-bottom:10px">Cadence</a><p>Product analytics for fast-moving teams.</p></div>
+      <div><h4>Product</h4><a href="#">Features</a><a href="#">Integrations</a><a href="#pricing">Pricing</a><a href="#">Changelog</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Customers</a><a href="#">Contact</a></div>
+      <div><h4>Stay in the loop</h4><p>Product notes and the occasional deep dive. No noise.</p>
+        <form class="signup" onsubmit="return false"><label for="em" style="position:absolute;left:-9999px">Email</label><input id="em" type="email" placeholder="you@company.com"><button type="submit">Subscribe</button></form></div>
+    </div>
+    <div class="legal"><span>© 2026 Cadence, Inc.</span><nav aria-label="Social"><a href="#">X</a><a href="#">LinkedIn</a><a href="#">GitHub</a></nav></div>
+  </footer>
+</body>
+</html>

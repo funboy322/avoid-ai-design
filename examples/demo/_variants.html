@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- Render scaffold for docs/variants.png (1600x1040 @2x): one page, four directions. Not part of the lesson. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ground:#e8ecf0; --ink:#14202b; --muted:#52606d; }
+  html,body{ width:1600px; height:1040px; overflow:hidden; }
+  body{ background:var(--ground); color:var(--ink); font-family:"Schibsted Grotesk","Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
+  .top{ display:flex; justify-content:space-between; align-items:baseline; padding:34px 60px 0; }
+  .wm{ font-size:24px; font-weight:800; letter-spacing:-.02em; }
+  .tag{ font-size:17px; color:var(--muted); }
+  .stage{ flex:1; display:flex; justify-content:center; align-items:center; gap:40px; }
+  .label{ font-size:16px; font-weight:700; margin:0 0 10px 2px; white-space:nowrap; }
+  .label span{ font-weight:400; color:var(--muted); }
+  .panel{ border-radius:10px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(20,32,43,.08), 0 24px 48px -30px rgba(20,32,43,.5); }
+  .panel iframe{ width:1280px; border:0; transform:scale(.30625); transform-origin:top left; }
+  .before .panel{ width:392px; height:610px; } .before .panel iframe{ height:1992px; }
+  .grid{ display:grid; grid-template-columns:392px 392px; gap:20px 22px; }
+  .grid .panel{ width:392px; height:292px; } .grid .panel iframe{ height:954px; }
+  .cap{ text-align:center; font-size:16.5px; color:var(--muted); padding:0 60px 30px; }
+  .cap b{ color:var(--ink); }
+</style>
+</head>
+<body>
+  <div class="top"><div class="wm">avoid-ai-design</div><div class="tag">One page, four directions drawn from the product</div></div>
+  <div class="stage">
+    <div class="before"><p class="label">Before <span>the AI default</span></p><div class="panel"><iframe src="slop.html" scrolling="no"></iframe></div></div>
+    <div class="grid">
+      <div><p class="label">Cohort <span>the retention table is the hero</span></p><div class="panel"><iframe src="refined.html" scrolling="no"></iframe></div></div>
+      <div><p class="label">Tempo <span>the week as a step sequencer</span></p><div class="panel"><iframe src="after-tempo.html" scrolling="no"></iframe></div></div>
+      <div><p class="label">Wallboard <span>made for the TV on the wall</span></p><div class="panel"><iframe src="after-wallboard.html" scrolling="no"></iframe></div></div>
+      <div><p class="label">Funnel <span>the page narrows like one</span></p><div class="panel"><iframe src="after-funnel.html" scrolling="no"></iframe></div></div>
+    </div>
+  </div>
+  <p class="cap"><b>Same product and copy, rebuilt four ways.</b> Each direction comes from Cadence's own world, and each scans clean of first- and second-order defaults.</p>
+</body>
+</html>

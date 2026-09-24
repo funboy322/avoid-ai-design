@@ -1,44 +1,32 @@
 <!doctype html>
+<!-- Render scaffold for docs/before-after.png (1600x1040). Not part of the lesson. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   *{ margin:0; padding:0; box-sizing:border-box; }
-  :root{ --paper:#f4efe4; --accent:#e5402b; --mut:#a99d87; }
+  :root{ --ground:#e8ecf0; --ink:#14202b; --muted:#52606d; }
   html,body{ width:1600px; height:1040px; overflow:hidden; }
-  body{ background:radial-gradient(1300px 600px at 50% -8%, #221a12, #131009 72%);
-        font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--paper);
-        -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
-  .top{ display:flex; justify-content:space-between; align-items:center; padding:40px 70px 0; }
-  .wm{ font-size:25px; font-weight:700; letter-spacing:-.02em; }
-  .wm b{ color:var(--accent); }
-  .tag{ font-family:"SF Mono",Menlo,monospace; font-size:13px; letter-spacing:.16em; color:var(--mut); text-transform:uppercase; }
-  .stage{ flex:1; display:flex; align-items:center; justify-content:center; gap:0; }
-  .col{ display:flex; flex-direction:column; }
-  .chip{ align-self:flex-start; margin:0 0 14px 2px; font-family:"SF Mono",Menlo,monospace; font-size:12px;
-         font-weight:700; letter-spacing:.18em; padding:7px 13px; border-radius:7px; }
-  .chip.b{ background:rgba(255,255,255,.07); color:#d8cab2; border:1px solid rgba(255,255,255,.18); }
-  .chip.a{ background:var(--accent); color:#fff; }
-  .panel{ position:relative; width:740px; height:856px; border-radius:14px; overflow:hidden;
-          box-shadow:0 55px 95px -42px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.06); }
-  .panel iframe{ width:1280px; height:1480px; border:0; transform:scale(.578); transform-origin:top left; }
-  .arrow{ position:relative; top:18px; width:60px; height:60px; border-radius:50%; background:var(--accent); color:#fff;
-          display:grid; place-items:center; font-size:26px; margin:0 -30px; z-index:5;
-          box-shadow:0 18px 34px -10px rgba(229,64,43,.7); }
-  .cap{ text-align:center; font-size:16px; color:var(--mut); padding:0 0 32px; }
-  .cap b{ color:var(--paper); font-weight:600; }
+  body{ background:var(--ground); color:var(--ink); font-family:"Schibsted Grotesk","Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
+  .top{ display:flex; justify-content:space-between; align-items:baseline; padding:36px 64px 0; }
+  .wm{ font-size:24px; font-weight:800; letter-spacing:-.02em; }
+  .tag{ font-size:17px; color:var(--muted); }
+  .stage{ flex:1; display:flex; justify-content:center; align-items:center; gap:44px; }
+  .label{ font-size:17px; font-weight:700; margin:0 0 12px 2px; }
+  .label span{ font-weight:400; color:var(--muted); }
+  .panel{ width:720px; height:800px; border-radius:12px; overflow:hidden; background:#fff; box-shadow:0 1px 0 rgba(20,32,43,.08), 0 30px 60px -34px rgba(20,32,43,.5); }
+  .panel iframe{ width:1280px; height:1423px; border:0; transform:scale(.5625); transform-origin:top left; }
+  .cap{ text-align:center; font-size:17px; color:var(--muted); padding:0 64px 34px; }
+  .cap b{ color:var(--ink); font-weight:700; }
 </style>
 </head>
 <body>
-  <div class="top">
-    <div class="wm">avoid<b>-ai-</b>design</div>
-    <div class="tag">one real site, run through the skill</div>
-  </div>
+  <div class="top"><div class="wm">avoid-ai-design</div><div class="tag">One real page, audited and rewritten by the skill</div></div>
   <div class="stage">
-    <div class="col"><div class="chip b">AI-GENERATED</div><div class="panel"><iframe src="slop.html" scrolling="no"></iframe></div></div>
-    <div class="arrow">&rarr;</div>
-    <div class="col"><div class="chip a">AFTER AVOID-AI-DESIGN</div><div class="panel"><iframe src="refined.html" scrolling="no"></iframe></div></div>
+    <div><p class="label">Before <span>what an AI tool ships unprompted</span></p><div class="panel"><iframe src="slop.html" scrolling="no"></iframe></div></div>
+    <div><p class="label">After <span>the same page and copy, rewritten</span></p><div class="panel"><iframe src="refined.html" scrolling="no"></iframe></div></div>
   </div>
-  <div class="cap"><b>Same product, same sections, same copy.</b>&nbsp; 22 tells found, audited, rewritten around one committed direction.</div>
+  <p class="cap"><b>Same product, same sections, same copy.</b> The scanner finds 23 tells before, and no design tells after.</p>
 </body>
 </html>
