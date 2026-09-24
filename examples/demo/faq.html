@@ -1,0 +1,167 @@
+<!doctype html>
+<!-- DEMO / after: a SECOND page of the Cadence site, built on the same design system as
+     refined.html (direction "Cohort"). It exists to show cross-page CONSISTENCY: the same tokens,
+     the same header and footer, the same type and heat ramp, the same table-like structure.
+     Land on the home page, open the FAQ, and it is unmistakably the same product.
+     Compare with faq-drift.html, the same page regenerated from scratch, which drifts.
+     avoid-ai-design-ignore-file: CP6
+     (the "Get started" nav label is shared site chrome, held identical to refined.html) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadence: questions, answered</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  /* shared design system: identical to refined.html */
+  :root{
+    --ground:#f4f6f8; --surface:#ffffff; --ink:#10233b; --muted:#4a5a6e; --rule:#d5dde6;
+    --heat-1:#c9dbef; --heat-2:#9ebfe3; --heat-3:#5f8fc9; --heat-4:#2f64a8; --heat-5:#16447f; --wash:#e8f0f9;
+    --face:"Schibsted Grotesk", "Segoe UI", sans-serif;
+  }
+  body{ font-family:var(--face); color:var(--ink); background:var(--ground); -webkit-font-smoothing:antialiased; line-height:1.5; }
+  a{ color:inherit; text-decoration:none; }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible{ outline:2px solid var(--heat-4); outline-offset:3px; border-radius:4px; }
+  .wrap{ max-width:1200px; margin:0 auto; padding:0 40px; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:21px; letter-spacing:-.02em; }
+  .brand svg{ display:block; }
+  .links{ display:flex; gap:30px; font-size:15px; font-weight:500; color:var(--muted); }
+  .links a:hover{ color:var(--ink); }
+  .nav-r{ display:flex; align-items:center; gap:22px; font-size:15px; font-weight:500; }
+  .btn{ display:inline-block; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:11px 18px; border-radius:6px; transition:background-color .15s ease; }
+  .btn:hover{ background:var(--heat-4); }
+  footer{ border-top:2px solid var(--ink); padding:48px 0 34px; }
+  .foot{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.5fr; gap:32px; }
+  .foot h4{ font-size:15px; font-weight:700; margin-bottom:14px; }
+  .foot a{ display:block; color:var(--muted); font-size:15px; margin-bottom:9px; }
+  .foot a:hover{ color:var(--ink); }
+  .foot p{ color:var(--muted); font-size:15px; max-width:260px; }
+  .signup{ display:flex; margin-top:14px; }
+  .signup input{ flex:1; font:inherit; font-size:15px; padding:10px 12px; border:1.5px solid var(--ink); border-right:0; border-radius:6px 0 0 6px; background:var(--surface); color:var(--ink); }
+  .signup button{ font:inherit; font-weight:700; font-size:15px; padding:0 16px; border:0; border-radius:0 6px 6px 0; background:var(--ink); color:#fff; cursor:pointer; }
+  .signup button:hover{ background:var(--heat-4); }
+  .legal{ display:flex; justify-content:space-between; margin-top:40px; font-size:14px; color:var(--muted); }
+  .legal nav{ display:flex; gap:18px; }
+
+  /* this page */
+  .head{ display:grid; grid-template-columns:1fr 360px; gap:56px; align-items:end; padding:56px 0 44px; }
+  .head h1{ font-size:58px; line-height:1.02; font-weight:800; letter-spacing:-.035em; margin-bottom:18px; }
+  .head p{ font-size:18px; color:var(--muted); max-width:470px; }
+  .jump{ background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:8px 18px; }
+  .jump a{ display:flex; justify-content:space-between; padding:11px 0; font-weight:500; }
+  .jump a + a{ border-top:1px solid var(--rule); }
+  .jump a span{ color:var(--muted); font-weight:400; }
+  .jump a:hover b{ color:var(--heat-4); }
+  .jump b{ font-weight:700; transition:color .15s ease; }
+
+  .group{ display:grid; grid-template-columns:260px 1fr; gap:32px; border-top:2px solid var(--ink); padding:22px 0 56px; }
+  .group h2{ font-size:22px; font-weight:800; letter-spacing:-.02em; line-height:1.15; }
+  details{ border-bottom:1px solid var(--rule); }
+  details:first-child summary{ padding-top:0; }
+  summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:24px; padding:16px 0; font-size:18px; font-weight:700; letter-spacing:-.01em; }
+  summary::-webkit-details-marker{ display:none; }
+  summary:hover{ color:var(--heat-4); }
+  summary .mark{ flex:none; width:14px; height:14px; margin-top:6px; border:1.5px solid var(--heat-4); border-radius:2px; transition:background-color .15s ease; }
+  details[open] summary .mark{ background:var(--heat-4); }
+  details p{ color:var(--muted); font-size:16px; max-width:620px; padding:0 0 18px; }
+  details p a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--heat-3); text-underline-offset:3px; }
+
+  .contact{ display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; background:var(--ink); color:#fff; border-radius:10px; margin:10px 0 96px; }
+  .contact > div{ padding:32px 28px; }
+  .contact > div + div{ box-shadow:inset 1px 0 0 rgba(255,255,255,.14); }
+  .contact h2{ font-size:28px; font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+  .contact b{ display:block; font-size:17px; }
+  .contact span{ display:block; margin-top:6px; font-size:14.5px; color:#bfd0e4; }
+
+  @media (max-width:900px){
+    .head, .group{ grid-template-columns:1fr; } .head h1{ font-size:42px; }
+    .contact, .foot{ grid-template-columns:1fr 1fr; } .links{ display:none; }
+  }
+</style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="refined.html" aria-label="Cadence home">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+        <rect x="0" y="0" width="6" height="6" fill="#16447f"/><rect x="8" y="0" width="6" height="6" fill="#2f64a8"/><rect x="16" y="0" width="6" height="6" fill="#9ebfe3"/>
+        <rect x="0" y="8" width="6" height="6" fill="#16447f"/><rect x="8" y="8" width="6" height="6" fill="#5f8fc9"/>
+        <rect x="0" y="16" width="6" height="6" fill="#16447f"/>
+      </svg>
+      Cadence
+    </a>
+    <nav class="links" aria-label="Main"><a href="refined.html">Product</a><a href="refined.html">Solutions</a><a href="refined.html#pricing">Pricing</a><a href="#">Docs</a><a href="#">Blog</a></nav>
+    <div class="nav-r"><a href="#">Log in</a><a class="btn" href="#">Get started</a></div>
+  </header>
+
+  <main class="wrap">
+    <section class="head">
+      <div>
+        <h1>Questions, answered.</h1>
+        <p>Everything about setup, billing, data, and security. Can't find it here? Talk to a person on our team; we reply in hours, not days.</p>
+      </div>
+      <nav class="jump" aria-label="Jump to a topic">
+        <a href="#start"><b>Getting started</b><span>3 questions</span></a>
+        <a href="#billing"><b>Billing and plans</b><span>3 questions</span></a>
+        <a href="#data"><b>Data and privacy</b><span>2 questions</span></a>
+        <a href="#security"><b>Security and access</b><span>2 questions</span></a>
+      </nav>
+    </section>
+
+    <section class="group" id="start">
+      <h2>Getting started</h2>
+      <div>
+        <details open><summary>How long does it take to get my first chart?<i class="mark" aria-hidden="true"></i></summary><p>About five minutes. Drop our snippet into your app or point Cadence at your warehouse, and events start streaming in live. Your first dashboard is one visual query away, no SQL required.</p></details>
+        <details><summary>Do I need to know SQL?<i class="mark" aria-hidden="true"></i></summary><p>No. Dashboards, funnels, and retention are all built from a visual query builder. SQL is there the moment you want it, but it is never a requirement to get an answer.</p></details>
+        <details><summary>Can I import historical data?<i class="mark" aria-hidden="true"></i></summary><p>Yes. Backfill from your warehouse or a CSV, and Cadence reconciles it with live events automatically, so a chart drawn today still reflects last year.</p></details>
+      </div>
+    </section>
+
+    <section class="group" id="billing">
+      <h2>Billing and plans</h2>
+      <div>
+        <details><summary>What counts as an event?<i class="mark" aria-hidden="true"></i></summary><p>Any tracked action: a page view, a click, a server-side call. You only pay for events you keep; anything you sample out or filter before storage does not count against your plan.</p></details>
+        <details><summary>What happens if I go over my plan's events?<i class="mark" aria-hidden="true"></i></summary><p>Nothing breaks. We flag it, keep collecting, and prorate the overage at your tier's rate. No sampling you did not ask for, no surprise shutoffs mid-month.</p></details>
+        <details><summary>Can I change plans later?<i class="mark" aria-hidden="true"></i></summary><p>Any time, up or down. Changes take effect on your next billing cycle and we prorate the difference. Compare the tiers on the <a href="refined.html#pricing">pricing page</a>.</p></details>
+      </div>
+    </section>
+
+    <section class="group" id="data">
+      <h2>Data and privacy</h2>
+      <div>
+        <details><summary>Where is my data stored?<i class="mark" aria-hidden="true"></i></summary><p>In-region by default, US or EU, on SOC 2 Type II infrastructure. You pick the region at setup, and it never leaves it without your say-so.</p></details>
+        <details><summary>Can I delete a user's data?<i class="mark" aria-hidden="true"></i></summary><p>Yes. A single call removes a user and every event tied to them, across both live and historical stores, within 24 hours, and returns a receipt you can hand to an auditor.</p></details>
+      </div>
+    </section>
+
+    <section class="group" id="security">
+      <h2>Security and access</h2>
+      <div>
+        <details><summary>Is Cadence SOC 2 compliant?<i class="mark" aria-hidden="true"></i></summary><p>Yes, SOC 2 Type II. You can pull the current report straight from your dashboard, or request it from our security team before you sign anything.</p></details>
+        <details><summary>Do you support SSO and roles?<i class="mark" aria-hidden="true"></i></summary><p>SAML SSO and role-based access ship on the Scale plan. Starter and Pro include team workspaces with basic roles, so you can invite the whole team from day one.</p></details>
+      </div>
+    </section>
+
+    <section class="contact" aria-label="Contact">
+      <div><h2>Still have a question?</h2></div>
+      <div><b>hey@cadence.io</b><span>A real person, a few hours, any plan.</span></div>
+      <div><b>docs.cadence.io</b><span>Guides, API reference, SDKs.</span></div>
+      <div><b>Slack community</b><span>3,000 builders and a weekly changelog.</span></div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">
+    <div class="foot">
+      <div><a class="brand" href="refined.html" style="color:var(--ink);font-size:19px;margin-bottom:12px">Cadence</a><p>Product analytics for fast-moving teams.</p></div>
+      <div><h4>Product</h4><a href="refined.html">Features</a><a href="#">Integrations</a><a href="refined.html#pricing">Pricing</a><a href="#">Changelog</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Customers</a><a href="#">Contact</a><a href="faq.html" aria-current="page">FAQ</a></div>
+      <div><h4>Stay in the loop</h4><p>Product notes and the occasional deep dive. No noise.</p>
+        <form class="signup" onsubmit="return false"><label for="em" style="position:absolute;left:-9999px">Email</label><input id="em" type="email" placeholder="you@company.com"><button type="submit">Subscribe</button></form></div>
+    </div>
+    <div class="legal"><span>© 2026 Cadence, Inc.</span><nav aria-label="Social"><a href="#">X</a><a href="#">LinkedIn</a><a href="#">GitHub</a></nav></div>
+  </div></footer>
+</body>
+</html>
