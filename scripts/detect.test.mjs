@@ -135,3 +135,53 @@ test("exit code 2 on P0/P1, and --min filters", () => {
   const p0 = JSON.parse(run(["--json", "--min=P0", file]).stdout);
   assert.ok(p0.findings.length > 0 && p0.findings.every((f) => f.severity === "P0"));
 });
+
+test("v0.5: vendor-named palettes (SD9) and the one-note palette (C10)", () => {
+  assert.ok(ids(put("v5/slate.html", "<style>body{background:#0f1f33;color:#eef3f8}</style><h1>Ops</h1>")).has("SD9"));
+  assert.ok(ids(put("v5/espresso.html", "<style>body{background:#2a1d14}.a{color:#e8761c}</style><h1>Roast</h1>")).has("SD9"));
+  assert.ok(ids(put("v5/sand.html", "<style>body{background:#e9dcc4}</style><h1>Linen</h1>")).has("SD9"));
+  const oneNote = "<style>:root{--g:#f4f6f8;--i:#10233b;--m:#4a5a6e;--a:#2f64a8;--b:#9ebfe3;--c:#16447f}body{background:var(--g);color:var(--i)}.x{color:var(--m);border-color:var(--a)}.y{background:var(--b)}.z{background:var(--c)}</style><h1>Rates</h1>";
+  assert.ok(ids(put("v5/onenote.html", oneNote)).has("C10"));
+  assert.ok(!ids(put("v5/two.html", oneNote.replace("--b:#9ebfe3", "--b:#d9952b").replace("--g:#f4f6f8", "--g:#f3f3f1"))).has("C10"));
+});
+
+test("v0.5: orbs, grid backdrop, big-number hero, pulse dot, tinted checks, stars", () => {
+  const tsx = `<main className="bg-white">
+    <div className="absolute -z-10 h-72 w-72 rounded-full bg-sky-400/30 blur-3xl" />
+    <section className="bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)]">
+      <span className="relative flex h-2 w-2"><span className="animate-ping rounded-full bg-green-400" /></span>
+      <p className="text-7xl font-bold">98%</p>
+      <h1>Ship it</h1>
+    </section>
+    <h2>Plans</h2>
+    <ul>
+      <li><span className="rounded-full bg-green-500/10 p-1"><Check /></span> One</li>
+      <li><span className="rounded-full bg-green-500/10 p-1"><Check /></span> Two</li>
+      <li><span className="rounded-full bg-green-500/10 p-1"><Check /></span> Three</li>
+    </ul>
+    <div><Star /><Star /><Star /><Star /><Star /></div>
+  </main>`;
+  const found = ids(put("v5/Hero.tsx", tsx));
+  for (const id of ["C11", "L10", "L11", "K13", "K14", "IM5"]) assert.ok(found.has(id), `expected ${id}`);
+});
+
+test("v0.5: motion habits (M7, M8, M9) and copy (CP7, CP8) and comment trail (F2)", () => {
+  const html = `<style>
+    @keyframes typing { from { width: 0 } }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.1); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    .logos { animation: marquee 30s linear infinite; }
+  </style>
+  <!-- Hero Section --><h1>Not another dashboard. A decision engine.</h1>
+  <p>No setup. No code. Just results.</p>
+  <!-- Features Section --><p>Trusted by 10,000+ teams worldwide.</p>
+  <!-- Pricing Section --><p>Pricing</p>`;
+  const found = ids(put("v5/motion.html", html));
+  for (const id of ["M7", "M8", "M9", "CP7", "CP8", "F2"]) assert.ok(found.has(id), `expected ${id}`);
+});
+
+test("v0.5: stack score marks six or more distinct tells as a template", () => {
+  const out = JSON.parse(run(["--json", path.join(app, "src/Page.tsx")]).stdout);
+  const s = Object.values(out.stacks)[0];
+  assert.ok(s.distinct >= 6 && s.template === true);
+});

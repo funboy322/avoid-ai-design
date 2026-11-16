@@ -20,8 +20,9 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const VERSION = "0.4.0";
+const VERSION = "0.5.0";
 const SEV = { P0: 0, P1: 1, P2: 2 };
+const STACK = 6; // distinct tells in one file at which the page reads as a template
 const EXT = new Set([".html", ".htm", ".css", ".scss", ".sass", ".less", ".js", ".jsx", ".ts", ".tsx",
   ".mjs", ".cjs", ".vue", ".svelte", ".astro", ".mdx", ".json"]);
 const MARKUP = new Set([".html", ".htm", ".vue", ".svelte", ".astro"]);
@@ -73,9 +74,16 @@ const is = {
   vermilion: (c) => { const { h, s, l } = hsl(c); return inHue(h, 355, 18) && s >= 60 && l >= 40 && l <= 65; },
   violet: (c) => { const { h, s, l } = hsl(c); return inHue(h, 228, 300) && s >= 40 && l > 15 && l < 90; },
   saturated: (c) => { const { s, l } = hsl(c); return s >= 45 && l >= 20 && l <= 80; },
+  // the palettes OpenAI's GPT-5.5 frontend guide names as defaults (SD9)
+  slate: (c) => { const { h, s, l } = hsl(c); return inHue(h, 195, 245) && s >= 15 && l <= 24; },
+  espresso: (c) => { const { h, s, l } = hsl(c); return inHue(h, 10, 45) && s >= 12 && l <= 22; },
+  sand: (c) => { const { h, s, l } = hsl(c); return inHue(h, 20, 60) && s >= 12 && l >= 72 && l < 99.5; },
+  orange: (c) => { const { h, s, l } = hsl(c); return inHue(h, 12, 42) && s >= 60 && l >= 40 && l <= 65; },
+  chromatic: (c) => { const { s, l } = hsl(c); return s >= 12 && l >= 6 && l <= 97; },
 };
 const TW_HEX = { "zinc-950": "#09090b", "neutral-950": "#0a0a0a", "stone-950": "#0c0a09", "gray-950": "#030712",
-  "slate-950": "#020617", black: "#000000", "amber-50": "#fffbeb", "orange-50": "#fff7ed", "yellow-50": "#fefce8" };
+  "slate-950": "#020617", black: "#000000", "amber-50": "#fffbeb", "orange-50": "#fff7ed", "yellow-50": "#fefce8",
+  "slate-900": "#0f172a", "stone-900": "#1c1917", "stone-100": "#f5f5f4", "stone-200": "#e7e5e4", "amber-100": "#fef3c7" };
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 function lineStarts(text) { const s = [0]; for (let i = 0; i < text.length; i++) if (text[i] === "\n") s.push(i + 1); return s; }
@@ -210,6 +218,18 @@ const RULES = [
   { id: "SD8", sev: "P2", name: "Emerald as the purple-avoiding accent",
     why: "When purple is ruled out, emerald is the model's next reflex; it is still a default unless the brief earns it.",
     run: (ctx) => [...idxOf(/#(10b981|059669|34d399|6ee7b7|047857)\b/i)(ctx), ...clsHits(ctx, (c) => /\b(bg|text|from|to|border|ring)-emerald-\d{3}\b/.test(c))] },
+  { id: "SD9", sev: "P1", name: "A palette the vendors now name as a default",
+    why: "OpenAI's GPT-5.5 frontend guide lists dark blue/slate, brown/espresso with orange, and beige/sand/cream grounds as the palettes models fall back on.",
+    run(ctx) {
+      const bg = ctx.pageBg;
+      const twBg = (re) => ctx.classAttrs.some((c) => /<(?:body|html|main)\b/.test(ctx.text.slice(Math.max(0, c.idx - 60), c.idx)) && re.test(c.cls));
+      let note = null;
+      if ((bg && is.slate(bg)) || twBg(/\bbg-(slate|blue|sky)-(900|950)\b|\bbg-\[#0f172a\]/)) note = "dark blue / slate ground";
+      else if ((bg && is.espresso(bg) && ctx.allColors.some(is.orange)) || (twBg(/\bbg-(stone|amber|orange)-(900|950)\b/) && ctx.classAttrs.some((c) => /\b(text|bg)-(orange|amber)-(400|500|600)\b/.test(c.cls)))) note = "espresso ground + orange accent";
+      else if (bg && is.sand(bg) && !(is.cream(bg) && ctx.allColors.some(is.terracotta))) note = "beige / sand / cream ground";
+      else if (twBg(/\bbg-(amber|orange|yellow)-(50|100)\b/) && !ctx.classAttrs.some((c) => /\b(text|bg)-(orange|amber)-(6|7)00\b/.test(c.cls))) note = "beige / sand / cream ground";
+      return note ? [{ idx: Math.max(0, ctx.text.search(/<body\b|background/)), note: bg ? `${note} (${fmt(bg)})` : note }] : [];
+    } },
 
   // ── Typography ──
   { id: "T1", sev: "P0", name: "Inter as the primary face",
@@ -298,6 +318,31 @@ const RULES = [
       }
       return out;
     } },
+  { id: "C10", sev: "P1", name: "One-note palette",
+    why: "Ground, ink, and accents all drawn from one hue family: a palette that never chose a second color.",
+    run(ctx) {
+      if (!ctx.pageBg) return [];
+      // every tinted color the stylesheet declares, deduplicated
+      const seen = new Map();
+      for (const r of ctx.rules) for (const c of ctx.colorsIn(r.body)) if (c.a >= 0.5 && is.chromatic(c)) seen.set(fmt(c), c);
+      const cs = [...seen.values()];
+      if (cs.length < 5 || !is.chromatic(ctx.pageBg)) return [];
+      const hues = cs.map((c) => hsl(c).h).concat(hsl(ctx.pageBg).h).sort((a, b) => a - b);
+      // circular spread: 360 minus the largest gap between neighbouring hues
+      let gap = 360 - hues[hues.length - 1] + hues[0];
+      for (let i = 1; i < hues.length; i++) gap = Math.max(gap, hues[i] - hues[i - 1]);
+      const spread = 360 - gap;
+      return spread <= 30 ? [{ idx: Math.max(0, ctx.text.search(/:root|<style/)), note: `${cs.length} tinted colors within ${Math.round(spread)}° of hue, ground included` }] : [];
+    } },
+  { id: "C11", sev: "P1", name: "Decorative orbs, bokeh, and glow blobs",
+    why: "Blurred circles floating behind the hero or an input are atmosphere with no subject; OpenAI's guide bans them by name.",
+    run(ctx) {
+      const css = ctx.rules.filter((r) => /border-radius\s*:\s*(50%|9{3,}px|100%)/.test(r.body) && /filter\s*:\s*blur\(\s*(\d+)/.test(r.body) && +r.body.match(/filter\s*:\s*blur\(\s*(\d+)/)[1] >= 24)
+        .map((r) => ({ idx: r.idx }));
+      const tw = clsHits(ctx, (c) => /\brounded-full\b/.test(c) && /\bblur-(2xl|3xl|\[\d{2,}px\])/.test(c) && /\b(absolute|fixed|-z-10)\b/.test(c));
+      const named = clsHits(ctx, (c) => /(^|\s)(orb|blob|bokeh|glow-blob|gradient-orb)s?(\s|$|-)/.test(c));
+      return [...css, ...tw, ...named];
+    } },
 
   // ── Layout ──
   { id: "L1", sev: "P0", name: "Pill badge + centered hero",
@@ -347,6 +392,28 @@ const RULES = [
         /ready to (?:get started|start|try)|start (?:your )?free/i, /<footer\b/i].filter((re) => re.test(t)).length;
       return parts >= 6 ? [{ idx: 0, note: `${parts} of the 9 stock sections present` }] : [];
     } },
+  { id: "L10", sev: "P2", name: "Faint grid or dot pattern behind the hero",
+    why: "A 1px grid or dot field, usually masked to fade out, is the stock 'technical' backdrop of generated heroes.",
+    run: (ctx) => [...idxOf(/(?:linear|radial)-gradient\((?:[^;{}()]|\([^()]*\))*?[\s_,]1px\s*,\s*transparent[\s_]+1px/i)(ctx),
+      ...clsHits(ctx, (c) => /\bbg-(grid|dot|dots|grid-pattern|dot-pattern)(-[\w/]+)?\b/.test(c))] },
+  { id: "L11", sev: "P1", name: "A big number as the hero",
+    why: "Anthropic names it: 'a big number with a small label, supporting stats, and a gradient accent' is the default hero.",
+    run(ctx) {
+      const t = ctx.visible, h2 = t.search(/<h2\b/i), end = h2 > 0 ? h2 : Math.floor(t.length * 0.4);
+      const big = new Set();
+      for (const r of ctx.rules) {
+        const fs_ = r.body.match(/font-size\s*:\s*([^;]+)/); if (!fs_) continue;
+        const sizes = [...fs_[1].matchAll(/([\d.]+)(px|rem|em)\b/g)].map((m) => (m[2] === "px" ? +m[1] : +m[1] * 16));
+        if (!sizes.length || Math.max(...sizes) < 56) continue;
+        const last = r.sel.split(/[\s>+~,]/).filter(Boolean).pop() || ""; const m = last.match(/^\.([\w-]+)$/); if (m) big.add(m[1]);
+      }
+      const out = [];
+      for (const m of matches(t.slice(0, end), /<(\w+)\b[^>]*class(?:Name)?=["']([^"']*)["'][^>]*>\s*[$€£]?\d[\d.,]*\s*(?:%|×|x|\+|[KMB]\+?)?\s*<\/\1>/)) {
+        const cls = m[2].split(/\s+/);
+        if (cls.some((n) => big.has(n)) || /\btext-([6-9]xl|\[(?:[5-9]\d|\d{3})px\])/.test(m[2])) out.push({ idx: m.index });
+      }
+      return out;
+    } },
 
   // ── Components ──
   { id: "K1", sev: "P0", name: "Untouched shadcn/ui base theme",
@@ -385,6 +452,22 @@ const RULES = [
     why: "Spotlights, animated beams, shimmer buttons, 3D tilt cards: the same effects across dozens of launches.",
     run: (ctx) => [...matches(ctx.text, new RegExp(`<${EFFECTS.source.replace(/^\\b/, "")}|components\\/(?:magicui|aceternity|ui\\/(?:spotlight|background-beams|animated-beam|shimmer-button|number-ticker|border-beam|meteors|marquee|sparkles|lamp|3d-card|aurora-background))`))]
       .map((m) => ({ idx: m.index, note: (m[1] || m[0]).replace(/^</, "") })) },
+  { id: "K13", sev: "P2", name: "Pulsing status dot",
+    why: "A pinging green dot beside 'Live' or 'Now in beta' signals activity the page does not have.",
+    run: (ctx) => [...clsHits(ctx, (c) => /\banimate-ping\b/.test(c) || (/\banimate-pulse\b/.test(c) && /\brounded-full\b/.test(c) && /\b(h|w|size)-(1\.5|2|2\.5|3)\b/.test(c))),
+      ...ctx.rules.filter((r) => /dot|pulse|live|status|indicator|beacon/i.test(r.sel) && /border-radius\s*:\s*(50%|9{3,}px)/.test(r.body) && /animation\s*:[^;]*infinite/.test(r.body)).map((r) => ({ idx: r.idx }))] },
+  { id: "K14", sev: "P2", name: "Check marks in tinted circles",
+    why: "A check icon inside a soft colored circle on every list line is the stock feature and pricing list.",
+    run(ctx) {
+      const h = [];
+      for (const c of ctx.classAttrs) {
+        const circle = (/\brounded-full\b/.test(c.cls) && /\bbg-[a-z]+-(50|100|\d{3}\/(5|10|15|20))\b/.test(c.cls)) ||
+          ctx.rules.some((r) => /border-radius\s*:\s*(50%|9{3,}px)/.test(r.body) && c.cls.split(/\s+/).some((n) => n && r.sel.endsWith(`.${n}`)) && ctx.colorsIn(r.body).some((x) => x.a <= 0.25 || hsl(x).l >= 88));
+        if (!circle) continue;
+        if (/^[^<]*>\s*(?:<[^>]*>\s*)*(?:✓|✔|<Check(?:Icon|Circle2?)?\b|<svg[^>]*>[\s\S]{0,160}?(?:points=["']20 6 9 17 4 12|lucide-check))/.test(ctx.text.slice(c.idx, c.idx + 400))) h.push({ idx: c.idx });
+      }
+      return h.length >= 3 ? h : [];
+    } },
 
   // ── Motion ──
   { id: "M1", sev: "P2", name: "The same fade-up entrance on everything",
@@ -402,6 +485,23 @@ const RULES = [
   { id: "M5", sev: "P2", name: "Count-up stat animation",
     why: "Numbers that tick up on scroll are theater around placeholder proof.",
     run: idxOf(/\bNumberTicker\b|\bCountUp\b|react-countup|useCountUp/) },
+  { id: "M7", sev: "P2", name: "Headline that types itself out",
+    why: "A letter-by-letter typing headline makes the visitor wait for a sentence they could have read at once.",
+    run: idxOf(/typed\.js|new Typed\(|react-type-animation|<TypeAnimation\b|typewriter-effect|<Typewriter\b|\bTypewriterEffect(?:Smooth)?\b|@keyframes\s+(?:typing|typewriter)\b/i) },
+  { id: "M8", sev: "P2", name: "Every card lifts on hover",
+    why: "A rise-and-shadow on every card, clickable or not, is motion with no meaning; Anthropic lists 'hover transitions on every card'.",
+    run(ctx) {
+      const css = ctx.rules.filter((r) => /:hover/.test(r.sel) && /card|tile|feature|item|panel|box/i.test(r.sel) && /translateY\(\s*-/.test(r.body)).map((r) => ({ idx: r.idx }));
+      const tw = clsHits(ctx, (c) => /\bhover:-translate-y-/.test(c));
+      return [...css, ...(tw.length >= 3 ? tw : [])];
+    } },
+  { id: "M9", sev: "P2", name: "Auto-scrolling logo strip",
+    why: "An endless marquee of logos moves so the proof feels busier than it is, and nobody can read it.",
+    run(ctx) {
+      const kf = [...matches(ctx.text, /@keyframes\s+([\w-]+)\s*\{((?:[^{}]|\{[^{}]*\})*)\}/)].filter((m) => /translateX\(\s*-(?:50|100)%|translate3d\(\s*-(?:50|100)%/.test(m[2]) &&
+        new RegExp(`animation(?:-name)?\\s*:[^;]*\\b${m[1]}\\b[^;]*infinite|animation\\s*:[^;]*infinite[^;]*\\b${m[1]}\\b`).test(ctx.text)).map((m) => ({ idx: m.index, note: m[1] }));
+      return [...kf, ...idxOf(/\banimate-(?:marquee|infinite-scroll|scroll-x|logo-scroll|scroll)\b|react-fast-marquee|<marquee\b/i)(ctx)];
+    } },
 
   // ── Icons ──
   { id: "I2", sev: "P1", name: "Emoji as interface icons",
@@ -435,15 +535,39 @@ const RULES = [
   { id: "CP6", sev: "P2", name: "Generic CTA label",
     why: "A CTA should say what happens ('Start a free trial'), not 'Get started' / 'Learn more' / 'Submit'.",
     run: (ctx) => at(ctx, [...matches(ctx.visible, />\s*(get started|learn more|submit|click here)\s*</i)].map((m) => m.index)) },
+  { id: "CP7", sev: "P2", name: "'Not X. Y.' slogan",
+    why: "'Not another dashboard. A decision engine.' 'No setup. No code. Just results.' A denial-then-reveal cadence models reach for by reflex.",
+    run(ctx) {
+      const t = ctx.visible.replace(/<[^>]+>/g, (s) => " ".repeat(s.length));
+      return [/\bNo [a-z][^.!\n]{0,30}\.\s+No [a-z][^.!\n]{0,30}\.\s+(?:Just|Only)\b/,
+        /\bStop [a-z][^.!\n]{0,30}\.\s+Start [a-z]/,
+        /(?:^|[.!?>]\s*)Not (?:just )?(?:a |an |another |your )?[a-z][^.!?,\n]{0,30}\.\s+(?:A|An|The|Just|It'?s)\s[^.!?\n]{1,40}[.!]/,
+        /\b(?:[Ii]t'?s|[Tt]his is|[Ii]t is) not (?:just )?(?:a |an )?[^.,;\n]{1,30}[,;]\s*(?:it'?s|it is)\b/,
+      ].flatMap((re) => [...matches(t, re)].map((m) => ({ idx: m.index + (m[0].length - m[0].trimStart().length), note: m[0].trim().slice(0, 48) })));
+    } },
+  { id: "CP8", sev: "P2", name: "Unsourced social-proof claim",
+    why: "'Trusted by 10,000+ teams' with no names, link, or source is placeholder proof, often for a product with no users yet.",
+    run: (ctx) => [...matches(ctx.visible.replace(/<[^>]+>/g, (s) => " ".repeat(s.length)),
+      /\b(?:trusted|loved|used|relied on|chosen) by (?:over |more than )?[\d,.]+\s*[KkMm]?\+?\s+[a-z-]+|\bjoin (?:over |more than )?[\d,.]+\s*[KkMm]?\+?\s+(?:teams|developers|companies|users|creators|businesses|marketers|founders|people)\b|\b(?:trusted|loved|used) by (?:thousands|millions|hundreds) of\b/i)]
+      .map((m) => ({ idx: m.index, note: m[0] })) },
 
   // ── Imagery & fingerprints ──
   { id: "IM4", sev: "P1", name: "Placeholder avatars or media",
     why: "Stock avatar services and gray aspect-video boxes are 'nothing real here yet' signals.",
     run: (ctx) => [...idxOf(/dicebear|pravatar|boring-avatars|ui-avatars|robohash|randomuser\.me|placehold\.co|via\.placeholder|picsum\.photos/i)(ctx),
       ...clsHits(ctx, (c) => /\baspect-video\b/.test(c) && /\bbg-(muted|gray|slate|zinc)/.test(c))] },
+  { id: "IM5", sev: "P1", name: "A five-star row on every testimonial",
+    why: "Five of five stars above each quote is decoration, not a rating anyone gave.",
+    run: (ctx) => idxOf(/★{5}|(?:<Star(?:Icon)?\b[^>]*\/>\s*){5}|(?:\[\.\.\.Array\(5\)\]|Array\.from\(\{\s*length\s*:\s*5\s*\}|Array\(5\)\.fill|\[\s*1\s*,\s*2\s*,\s*3\s*,\s*4\s*,\s*5\s*\])[\s\S]{0,200}?(?:<Star|★)/)(ctx) },
   { id: "F1", sev: "P1", name: "Generator signature left in",
     why: "lovable-tagger, v0/Bolt meta tags, or builder attribution tell everyone which tool shipped it.",
     run: idxOf(/lovable-tagger|lovable\.dev|gpt-?engineer|v0\.dev|v0\.app|bolt\.new|name=["']generator["'][^>]*content=["'](?:v0|Lovable|Bolt)/i) },
+  { id: "F2", sev: "P2", name: "Section-label comments",
+    why: "'{/* Hero Section */}', '<!-- Features Section -->' on every block: the comment trail generated pages leave behind.",
+    run(ctx) {
+      const h = [...matches(ctx.text, /(?:\{\s*\/\*|<!--|\/\/)\s*(?:Hero|Features?|Pricing|Testimonials?|CTA|Call to Action|FAQ|Footer|Header|Navigation|Navbar|Stats|Logos?|Logo Cloud|How It Works|Main Content|Social Proof)(?:\s+Section)?\s*(?:\*\/\s*\}|-->|$)/im)].map((m) => ({ idx: m.index }));
+      return h.length >= 3 ? h : [];
+    } },
 
   // ── Craft & accessibility (whole-page checks) ──
   { id: "K7", sev: "P1", name: "No visible keyboard focus",
@@ -535,18 +659,25 @@ const linesLabel = (ls) => (ls.length > 4 ? `L${ls.slice(0, 4).join(", L")} (+${
 function report(findings, scanned, json) {
   const sum = { P0: 0, P1: 0, P2: 0 };
   for (const f of findings) sum[f.severity]++;
-  if (json) { process.stdout.write(JSON.stringify({ tool: "avoid-ai-design", version: VERSION, scanned, summary: { ...sum, total: findings.length }, findings }, null, 2) + "\n"); return sum; }
+  // The stack: how many distinct tells one file carries. In a 2026 count of 120 AI-built pages, 57 carried
+  // six or more and only 20 carried two or fewer; the combination, not any single hit, is what reads as generated.
+  const stacks = {}; for (const f of findings) (stacks[f.file] ||= new Set()).add(f.id.replace(/[a-z]+$/, ""));
+  const stackOf = (file) => stacks[file]?.size || 0;
+  if (json) { process.stdout.write(JSON.stringify({ tool: "avoid-ai-design", version: VERSION, scanned, summary: { ...sum, total: findings.length },
+    stacks: Object.fromEntries(Object.keys(stacks).map((k) => [k, { distinct: stackOf(k), template: stackOf(k) >= STACK }])), findings }, null, 2) + "\n"); return sum; }
   console.log(paint("1", `avoid-ai-design detect v${VERSION}`) + paint("2", ` · ${scanned} file${scanned === 1 ? "" : "s"} scanned`));
   const byFile = new Map(); for (const f of findings) (byFile.get(f.file) || byFile.set(f.file, []).get(f.file)).push(f);
   for (const [file, fs_] of byFile) {
     const s = { P0: 0, P1: 0, P2: 0 }; fs_.forEach((f) => s[f.severity]++);
-    console.log(`\n${paint("1", file)}  ${paint("2", `P0 ${s.P0} · P1 ${s.P1} · P2 ${s.P2}`)}`);
+    const n = stackOf(file);
+    console.log(`\n${paint("1", file)}  ${paint("2", `P0 ${s.P0} · P1 ${s.P1} · P2 ${s.P2} · stack ${n}`)}${n >= STACK ? paint("31;1", "  template stack") : ""}`);
     for (const f of fs_) {
       console.log(`  ${paint(sevColor[f.severity], f.severity)}  ${f.id.padEnd(4)} ${f.name}  ${paint("2", linesLabel(f.lines))}${f.notes.length ? paint("2", `  · ${f.notes.join(" · ")}`) : ""}`);
       console.log(paint("2", `        ${f.why}`));
     }
   }
   console.log(`\n${paint("1", `${findings.length} finding${findings.length === 1 ? "" : "s"}`)}  P0 ${sum.P0} · P1 ${sum.P1} · P2 ${sum.P2}`);
+  console.log(paint("2", `Stack = distinct tells per file; ${STACK} or more reads as a template (57 of 120 AI-built pages in a 2026 count).`));
   console.log(paint("2", "Code-certain signals only. Palette weight, rhythm, and hierarchy need a render (SKILL.md, step 2).\nA finding is a default nobody chose, not proof an AI made it. If the brief asked for it, keep it: avoid-ai-design-ignore: <ID>."));
   return sum;
 }

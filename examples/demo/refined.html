@@ -2,7 +2,8 @@
 <!-- DEMO / after: the SAME site as slop.html (same product, sections, copy, links), rewritten by
      avoid-ai-design v0.4. Direction "Cohort", grounded in the subject: the most characteristic
      artifact of product analytics is the retention cohort table, so it is the hero, the page is
-     structured like a table, and the table's heat ramp is the page's only color.
+     structured like a table, and the table's diverging ramp (below or above the typical cohort) is
+     the page's only color. v0.5: the ramp was one blue on a blue-grey page, a one-note palette (C10).
      avoid-ai-design-ignore-file: L4, L9, CP2, CP6
      (content held identical to slop.html so that only the design varies: the stat numbers, the
      section order, and the copy are out of scope for this demo, see AUDIT.md) -->
@@ -17,13 +18,14 @@
 <style>
   *{ margin:0; padding:0; box-sizing:border-box; }
   :root{
-    --ground:#f4f6f8; --surface:#ffffff; --ink:#10233b; --muted:#4a5a6e; --rule:#d5dde6;
-    --heat-1:#c9dbef; --heat-2:#9ebfe3; --heat-3:#5f8fc9; --heat-4:#2f64a8; --heat-5:#16447f; --wash:#e8f0f9;
+    --ground:#f3f3f1; --surface:#ffffff; --ink:#232323; --muted:#5c5c59; --rule:#d9d9d4;
+    /* the diverging ramp: points below or above the typical cohort at the same week */
+    --below-2:#d9952b; --below-1:#f1d29a; --even:#e6e6e1; --above-1:#b9d3ee; --above-2:#2f6db5; --wash:#e9eff7;
     --face:"Schibsted Grotesk", "Segoe UI", sans-serif;
   }
   body{ font-family:var(--face); color:var(--ink); background:var(--ground); -webkit-font-smoothing:antialiased; line-height:1.5; }
   a{ color:inherit; text-decoration:none; }
-  a:focus-visible, button:focus-visible, input:focus-visible{ outline:2px solid var(--heat-4); outline-offset:3px; border-radius:4px; }
+  a:focus-visible, button:focus-visible, input:focus-visible{ outline:2px solid var(--above-2); outline-offset:3px; border-radius:4px; }
   .wrap{ max-width:1200px; margin:0 auto; padding:0 40px; }
 
   /* nav */
@@ -35,7 +37,7 @@
   .nav-r{ display:flex; align-items:center; gap:22px; font-size:15px; font-weight:500; }
   .btn{ display:inline-block; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:11px 18px; border-radius:6px;
         transition:background-color .15s ease; }
-  .btn:hover{ background:var(--heat-4); }
+  .btn:hover{ background:var(--above-2); }
   .btn.quiet{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink); }
   .btn.quiet:hover{ background:var(--wash); }
   .btn.lg{ padding:14px 22px; font-size:16px; }
@@ -56,15 +58,16 @@
   .cohort th{ font-weight:500; color:var(--muted); text-align:left; padding:4px 6px; white-space:nowrap; }
   .cohort thead th{ text-align:center; }
   .cohort td{ text-align:center; padding:7px 0; border-radius:3px; font-weight:500; }
-  .h1c{ background:var(--heat-1); } .h2c{ background:var(--heat-2); } .h3c{ background:var(--heat-3); }
-  .h4c{ background:var(--heat-4); color:#fff; } .h5c{ background:var(--heat-5); color:#fff; }
+  .cohort td.base{ color:var(--muted); box-shadow:inset 0 0 0 1px var(--rule); }
+  .b2c{ background:var(--below-2); } .b1c{ background:var(--below-1); } .evc{ background:var(--even); }
+  .a1c{ background:var(--above-1); } .a2c{ background:var(--above-2); color:#fff; }
   .key{ display:flex; align-items:center; gap:4px; margin:12px 3px 0; font-size:12.5px; color:var(--muted); }
   .key i{ width:18px; height:8px; border-radius:2px; }
 
   /* logos */
   .logos{ display:flex; align-items:baseline; gap:40px; padding:26px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
   .logos p{ font-size:14.5px; color:var(--muted); white-space:nowrap; }
-  .logos ul{ list-style:none; display:flex; justify-content:space-between; flex:1; font-weight:700; font-size:18px; color:#34465c; }
+  .logos ul{ list-style:none; display:flex; justify-content:space-between; flex:1; font-weight:700; font-size:18px; color:#3d3d3a; }
 
   /* features as rows of a table */
   section.block{ padding:88px 0 0; }
@@ -81,14 +84,14 @@
   .totals div{ padding:34px 28px; }
   .totals div + div{ box-shadow:inset 1px 0 0 rgba(255,255,255,.14); }
   .totals b{ display:block; font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1; }
-  .totals span{ display:block; margin-top:10px; font-size:14.5px; color:#bfd0e4; }
+  .totals span{ display:block; margin-top:10px; font-size:14.5px; color:#c9c9c3; }
 
   /* pricing as a comparison */
   .plans{ display:grid; grid-template-columns:repeat(3,1fr); border-top:2px solid var(--ink); }
   .plan{ padding:26px 26px 30px; border-bottom:1px solid var(--rule); }
   .plan + .plan{ border-left:1px solid var(--rule); }
   .plan.rec{ background:var(--wash); }
-  .plan .tag{ font-size:13.5px; font-weight:700; color:var(--heat-4); height:20px; }
+  .plan .tag{ font-size:13.5px; font-weight:700; color:var(--above-2); height:20px; }
   .plan h3{ font-size:19px; font-weight:700; margin:4px 0 10px; }
   .plan .price{ font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1; }
   .plan .price small{ font-size:16px; font-weight:500; color:var(--muted); letter-spacing:0; }
@@ -110,7 +113,7 @@
   .signup{ display:flex; margin-top:14px; }
   .signup input{ flex:1; font:inherit; font-size:15px; padding:10px 12px; border:1.5px solid var(--ink); border-right:0; border-radius:6px 0 0 6px; background:var(--surface); color:var(--ink); }
   .signup button{ font:inherit; font-weight:700; font-size:15px; padding:0 16px; border:0; border-radius:0 6px 6px 0; background:var(--ink); color:#fff; cursor:pointer; }
-  .signup button:hover{ background:var(--heat-4); }
+  .signup button:hover{ background:var(--above-2); }
   .legal{ display:flex; justify-content:space-between; margin-top:40px; font-size:14px; color:var(--muted); }
   .legal nav{ display:flex; gap:18px; }
 
@@ -125,9 +128,9 @@
   <header class="wrap nav">
     <a class="brand" href="refined.html" aria-label="Cadence home">
       <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-        <rect x="0" y="0" width="6" height="6" fill="#16447f"/><rect x="8" y="0" width="6" height="6" fill="#2f64a8"/><rect x="16" y="0" width="6" height="6" fill="#9ebfe3"/>
-        <rect x="0" y="8" width="6" height="6" fill="#16447f"/><rect x="8" y="8" width="6" height="6" fill="#5f8fc9"/>
-        <rect x="0" y="16" width="6" height="6" fill="#16447f"/>
+        <rect x="0" y="0" width="6" height="6" fill="#d9952b"/><rect x="8" y="0" width="6" height="6" fill="#f1d29a"/><rect x="16" y="0" width="6" height="6" fill="#e6e6e1"/>
+        <rect x="0" y="8" width="6" height="6" fill="#e6e6e1"/><rect x="8" y="8" width="6" height="6" fill="#b9d3ee"/>
+        <rect x="0" y="16" width="6" height="6" fill="#2f6db5"/>
       </svg>
       Cadence
     </a>
@@ -149,20 +152,20 @@
       </div>
       <figure class="cohort">
         <table>
-          <caption><b>Weekly retention by signup week</b><span>Share of each week's new users still active</span></caption>
+          <caption><b>Weekly retention by signup week</b><span>Share still active, shaded against the typical cohort at the same week</span></caption>
           <thead><tr><th scope="col">Signed up</th><th scope="col">Week 0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Jul 7</th><td class="h5c">100%</td><td class="h4c">71%</td><td class="h2c">58%</td><td class="h2c">52%</td><td class="h1c">49%</td><td class="h1c">47%</td><td class="h1c">46%</td><td class="h1c">45%</td></tr>
-            <tr><th scope="row">Jul 14</th><td class="h5c">100%</td><td class="h4c">73%</td><td class="h3c">60%</td><td class="h2c">54%</td><td class="h2c">51%</td><td class="h1c">49%</td><td class="h1c">48%</td><td></td></tr>
-            <tr><th scope="row">Jul 21</th><td class="h5c">100%</td><td class="h3c">69%</td><td class="h2c">57%</td><td class="h2c">51%</td><td class="h1c">48%</td><td class="h1c">46%</td><td></td><td></td></tr>
-            <tr><th scope="row">Jul 28</th><td class="h5c">100%</td><td class="h4c">74%</td><td class="h3c">62%</td><td class="h2c">56%</td><td class="h2c">53%</td><td></td><td></td><td></td></tr>
-            <tr><th scope="row">Aug 4</th><td class="h5c">100%</td><td class="h4c">76%</td><td class="h3c">64%</td><td class="h2c">58%</td><td></td><td></td><td></td><td></td></tr>
-            <tr><th scope="row">Aug 11</th><td class="h5c">100%</td><td class="h4c">78%</td><td class="h3c">66%</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><th scope="row">Aug 18</th><td class="h5c">100%</td><td class="h4c">79%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><th scope="row">Aug 25</th><td class="h5c">100%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Jul 7</th><td class="base">100%</td><td class="b1c">71%</td><td class="b1c">58%</td><td class="b1c">52%</td><td class="evc">49%</td><td class="evc">47%</td><td class="evc">46%</td><td class="evc">45%</td></tr>
+            <tr><th scope="row">Jul 14</th><td class="base">100%</td><td class="evc">73%</td><td class="evc">60%</td><td class="evc">54%</td><td class="evc">51%</td><td class="a1c">49%</td><td class="evc">48%</td><td></td></tr>
+            <tr><th scope="row">Jul 21</th><td class="base">100%</td><td class="b2c">69%</td><td class="b2c">57%</td><td class="b1c">51%</td><td class="b1c">48%</td><td class="evc">46%</td><td></td><td></td></tr>
+            <tr><th scope="row">Jul 28</th><td class="base">100%</td><td class="evc">74%</td><td class="evc">62%</td><td class="a1c">56%</td><td class="a1c">53%</td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 4</th><td class="base">100%</td><td class="a1c">76%</td><td class="a1c">64%</td><td class="a2c">58%</td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 11</th><td class="base">100%</td><td class="a2c">78%</td><td class="a2c">66%</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 18</th><td class="base">100%</td><td class="a2c">79%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Aug 25</th><td class="base">100%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
           </tbody>
         </table>
-        <div class="key" aria-hidden="true">Fewer <i class="h1c"></i><i class="h2c"></i><i class="h3c"></i><i class="h4c"></i><i class="h5c"></i> More still active</div>
+        <div class="key" aria-hidden="true">Below typical <i class="b2c"></i><i class="b1c"></i><i class="evc"></i><i class="a1c"></i><i class="a2c"></i> Above typical</div>
       </figure>
     </section>
 
@@ -177,12 +180,12 @@
         <div class="row">
           <h3>Live dashboards</h3>
           <p>Watch events stream in and build views without writing a single line of SQL.</p>
-          <div class="viz"><svg width="200" height="36" viewBox="0 0 200 36" aria-hidden="true"><polyline fill="none" stroke="#2f64a8" stroke-width="2" points="0,30 25,26 50,28 75,18 100,21 125,12 150,15 175,7 200,4"/></svg>events in the last hour</div>
+          <div class="viz"><svg width="200" height="36" viewBox="0 0 200 36" aria-hidden="true"><polyline fill="none" stroke="#2f6db5" stroke-width="2" points="0,30 25,26 50,28 75,18 100,21 125,12 150,15 175,7 200,4"/></svg>events in the last hour</div>
         </div>
         <div class="row">
           <h3>Funnels &amp; retention</h3>
           <p>See exactly where users drop off and what brings them back, in seconds.</p>
-          <div class="viz"><svg width="200" height="36" viewBox="0 0 200 36" aria-hidden="true"><rect x="0" y="4" width="200" height="6" fill="#16447f"/><rect x="0" y="15" width="122" height="6" fill="#5f8fc9"/><rect x="0" y="26" width="58" height="6" fill="#9ebfe3"/></svg>visit, sign up, invite</div>
+          <div class="viz"><svg width="200" height="36" viewBox="0 0 200 36" aria-hidden="true"><rect x="0" y="4" width="200" height="6" fill="#232323"/><rect x="0" y="15" width="122" height="6" fill="#2f6db5"/><rect x="0" y="26" width="58" height="6" fill="#d9952b"/></svg>visit, sign up, invite</div>
         </div>
         <div class="row">
           <h3>Team workspaces</h3>

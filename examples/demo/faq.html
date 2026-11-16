@@ -18,13 +18,14 @@
   *{ margin:0; padding:0; box-sizing:border-box; }
   /* shared design system: identical to refined.html */
   :root{
-    --ground:#f4f6f8; --surface:#ffffff; --ink:#10233b; --muted:#4a5a6e; --rule:#d5dde6;
-    --heat-1:#c9dbef; --heat-2:#9ebfe3; --heat-3:#5f8fc9; --heat-4:#2f64a8; --heat-5:#16447f; --wash:#e8f0f9;
+    --ground:#f3f3f1; --surface:#ffffff; --ink:#232323; --muted:#5c5c59; --rule:#d9d9d4;
+    /* the diverging ramp: points below or above the typical cohort at the same week */
+    --below-2:#d9952b; --below-1:#f1d29a; --even:#e6e6e1; --above-1:#b9d3ee; --above-2:#2f6db5; --wash:#e9eff7;
     --face:"Schibsted Grotesk", "Segoe UI", sans-serif;
   }
   body{ font-family:var(--face); color:var(--ink); background:var(--ground); -webkit-font-smoothing:antialiased; line-height:1.5; }
   a{ color:inherit; text-decoration:none; }
-  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible{ outline:2px solid var(--heat-4); outline-offset:3px; border-radius:4px; }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible{ outline:2px solid var(--above-2); outline-offset:3px; border-radius:4px; }
   .wrap{ max-width:1200px; margin:0 auto; padding:0 40px; }
   .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
   .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:21px; letter-spacing:-.02em; }
@@ -33,7 +34,7 @@
   .links a:hover{ color:var(--ink); }
   .nav-r{ display:flex; align-items:center; gap:22px; font-size:15px; font-weight:500; }
   .btn{ display:inline-block; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:11px 18px; border-radius:6px; transition:background-color .15s ease; }
-  .btn:hover{ background:var(--heat-4); }
+  .btn:hover{ background:var(--above-2); }
   footer{ border-top:2px solid var(--ink); padding:48px 0 34px; }
   .foot{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.5fr; gap:32px; }
   .foot h4{ font-size:15px; font-weight:700; margin-bottom:14px; }
@@ -43,7 +44,7 @@
   .signup{ display:flex; margin-top:14px; }
   .signup input{ flex:1; font:inherit; font-size:15px; padding:10px 12px; border:1.5px solid var(--ink); border-right:0; border-radius:6px 0 0 6px; background:var(--surface); color:var(--ink); }
   .signup button{ font:inherit; font-weight:700; font-size:15px; padding:0 16px; border:0; border-radius:0 6px 6px 0; background:var(--ink); color:#fff; cursor:pointer; }
-  .signup button:hover{ background:var(--heat-4); }
+  .signup button:hover{ background:var(--above-2); }
   .legal{ display:flex; justify-content:space-between; margin-top:40px; font-size:14px; color:var(--muted); }
   .legal nav{ display:flex; gap:18px; }
 
@@ -55,7 +56,7 @@
   .jump a{ display:flex; justify-content:space-between; padding:11px 0; font-weight:500; }
   .jump a + a{ border-top:1px solid var(--rule); }
   .jump a span{ color:var(--muted); font-weight:400; }
-  .jump a:hover b{ color:var(--heat-4); }
+  .jump a:hover b{ color:var(--above-2); }
   .jump b{ font-weight:700; transition:color .15s ease; }
 
   .group{ display:grid; grid-template-columns:260px 1fr; gap:32px; border-top:2px solid var(--ink); padding:22px 0 56px; }
@@ -64,18 +65,18 @@
   details:first-child summary{ padding-top:0; }
   summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:24px; padding:16px 0; font-size:18px; font-weight:700; letter-spacing:-.01em; }
   summary::-webkit-details-marker{ display:none; }
-  summary:hover{ color:var(--heat-4); }
-  summary .mark{ flex:none; width:14px; height:14px; margin-top:6px; border:1.5px solid var(--heat-4); border-radius:2px; transition:background-color .15s ease; }
-  details[open] summary .mark{ background:var(--heat-4); }
+  summary:hover{ color:var(--above-2); }
+  summary .mark{ flex:none; width:14px; height:14px; margin-top:6px; border:1.5px solid var(--above-2); border-radius:2px; transition:background-color .15s ease; }
+  details[open] summary .mark{ background:var(--above-2); }
   details p{ color:var(--muted); font-size:16px; max-width:620px; padding:0 0 18px; }
-  details p a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--heat-3); text-underline-offset:3px; }
+  details p a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--above-2); text-underline-offset:3px; }
 
   .contact{ display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; background:var(--ink); color:#fff; border-radius:10px; margin:10px 0 96px; }
   .contact > div{ padding:32px 28px; }
   .contact > div + div{ box-shadow:inset 1px 0 0 rgba(255,255,255,.14); }
   .contact h2{ font-size:28px; font-weight:800; letter-spacing:-.02em; line-height:1.1; }
   .contact b{ display:block; font-size:17px; }
-  .contact span{ display:block; margin-top:6px; font-size:14.5px; color:#bfd0e4; }
+  .contact span{ display:block; margin-top:6px; font-size:14.5px; color:#c9c9c3; }
 
   @media (max-width:900px){
     .head, .group{ grid-template-columns:1fr; } .head h1{ font-size:42px; }
@@ -87,9 +88,9 @@
   <header class="wrap nav">
     <a class="brand" href="refined.html" aria-label="Cadence home">
       <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-        <rect x="0" y="0" width="6" height="6" fill="#16447f"/><rect x="8" y="0" width="6" height="6" fill="#2f64a8"/><rect x="16" y="0" width="6" height="6" fill="#9ebfe3"/>
-        <rect x="0" y="8" width="6" height="6" fill="#16447f"/><rect x="8" y="8" width="6" height="6" fill="#5f8fc9"/>
-        <rect x="0" y="16" width="6" height="6" fill="#16447f"/>
+        <rect x="0" y="0" width="6" height="6" fill="#d9952b"/><rect x="8" y="0" width="6" height="6" fill="#f1d29a"/><rect x="16" y="0" width="6" height="6" fill="#e6e6e1"/>
+        <rect x="0" y="8" width="6" height="6" fill="#e6e6e1"/><rect x="8" y="8" width="6" height="6" fill="#b9d3ee"/>
+        <rect x="0" y="16" width="6" height="6" fill="#2f6db5"/>
       </svg>
       Cadence
     </a>

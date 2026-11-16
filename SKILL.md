@@ -5,7 +5,7 @@ license: MIT
 compatibility: Works in any agent that reads agentskills.io SKILL.md files (Claude Code, Cursor, Codex CLI, VS Code Copilot and others). Optional, Node 18+ to run scripts/detect.mjs, and a screenshot tool to judge the visual tells.
 metadata:
   author: ungspirit
-  version: "0.4.0"
+  version: "0.5.0"
   tags: design ui frontend ai-slop tailwind shadcn react
   agentskills_spec: "1.0"
 ---
@@ -18,7 +18,7 @@ This is the design counterpart to the `avoid-ai-writing` skill. It targets two s
 
 The point is not to chase novelty. It is to replace defaults with decisions. A purple gradient is not bad because purple is bad; it is bad because no one chose it.
 
-**There are two orders of default.** The first is the median: purple gradient, Inter, three icon cards. The second is the tasteful escape that became the new median: cream with terracotta, near-black with one acid-green accent, all-caps mono labels, one colored word in the headline, decorative 01/02/03. Anthropic's own `frontend-design` skill lists these clusters, and de-slop passes (this skill's included) land in them constantly. Treat both orders as tells. See the SD section of `references/ai-tells-catalog.md`.
+**There are two orders of default.** The first is the median: purple gradient, Inter, three icon cards. The second is the tasteful escape that became the new median: cream with terracotta, near-black with one acid-green accent, all-caps mono labels, one colored word in the headline, decorative 01/02/03. Anthropic's own `frontend-design` skill lists these clusters, and de-slop passes (this skill's included) land in them constantly. OpenAI's GPT-5.5 frontend guide now names the next escapes too: dark blue or slate, brown or espresso with orange, beige or sand, and the one-note palette built from a single hue. Treat all of them as tells. See the SD section and C10 in `references/ai-tells-catalog.md`.
 
 **Code shows half of it; pixels show the rest.** Some tells live in the source (a literal `from-indigo-500`, `Inter`, a `lucide` import); the scanner finds those. Others are visual: whether a palette has a real dominant color, whether spacing has rhythm, whether the structure is the same as every other page. Render when you can. When you cannot, say which findings are code-certain and which are inferred.
 
@@ -42,7 +42,7 @@ node <skill-dir>/scripts/detect.mjs <files or folders>        # grouped report, 
 node <skill-dir>/scripts/detect.mjs --json <files or folders>  # for your own parsing
 ```
 
-Treat its output as the code-certain half of the audit, not the whole audit: it cannot see palette weight, rhythm, hierarchy, or structure-level sameness. It skips `examples/`, `fixtures/`, `stories/`, and files marked `slop-example` unless given `--include-examples`, and it honors `avoid-ai-design-ignore: <ID>` comments for choices the brief asked for. Without Node, walk the catalog by hand.
+Each file also gets a **stack**: the number of distinct tells in it. Six or more reads as a template (in a 2026 count of 120 AI-built pages, 57 had six or more), so judge the stack before any single hit. Treat its output as the code-certain half of the audit, not the whole audit: it cannot see palette weight, rhythm, hierarchy, or structure-level sameness. It skips `examples/`, `fixtures/`, `stories/`, and files marked `slop-example` unless given `--include-examples`, and it honors `avoid-ai-design-ignore: <ID>` comments for choices the brief asked for. Without Node, walk the catalog by hand.
 
 ## Workflow (rewrite mode)
 
@@ -51,7 +51,7 @@ Treat its output as the code-certain half of the audit, not the whole audit: it 
 3. **Render.** If a screenshot or preview tool is available, render the artifact and judge the 👁 tells from pixels. Run the **silhouette test** on pages: reduce the screenshot to a small black-on-white block silhouette and ask whether it could be any other product's page (catalog L9). Squint at 25% for flat density. Without a render, mark visual tells as **inferred, lower-confidence**.
 4. **Audit.** Merge the scan, the render, and a pass through every category in `references/ai-tells-catalog.md`, including the SD section. For each tell: location, ID, severity, one line on *why it reads as AI*, and whether it is code-certain, rendered, or inferred.
 5. **Ground and plan.** If a design system exists, it *is* the direction: adopt it as a contract and match it exactly. Otherwise, derive the direction from the subject, not from a style menu. Ask what the product is, who uses it, and what its world is made of (materials, place, era, the domain's own artifacts and vernacular). Write a compact plan: 4-6 named colors with roles, the faces and their roles, the layout idea in a sentence, and the one signature detail. `references/aesthetic-directions.md` is vocabulary for naming moves, not a menu to pick from.
-6. **Review the plan against the defaults.** Before touching code, check the plan against the second-order clusters (SD1-SD8) and your own recent passes. For each part, ask: would I arrive here for any similar page? If yes, revise it and say what changed. If a user is present, show the plan plus one or two alternatives in a sentence and pause. If you are running non-interactively, state the assumption in one line, proceed, and keep it easy to override.
+6. **Review the plan against the defaults.** Before touching code, check the plan against the second-order clusters (SD1-SD9), the one-note palette (C10), and your own recent passes. Give each color a job; if every color comes from one hue, the palette has not decided anything. For each part, ask: would I arrive here for any similar page? If yes, revise it and say what changed. If a user is present, show the plan plus one or two alternatives in a sentence and pause. If you are running non-interactively, state the assumption in one line, proceed, and keep it easy to override.
 7. **Calibrate depth.** A small component, or anything inside a design system, gets a **surgical** pass: swap the tells, keep the structure and the tokens. A standalone page gets a **rebuild** around the direction. A ground-up build overlaps with the `frontend-design` skill; if it is available, hand it the reviewed plan rather than duplicating its job.
 8. **Rewrite.** Edit the real files. Preserve functionality, props, state, routing, data flow, accessibility, and the meaning of the copy. Do not add dependencies silently; name any you introduce. For multi-page work, write the plan into a `DESIGN.md` from `references/design-md-template.md` (or extend the existing one), and build every page from it.
 9. **Re-scan and judge.** Run the scanner again: no P0, and no SD tell the brief did not ask for. Then judge the result against "What success means." A clean scan is **necessary but not sufficient**.

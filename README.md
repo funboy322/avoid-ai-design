@@ -10,7 +10,7 @@
 [![Also works with](https://img.shields.io/badge/Cursor%20%C2%B7%20Codex%20%C2%B7%20Copilot-compatible-555.svg)](#compatibility)
 
 <p align="center">
-  <img src="docs/before-after.png" alt="The same SaaS landing page, before and after. Left, labeled Before: a purple-to-blue gradient hero with gradient headline text, a sparkle pill badge, a glassy chart mock, and three emoji feature cards. Right, labeled After: the same product, sections, and copy, rebuilt around the product's own retention cohort table as the hero, in navy on a cool grey ground with one blue heat ramp, features as table rows, and a totals row for the stats." width="100%">
+  <img src="docs/before-after.png" alt="The same SaaS landing page, before and after. Left, labeled Before: a purple-to-blue gradient hero with gradient headline text, a sparkle pill badge, a glassy chart mock, and three emoji feature cards. Right, labeled After: the same product, sections, and copy, rebuilt around the product's own retention cohort table as the hero, in graphite on a neutral grey ground, with cells shaded ochre below and blue above the typical cohort, features as table rows, and a totals row for the stats." width="100%">
 </p>
 
 <p align="center"><sub><i>One real page, run through the skill. Same product, same sections, same copy; only the design changed. The scanner finds 23 tells before and no design tells after. Pages and the full audit: <a href="examples/demo/">examples/demo/</a>.</i></sub></p>
@@ -35,19 +35,21 @@ Models are trained toward the average, so their UI clusters around safe defaults
 
 Then the fix converged too. Anthropic's own `frontend-design` skill now lists the clusters AI design gathers around once it avoids the purple: cream with a terracotta accent (Claude's own interface color), near-black with one acid-green or vermilion signal, broadsheet hairlines, the SaaS card kit, and template chrome like tracked all-caps eyebrows and `A · B · C` meta strings. These *second-order defaults* read as AI to anyone who has seen a few hundred generated pages. This skill's own first demo landed in them, which is how v0.4 came to check for them by name.
 
+Then the model vendors started naming defaults themselves. OpenAI's frontend guide for GPT-5.5 tells its model to avoid dark blue and slate, brown and espresso with orange, beige and sand, one-note palettes built from a single hue, and decorative orbs. This skill's v0.4 demo, rebuilt to escape the second order, turned out to be navy on blue-grey with a blue ramp: one-note. v0.5 checks for those too, and the demo was repainted again.
+
 ## What it catches
 
-The full catalog lives in [`references/ai-tells-catalog.md`](references/ai-tells-catalog.md): 67 tells, each with a detection signal, why it reads as AI, a fix for plain HTML/CSS and for React + Tailwind + shadcn, and its sources.
+The full catalog lives in [`references/ai-tells-catalog.md`](references/ai-tells-catalog.md): 81 tells, each with a detection signal, why it reads as AI, a fix for plain HTML/CSS and for React + Tailwind + shadcn, and its sources.
 
 | Category | Example tells |
 |---|---|
-| **Second-order defaults** | cream + terracotta (the Claude look), near-black + one acid-green accent, broadsheet cosplay, all-caps and mono template chrome, one accented headline word, decorative 01 / 02 / 03, fake window dots, the emerald fallback |
+| **Second-order defaults** | cream + terracotta (the Claude look), near-black + one acid-green accent, broadsheet cosplay, all-caps and mono template chrome, one accented headline word, decorative 01 / 02 / 03, fake window dots, the emerald fallback, the palettes OpenAI now names (slate, espresso, sand) |
 | **Typography** | Inter everywhere, the "tasteful free font" set (Space Grotesk, Geist, Instrument Serif, Fraunces), a face declared in CSS but never loaded |
-| **Color** | the purple/indigo gradient, gradient headline text, untouched shadcn palettes, one hue pretending to be two, muted text below WCAG AA |
-| **Layout** | the centered hero, three icon cards, the stock section order (hero, logos, features, stats, pricing, CTA), three-tier pricing rings, the four-column footer |
-| **Components** | `rounded-2xl shadow-lg` on everything, reflexive glass, icon-in-a-rounded-square, stock Aceternity / Magic UI effects, missing focus states |
-| **Motion** | the same fade-up on every section, bounce easing, count-up stats, animation that ignores reduced-motion |
-| **Icons, copy, imagery** | the worn Lucide set and the sparkle-for-AI, "Elevate / Seamless / Powerful", arrows welded to CTAs, generic CTA labels, placeholder avatars |
+| **Color** | the purple/indigo gradient, gradient headline text, untouched shadcn palettes, one hue pretending to be two, the one-note palette, orbs and bokeh blobs, muted text below WCAG AA |
+| **Layout** | the centered hero, three icon cards, the stock section order (hero, logos, features, stats, pricing, CTA), three-tier pricing rings, the four-column footer, a big number as the hero, the faint grid backdrop |
+| **Components** | `rounded-2xl shadow-lg` on everything, reflexive glass, icon-in-a-rounded-square, stock Aceternity / Magic UI effects, pulsing status dots, checks in tinted circles, missing focus states |
+| **Motion** | the same fade-up on every section, bounce easing, count-up stats, typing headlines, every card lifting on hover, auto-scrolling logos, animation that ignores reduced-motion |
+| **Icons, copy, imagery** | the worn Lucide set and the sparkle-for-AI, "Elevate / Seamless / Powerful", arrows welded to CTAs, generic CTA labels, "Not X. Y." slogans, "Trusted by 10,000+ teams", placeholder avatars, five-star rows |
 | **Consistency** | design-system drift: font, color, radius, nav, or footer that changes from page to page, or ignores the design you chose |
 
 Every tell is ranked by **who notices it**: P0 a layperson, P1 a designer or developer, P2 craft and polish. And the catalog is explicit about what *not* to flag: a tell is evidence of a default nobody chose, never proof that a model made the page.
@@ -61,7 +63,7 @@ node ~/.claude/skills/avoid-ai-design/scripts/detect.mjs src/
 ```
 
 ```
-src/app/page.tsx  P0 5 · P1 12 · P2 4
+src/app/page.tsx  P0 5 · P1 12 · P2 4 · stack 21  template stack
   P0  C1   Purple / indigo gradient  L13
         The canonical unchosen gradient (the Tailwind indigo-500 lineage).
   P0  C6   Gradient-filled headline text  L13
@@ -71,6 +73,7 @@ src/app/page.tsx  P0 5 · P1 12 · P2 4
 ```
 
 - `--json` for machine-readable output, `--min=P1` to hide polish-level findings.
+- A per-file **stack**: how many distinct tells one file carries. Six or more is marked as a template, since the combination, not any single hit, is what reads as generated (57 of 120 AI-built pages in a 2026 count carried six or more).
 - Exit code `2` when any P0 or P1 is found, `0` when clean, so it works as a CI gate.
 - It skips `examples/`, `fixtures/`, `stories/`, and files marked `slop-example`, and it honors ignore comments for choices your brief asked for: `avoid-ai-design-ignore: SD1` on a line, or `avoid-ai-design-ignore-file: SD1, SD4` in a file.
 
@@ -117,12 +120,12 @@ Trigger `detect` with phrases like "just audit", "flag only", "don't change the 
 
 [`examples/demo/`](examples/demo/) is a real end-to-end run on one generic AI-built SaaS page. Every file holds the same product, sections, and copy; only the design varies.
 
-**1. The run.** [`slop.html`](examples/demo/slop.html) is the page an AI tool produces unprompted. [`refined.html`](examples/demo/refined.html) is the same page after the skill, grounded in the product's most characteristic artifact: the retention cohort table is the hero, the page is built like a table, and the table's heat ramp is the only color. [`AUDIT.md`](examples/demo/AUDIT.md) is the full run, including an honest section on what the previous version of this demo got wrong. Full-page screenshots: [before](docs/demo-before.png) and [after](docs/demo-after.png).
+**1. The run.** [`slop.html`](examples/demo/slop.html) is the page an AI tool produces unprompted. [`refined.html`](examples/demo/refined.html) is the same page after the skill, grounded in the product's most characteristic artifact: the retention cohort table is the hero, the page is built like a table, and the only color is the table's diverging ramp: ochre where a cohort retains below the typical one, blue where it retains above. [`AUDIT.md`](examples/demo/AUDIT.md) is the full run, including an honest section on what the previous version of this demo got wrong. Full-page screenshots: [before](docs/demo-before.png) and [after](docs/demo-after.png).
 
 **2. More than one right answer.** The same page, rebuilt four ways, each drawn from a different part of the product's world, each scanning clean of first- and second-order defaults:
 
 <p align="center">
-  <img src="docs/variants.png" alt="The AI-generated page next to four rebuilds of it. Cohort: the retention cohort table as the hero, navy on cool grey. Tempo: the week drawn as a step sequencer in black and brass with expanded type. Wallboard: huge signage-face numerals on dark navy with amber live values, built for a wall TV. Funnel: a real signup funnel as the hero, with page sections that narrow like a funnel, in plum and raspberry with a sturdy serif." width="100%">
+  <img src="docs/variants.png" alt="The AI-generated page next to four rebuilds of it. Cohort: the retention cohort table as the hero, graphite on neutral grey with an ochre-to-blue diverging ramp. Tempo: the week drawn as a step sequencer in black and brass with expanded type. Wallboard: huge signage-face numerals on neutral charcoal with amber live values, built for a wall TV. Funnel: a real signup funnel as the hero, with page sections that narrow like a funnel, in plum and raspberry with a sturdy serif." width="100%">
 </p>
 
 - [`refined.html`](examples/demo/refined.html): **Cohort**, the retention table.
