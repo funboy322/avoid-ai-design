@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.0 (2026-11-15)
+
+Both model vendors now publish lists of the looks their own models fall back on. This release checks for the new names, and admits that this repo's own demo was one of them.
+
+### Added
+
+- **14 tells, all checked by the scanner (64 rules now, 81 tells in the catalog).**
+  - **SD9**, the palettes OpenAI's GPT-5.5 frontend guide names as defaults: a dark blue or slate ground, brown or espresso with orange, beige or sand.
+  - **C10**, the one-note palette: ground, ink, and accents all from one hue family.
+  - **C11**, decorative orbs, bokeh, and glow blobs.
+  - **L10**, the faint grid or dot pattern behind the hero, and **L11**, a big number as the hero (named in Anthropic's revised `frontend-design`).
+  - **K13**, the pulsing status dot, and **K14**, check marks in tinted circles.
+  - **M7**, the headline that types itself out; **M8**, every card lifting on hover; **M9**, the auto-scrolling logo strip.
+  - **CP7**, "Not X. Y." slogans, and **CP8**, unsourced social-proof claims such as "Trusted by 10,000+ teams."
+  - **IM5**, a five-star row on every testimonial, and **F2**, section-label comments such as `{/* Hero Section */}`.
+- **The stack.** Each file in the report shows how many distinct tells it carries, marked as a template at six or more. In a 2026 count of 120 AI-built pages, 57 carried six or more. JSON output has a `stacks` field.
+- Catalog sources 24 to 29: OpenAI's GPT-5.4 and GPT-5.5 frontend guidance, the 120-page count, two tell write-ups, and the Anthropic revision.
+
+### Changed
+
+- The demo is repainted. `refined.html` and `faq.html` were navy on blue-grey with a blue heat ramp, which C10 flags as one-note. The cohort table now uses a diverging scale (ochre below the typical cohort, blue above) on neutral grey and graphite, so the two colors carry two meanings. `after-wallboard.html` moved from dark navy (SD9) to a neutral charcoal. All `docs/` images are re-rendered.
+- "What not to over-flag" now says which vendor rules are taste rather than tells (zero letter-spacing, no fluid type), and when a big hero number is the brief.
+
 ## 0.4.0 (2026-09-24)
 
 The first "after" in this repo's own demo looked tasteful and still read as AI-made. This release is about why that happens, and about catching it in code.

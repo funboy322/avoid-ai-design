@@ -96,7 +96,7 @@ license: MIT
 compatibility: Works in any agent that reads agentskills.io SKILL.md files (Claude Code, Cursor, Codex CLI, VS Code Copilot and others). Optional, Node 18+ to run scripts/detect.mjs, and a screenshot tool to judge the visual tells.
 metadata:
   author: ungspirit
-  version: "0.4.0"
+  version: "0.5.0"
   tags: design ui frontend ai-slop tailwind shadcn react
   agentskills_spec: "1.0"
 ---

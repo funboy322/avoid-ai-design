@@ -30,6 +30,10 @@ A model trained on a decade of Tailwind tutorials, shadcn starters, and GitHub s
 
 De-slop passes land here constantly, this skill's own first demo included. Treat the second order as tells in their own right (the **SD** category below). The honest test for any fix: would you have arrived here for any similar page? If yes, it is a default.
 
+**The vendors now name the defaults too.** OpenAI's frontend guidance for GPT-5.4 and GPT-5.5 ([sources 24-25](#sources)) tells its own model to avoid purple and purple-blue gradients, and also "beige/cream/sand/tan," "dark blue/slate," and "brown/orange/espresso" palettes, one-note palettes built from a single hue, gradient orbs and bokeh blobs, and cards as the default container. Anthropic's revised `frontend-design` adds "a big number with a small label" as the default hero and hover transitions on every card. When both model vendors list a look as what their models fall back on, it is a default by definition: SD9, C10, C11, L11, and M8 track these lists.
+
+**Judge the stack, not the hit.** A 2026 count of 120 AI-built pages ([source 26](#sources)) found 57 with six or more tells and only 20 with two or fewer. The scanner reports this as a per-file **stack**: the number of distinct tells, with six or more marked as a template.
+
 **A third order is already forming.** Design forecasts name a handmade "anti-AI" reaction (grain, hand-drawn type, scrapbook collage). It is legitimate when the subject earns it and the next reflex when it is reached for to look human.
 
 **Severity:** **P0**: a layperson recognizes it as AI-made. **P1**: a designer or developer does. **P2**: craft and polish. Fix P0 and P1 on every pass.
@@ -38,17 +42,17 @@ De-slop passes land here constantly, this skill's own first demo included. Treat
 
 | Category | Tells |
 |---|---|
-| Second-order defaults | SD1 P1 ⚙ · SD2 P1 ⚙ · SD3 P2 👁 · SD4 P1 ⚙ · SD5 P1 ⚙ · SD6 P1 ⚙ · SD7 P2 ⚙ · SD8 P2 ⚙ |
+| Second-order defaults | SD1 P1 ⚙ · SD2 P1 ⚙ · SD3 P2 👁 · SD4 P1 ⚙ · SD5 P1 ⚙ · SD6 P1 ⚙ · SD7 P2 ⚙ · SD8 P2 ⚙ · SD9 P1 ⚙ |
 | Typography | T1 P0 ⚙ · T2 P1 ⚙ · T3 P1 ⚙ · T4 P1 ⚙ · T5 P1 ⚙ · T6 P2 👁 · T7 P1 ⚙ |
-| Color & gradients | C1 P0 ⚙ · C2 P1 ⚙ · C3 P1 👁 · C4 P0/P1 👁 · C5 P2 ⚙ · C6 P0 ⚙ · C7 P1 🧠 · C8 P2 ⚙ · C9 P1 ⚙👁 |
-| Layout & composition | L1 P0 ⚙ · L2 P0 ⚙ · L3 P1/P2 🧠 · L4 P1 ⚙ · L5 P2 🧠 · L6 P1 ⚙ · L7 P1 ⚙ · L8 P1 ⚙ · L9 P1 ⚙👁 |
-| Components | K1 P0 ⚙ · K2 P1 ⚙ · K3 P1 ⚙ · K4 P1 ⚙ · K5 P2 ⚙ · K6 P1 ⚙ · K7 P1 ⚙ · K8 P1 ⚙ · K9 P1 ⚙ · K10 P1 ⚙ · K11 P2 👁 · K12 P2 👁 |
+| Color & gradients | C1 P0 ⚙ · C2 P1 ⚙ · C3 P1 👁 · C4 P0/P1 👁 · C5 P2 ⚙ · C6 P0 ⚙ · C7 P1 🧠 · C8 P2 ⚙ · C9 P1 ⚙👁 · C10 P1 ⚙ · C11 P1 ⚙ |
+| Layout & composition | L1 P0 ⚙ · L2 P0 ⚙ · L3 P1/P2 🧠 · L4 P1 ⚙ · L5 P2 🧠 · L6 P1 ⚙ · L7 P1 ⚙ · L8 P1 ⚙ · L9 P1 ⚙👁 · L10 P2 ⚙ · L11 P1 ⚙ |
+| Components | K1 P0 ⚙ · K2 P1 ⚙ · K3 P1 ⚙ · K4 P1 ⚙ · K5 P2 ⚙ · K6 P1 ⚙ · K7 P1 ⚙ · K8 P1 ⚙ · K9 P1 ⚙ · K10 P1 ⚙ · K11 P2 👁 · K12 P2 👁 · K13 P2 ⚙ · K14 P2 ⚙ |
 | Spacing | S1 P2 👁 |
-| Motion | M1 P2 ⚙ · M2 P2 👁 · M3 P2 👁 · M4 P2 ⚙ · M5 P2 ⚙ · M6 P1 ⚙ |
+| Motion | M1 P2 ⚙ · M2 P2 👁 · M3 P2 👁 · M4 P2 ⚙ · M5 P2 ⚙ · M6 P1 ⚙ · M7 P2 ⚙ · M8 P2 ⚙ · M9 P2 ⚙ |
 | Icons | I1 (see K6) · I2 P1 ⚙ · I3 P1 ⚙ |
-| Copy & microcopy | CP1 P1 ⚙ · CP2 P2 ⚙ · CP3 P1 ⚙ · CP4 P2 ⚙ · CP5 P2 🧠 · CP6 P2 ⚙ |
-| Imagery | IM1 P1 👁 · IM2 P1 👁 · IM3 P2 👁 · IM4 P1 ⚙ |
-| Fingerprints | F1 P1 ⚙ |
+| Copy & microcopy | CP1 P1 ⚙ · CP2 P2 ⚙ · CP3 P1 ⚙ · CP4 P2 ⚙ · CP5 P2 🧠 · CP6 P2 ⚙ · CP7 P2 ⚙ · CP8 P2 ⚙ |
+| Imagery | IM1 P1 👁 · IM2 P1 👁 · IM3 P2 👁 · IM4 P1 ⚙ · IM5 P1 ⚙ |
+| Fingerprints | F1 P1 ⚙ · F2 P2 ⚙ |
 | Cross-page consistency | X1 P0 👁 |
 
 ---
@@ -96,6 +100,11 @@ The "tasteful AI" looks: what models produce when told to avoid the first order.
 **Detection:** Emerald (or teal) as the one accent on an otherwise neutral page when nothing in the brief asked for green.
 **Why AI:** With purple ruled out, emerald is the next reflex; tell catalogs now list the "emerald fallback."
 **Fix:** As C2: tie the accent to the brand or the subject, and give it a job (action, status, emphasis).
+
+### SD9: A palette the vendors now name as a default · P1 · ⚙
+**Detection:** The page ground is dark blue or slate (`#0f172a`, `#0f1f33`, Tailwind `slate-900`), a brown or espresso ground with an orange accent, or a beige, sand, tan, or cream ground (the cream-plus-terracotta case stays SD1).
+**Why AI:** OpenAI's GPT-5.5 frontend guide lists these exact palette families, alongside purple, as what its model should avoid by default. They are the escapes models took once purple and the Claude look were named; navy-and-slate in particular reads as "serious" without anyone deciding it should. This skill's own v0.4 demo landed in it twice (a blue-grey page with navy ink, a navy wallboard).
+**Fix:** As SD1: take the ground from the subject (its materials, place, era, signage). If a dark page is earned, choose a dark that is not navy by habit, and test it against the product, not against "looks premium."
 
 ---
 
@@ -200,6 +209,16 @@ body { font-family: var(--font-body); }
 **Why AI:** Barely-passing grey body copy is a systematic generated failure; in the HN discussion of Krebs's study, several commenters flagged low-contrast beige and brown text on dark sites. It is an accessibility defect whatever made it.
 **Fix:** Raise the contrast to AA (4.5:1 for body text) or better and check it with a tool, not by eye.
 
+### C10: One-note palette · P1 · ⚙
+**Detection:** The ground, the ink, the muted text, and every accent come from one hue family: a blue-grey page with navy ink and a blue ramp, a pink page with raspberry type. The scanner flags five or more tinted colors within 30° of hue when the page ground is tinted too.
+**Why AI:** OpenAI's guide bans "one-note palettes" by name. Picking one hue and deriving everything from it is the safest way to look coherent, so it is what models do once a single accent feels too thin. Coherent is not the same as chosen: nothing on the page gets a second color for a second job.
+**Fix:** Keep the neutrals neutral, and give color jobs: one hue for one meaning, a second hue for a different meaning (above and below a benchmark, live and stale, action and status). A diverging data scale is often the honest answer for an analytics product.
+
+### C11: Decorative orbs, bokeh, and glow blobs · P1 · ⚙
+**Detection:** Large blurred circles positioned behind the hero, a card, or an input: `absolute rounded-full blur-3xl bg-sky-400/30`, or CSS with `border-radius: 50%` and `filter: blur(40px)`; classes named `orb`, `blob`, `bokeh`.
+**Why AI:** OpenAI's guide names "discrete orbs, gradient orbs, or bokeh blobs" as decoration to avoid; a 2026 count of 120 AI-built pages lists "a glowing blob sits behind the input box" among the six recurring motion and atmosphere habits. It is atmosphere with no subject, the 2026 successor to the purple gradient hero.
+**Fix:** Cut it. If the page needs depth, get it from the subject: a real image, the product's own interface, a texture from its world.
+
 ---
 
 ## Layout & composition
@@ -221,7 +240,7 @@ body { font-family: var(--font-body); }
 **Fix:** Use a bento grid only when tiles genuinely differ in importance and the sizes encode that. Otherwise pick a layout that fits the content's actual hierarchy.
 
 ### L4: The generic stat / social-proof strip · P1 · ⚙
-**Detection:** A band of round numbers: "10,000+ users · 99.9% uptime · 4.9★". ~12.2% of sites. Its relatives are fabricated trust chrome: grayscale logo walls of companies that are not customers, invented compliance badges, testimonial grids of generated people. Anthropic also names the default hero version: "a big number with a small label, supporting stats, and a gradient accent."
+**Detection:** A band of round numbers: "10,000+ users · 99.9% uptime · 4.9★". ~12.2% of sites. Its relatives are fabricated trust chrome: grayscale logo walls of companies that are not customers, invented compliance badges, testimonial grids of generated people. Anthropic also names the default hero version: "a big number with a small label, supporting stats, and a gradient accent" (see L11).
 **Why AI:** The numbers are placeholders, often for a product with no users. Hollow proof.
 **Fix:** Use real numbers or cut the strip. A single specific, true metric beats four invented ones.
 
@@ -249,6 +268,16 @@ body { font-family: var(--font-body); }
 **Detection:** Hero, logos, features, how it works, testimonials, stats, pricing, FAQ, CTA, footer, in that order, whatever the product. Sailop calls it the standard section waterfall. The scanner flags a page carrying six or more of these stock sections; confirm with the **silhouette test**: screenshot the page, reduce it to a 200-pixel-wide black-on-white silhouette (blocks for sections, lines for text), do the same for five competitors, and lay them side by side. If you cannot pick yours out, the structure is slop.
 **Why AI:** The architecture is where most of the sameness lives. Color and font fixes never touch it, which is why a re-skinned page still reads as generated.
 **Fix:** Order sections by what this audience needs to decide, cut the ones that exist only because the template has them, and give the page one structural idea: a live demo first, a comparison table as the spine, a long-form argument, a single scrolling story.
+
+### L10: Faint grid or dot pattern behind the hero · P2 · ⚙
+**Detection:** A 1px grid or dot field drawn with `linear-gradient(... 1px, transparent 1px)` or `radial-gradient(... 1px, transparent 1px)`, usually masked to fade at the edges; `bg-grid`, `bg-dot` utilities; Magic UI `GridPattern` and `DotPattern` (reported under K10).
+**Why AI:** Tell write-ups list "dark backgrounds with a fine grid" and "a faint grid or pink glow in the hero" as recurring scan results. It is the stock "technical" backdrop: it says engineering without showing any.
+**Fix:** If the product really lives on a grid (a design tool, a spreadsheet, a map), draw that grid with its real units and labels. Otherwise use a plain ground.
+
+### L11: A big number as the hero · P1 · ⚙
+**Detection:** The first screen leads with a huge numeral (a percentage, a multiplier, a count) over a small label, often with supporting stats and a gradient accent. The scanner flags a number set at 56px or more (or `text-6xl` and up) before the first `<h2>`.
+**Why AI:** Anthropic's revised skill names it as a default hero, and OpenAI's guide bans stats and metadata rows in the hero. A number with no source is the fastest way to look data-driven.
+**Fix:** Lead with the product. Keep a hero number only when the number is the product (a wallboard, a live status page, a price), and then make it true and specific.
 
 ---
 
@@ -315,6 +344,16 @@ body { font-family: var(--font-body); }
 **Why AI:** Chips signal "app-like" without carrying state.
 **Fix:** Show a chip only where it reflects real, changing state, and keep one visual language for it.
 
+### K13: Pulsing status dot · P2 · ⚙
+**Detection:** A small green or brand-colored dot with `animate-ping` or an infinite pulse, beside "Live," "Now in beta," or "All systems operational."
+**Why AI:** Tell write-ups list "pulsing status dots" with auto-scrolling logos and bounce easing. On a marketing page it signals activity the page does not have.
+**Fix:** Show live state only where state is live (a real status, a real feed), and let it change when the state changes.
+
+### K14: Check marks in tinted circles · P2 · ⚙
+**Detection:** A check icon inside a soft colored circle on every line of a feature or pricing list: `rounded-full bg-green-500/10` around a Lucide `Check`.
+**Why AI:** It is one of the eight tells a 2026 write-up finds across AI builders, the list-item twin of the icon chip (K6).
+**Fix:** A plain list reads fine. If the list is a comparison, make it a table where a mark means something (included, not included, limited).
+
 ---
 
 ## Spacing
@@ -358,6 +397,21 @@ body { font-family: var(--font-body); }
 **Detection:** Animation with no `prefers-reduced-motion` handling. The scanner checks self-contained pages; in apps, look for a global rule or `MotionConfig reducedMotion="user"`.
 **Why AI:** Part of the quality floor generated pages skip; Anthropic's list includes "reduced motion respected." It fails people who asked for less movement.
 **Fix:** Wrap non-essential motion in `@media (prefers-reduced-motion: no-preference)`, or stop it under `reduce`. In React, use `useReducedMotion` or `MotionConfig`.
+
+### M7: Headline that types itself out · P2 · ⚙
+**Detection:** A headline or subhead revealed letter by letter: `typed.js`, `react-type-animation`, `TypewriterEffect`, a `@keyframes typing` with `steps()`.
+**Why AI:** One of the six motion habits in a 2026 count of 120 AI-built pages. It makes the visitor wait for a sentence they could have read at once.
+**Fix:** Set the headline. If the product genuinely generates text, show it doing that in the product area, with real output.
+
+### M8: Every card lifts on hover · P2 · ⚙
+**Detection:** `hover:-translate-y-1 hover:shadow-xl` on every card, or `.card:hover { transform: translateY(-4px) }`, whether or not the card is clickable.
+**Why AI:** Anthropic lists "hover transitions on every card"; the 120-page count found every card lifting with a shadow "whether or not it is clickable." Hover motion promises an action; on a static card it lies.
+**Fix:** Animate hover only on things a person can activate, and make the response say what will happen (a link underline, a pressed state).
+
+### M9: Auto-scrolling logo strip · P2 · ⚙
+**Detection:** A marquee of customer logos on an infinite linear loop: `@keyframes` translating by -50% on `infinite`, `animate-marquee`, `react-fast-marquee`, Magic UI `Marquee` (also K10).
+**Why AI:** Listed with pulsing dots among the stock motion of generated pages. Moving logos look busier than a still row and cannot be read.
+**Fix:** A still row of real customers, or one named case study. Respect reduced motion if anything must move.
 
 ---
 
@@ -410,6 +464,16 @@ See **K6**. The default set used as-is, one per feature card.
 **Why AI:** A CTA should say exactly what happens; Anthropic's example is "Save changes," not "Submit."
 **Fix:** Name the action and its object ("Start a 14-day trial", "Compare plans"), and keep the same verb through the flow: the button that says "Publish" produces a toast that says "Published."
 
+### CP7: "Not X. Y." slogans · P2 · ⚙
+**Detection:** A denial followed by the reveal: "Not another dashboard. A decision engine." "No setup. No code. Just results." "Stop guessing. Start knowing." "It's not a tool, it's a teammate."
+**Why AI:** Tell write-ups list "Not this. That." slogans beside em dashes as copy tells; the cadence is the headline version of a writing pattern `avoid-ai-writing` already flags.
+**Fix:** Say the positive claim plainly, with the thing it does and for whom.
+
+### CP8: Unsourced social-proof claim · P2 · ⚙
+**Detection:** "Trusted by 10,000+ teams," "Join 50,000+ developers," "Loved by thousands of founders," with no names, link, or source near it.
+**Why AI:** Write-ups flag unsourced claims such as "Trusted by 2,400+ forward-thinking companies" and anonymous testimonials as the sign of a fast, unreviewed build. It is L4 in a sentence.
+**Fix:** Name customers who agreed to be named, link a case study, or cut the line. A true small number beats a round large one.
+
 ---
 
 ## Imagery
@@ -434,6 +498,11 @@ See **K6**. The default set used as-is, one per feature card.
 **Why AI:** Generated stand-ins where real content belongs. Code-detectable, and a strong "nothing real here yet" signal.
 **Fix:** Use real avatars and a real product screenshot or recording. If you must use a placeholder, make it obviously intentional, not a stock avatar service.
 
+### IM5: A five-star row on every testimonial · P1 · ⚙
+**Detection:** Five filled stars above each quote (`★★★★★`, five `<Star />` components, `Array(5)` mapped to stars), always five of five.
+**Why AI:** One of the eight tells a 2026 write-up finds on AI-built sites, usually paired with generated avatars (IM4). Nobody rated anything; it is decoration that imitates a review.
+**Fix:** Show a rating only when it comes from a real source, and link the source. Otherwise let the quote and a real name carry it.
+
 ---
 
 ## Fingerprints
@@ -442,6 +511,11 @@ See **K6**. The default set used as-is, one per feature card.
 **Detection:** `lovable-tagger`, `gpt-engineer` leftovers, v0 / Bolt / Lovable meta tags or attribution in the shipped page.
 **Why AI:** It names the tool that shipped the page.
 **Fix:** Remove build-time taggers and generator meta before shipping, unless a builder's terms require the attribution.
+
+### F2: Section-label comments · P2 · ⚙
+**Detection:** Three or more comments that only name the section below them: `{/* Hero Section */}`, `<!-- Features Section -->`, `// Pricing`.
+**Why AI:** Generated code labels every block for itself; write-ups list generic section labels such as "Header," "Main Content," and "Footer" among the signs of an unreviewed build. Harmless at runtime, but a reviewer sees it at once.
+**Fix:** Delete comments that repeat what the markup already says. Keep the ones that explain a decision.
 
 ---
 
@@ -468,6 +542,8 @@ A pattern is a tell when it is a **default reached for without reason**, not whe
 - **"It's just Tailwind" is true and beside the point.** It was the most common pushback in the HN thread on Krebs's study, alongside "designers did this before AI." The skill fixes defaults whoever shipped them; it never claims a model did.
 - **Spacing (S1)** is a soft signal. Do not lead an audit with it.
 - **Corporate Memphis** is pre-AI context, not evidence a model made something.
+- **Some vendor rules are taste, not tells.** OpenAI's guide also asks for zero letter-spacing on headings and no font sizes that scale with viewport width. Tight display tracking and fluid type are long-standing typographic craft; the scanner does not flag them.
+- **A big number is right when the number is the product.** A wallboard, a status page, or a price can lead with one (L11). Keep it with an ignore comment that says why.
 - A confident, intentional design that happens to be minimal is not "timid." Restraint executed well is a decision. Reward it.
 
 ---
@@ -497,5 +573,11 @@ A pattern is a tell when it is a **default reached for without reason**, not whe
 21. Google Labs, DESIGN.md format specification: https://github.com/google-labs-code/design.md
 22. Paul Bakaus, Impeccable (anti-pattern detector: bounce easing, cards in cards, status-chip soup): https://github.com/pbakaus/impeccable
 23. Design Buddies, "2025 state of design + 2026 predictions" (the handmade anti-AI reaction): https://designbuddies.substack.com/p/2026-predictions
+24. OpenAI, frontend prompt guide for GPT-5.5 (palette families, one-note palettes, orbs and bokeh, cards by default): https://developers.openai.com/api/docs/guides/frontend-prompt
+25. OpenAI, "Designing delightful frontends with GPT-5.4" (stats and pill clusters in the hero, cards as the default container): https://developers.openai.com/blog/designing-delightful-frontends-with-gpt-5-4
+26. Build to Launch, "AI slop website design" (16 habits counted across 120 AI-built pages; the stack figures, motion habits, and the four flavors): https://buildtolaunch.substack.com/p/fix-ai-slop-website-design
+27. Maxiality, "How to spot an AI-generated website" (grid backdrops, pulsing dots, auto-scrolling logos, "Not this. That." slogans, unsourced claims, section-label comments): https://maxiality.com/how-to-spot-an-ai-generated-website/
+28. Rottoways, "Why your AI-generated website looks generic" (check marks in tinted circles, DiceBear avatars, five-star rows): https://rottoways.com/blog/ai-generated-website-looks-generic
+29. Anthropic, `frontend-design` revision (the big-number hero, hover on every card): https://github.com/anthropics/skills/commit/2235be7c60b551f5de82ade908fd3816455afcda
 
-*The "colored left borders ≈ em-dashes" line is from source 1. Per-pattern percentages are from sources 1-2. The Tailwind `indigo-500` origin and Adam Wathan's 2025 acknowledgment are from sources 4-5. The drift definition is from sources 11-12. The tell-ranking data is from source 13. The five clusters, the typographic treatments to avoid, and the CTA and reduced-motion guidance are from source 14.*
+*The "colored left borders ≈ em-dashes" line is from source 1. Per-pattern percentages are from sources 1-2. The Tailwind `indigo-500` origin and Adam Wathan's 2025 acknowledgment are from sources 4-5. The drift definition is from sources 11-12. The tell-ranking data is from source 13. The five clusters, the typographic treatments to avoid, and the CTA and reduced-motion guidance are from source 14. The vendor-named palettes and the one-note rule are from sources 24-25; the stack figures (57 of 120 pages with six or more tells) are from source 26, which counted some habits from screenshots rather than by script.*
